@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Form model html binding</name>
-    <description>Form model HTML binding is a form model implementation for HTML</description>
+    <description>Form model html binding is a form model implementation for HTML</description>
     <url>https://github.com/d-shap/form-model-binding-html</url>
 
     <licenses>
