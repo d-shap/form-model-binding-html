@@ -19,6 +19,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.jsoup.nodes.Document;
+
 import ru.d_shap.formmodel.binding.model.BindingSource;
 
 /**
@@ -26,13 +28,20 @@ import ru.d_shap.formmodel.binding.model.BindingSource;
  *
  * @author Dmitry Shapovalov
  */
-public final class HtmlBindingSource implements BindingSource {
+public abstract class HtmlBindingSource implements BindingSource {
 
     /**
      * Create new object.
      */
-    public HtmlBindingSource() {
+    protected HtmlBindingSource() {
         super();
     }
+
+    /**
+     * Get the HTML document.
+     *
+     * @return the HTML document.
+     */
+    public abstract Document getDocument();
 
 }
