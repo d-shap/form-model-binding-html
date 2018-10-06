@@ -50,7 +50,7 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
 
     @Override
     public void preBind(final BindingSource bindingSource, final FormDefinition formDefinition) {
-
+        // Ignore
     }
 
     @Override
@@ -94,7 +94,7 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
 
     @Override
     public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition) {
-
+        // Ignore
     }
 
 }
