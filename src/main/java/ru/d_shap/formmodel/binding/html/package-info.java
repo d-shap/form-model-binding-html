@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Form model html binding is a form model implementation for HTML.
+// Form model html binding is a form model binding implementation for HTML.
 // Copyright (C) 2018 Dmitry Shapovalov.
 //
 // This file is part of Form model html binding.

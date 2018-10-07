@@ -1,6 +1,6 @@
 Form model html binding
 =======================
-Form model html binding is a form model implementation for HTML.
+Form model html binding is a form model binding implementation for HTML.
 
 Donation
 ========
