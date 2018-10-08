@@ -19,18 +19,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import ru.d_shap.formmodel.binding.FormBinder;
-import ru.d_shap.formmodel.binding.instance.DocumentLookup;
-import ru.d_shap.formmodel.binding.model.BindedElement;
 import ru.d_shap.formmodel.definition.model.FormDefinitions;
+import ru.d_shap.formmodel.document.DocumentLookup;
 
 /**
  * The HTML form binder.
@@ -102,38 +99,49 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Perform XPath lookup and return the elements found.
+     * Perform XPath lookup and return the XML elements found.
      *
-     * @param document the source document.
-     * @param lookup   the XPath expression.
+     * @param node   the source node.
+     * @param lookup the XPath lookup expression.
      *
-     * @return the elements found.
-     *
-     * @throws XPathExpressionException XPath expression exception.
+     * @return the XML elements found.
      */
-    public static List<Element> lookupElements(final Document document, final String lookup) throws XPathExpressionException {
-        return DocumentLookup.lookupElements(document, lookup);
+    public static List<Element> getElements(final Node node, final String lookup) {
+        return DocumentLookup.getElements(node, lookup);
     }
 
     /**
-     * Perform XPath lookup and return the binded elements found.
+     * Perform XPath lookup and return the XML elements with the specified ID.
      *
-     * @param document the source document.
-     * @param lookup   the XPath expression.
+     * @param node the source node.
+     * @param id   the specified ID.
      *
-     * @return the binded elements found.
-     *
-     * @throws XPathExpressionException XPath expression exception.
+     * @return the XML elements with the specified ID.
      */
-    public static List<HtmlBindedElement> lookupBindedElements(final Document document, final String lookup) throws XPathExpressionException {
-        List<BindedElement> bindedElements = DocumentLookup.lookupBindedElements(document, lookup);
-        List<HtmlBindedElement> htmlBindedElements = new ArrayList<>();
-        for (BindedElement bindedElement : bindedElements) {
-            if (bindedElement instanceof HtmlBindedElement) {
-                htmlBindedElements.add((HtmlBindedElement) bindedElement);
-            }
-        }
-        return htmlBindedElements;
+    public static List<Element> getElementsWithId(final Node node, final String id) {
+        return DocumentLookup.getElementsWithId(node, id);
+    }
+
+    /**
+     * Obtain the binded elements from the specified XML elements.
+     *
+     * @param elements the specified XML elements.
+     *
+     * @return the binded elements.
+     */
+    public static List<HtmlBindedElement> getBindedElements(final List<Element> elements) {
+        return DocumentLookup.getBindedElements(elements, HtmlBindedElement.class);
+    }
+
+    /**
+     * Obtain the binded attributes from the specified XML elements.
+     *
+     * @param elements the specified XML elements.
+     *
+     * @return the binded attributes.
+     */
+    public static List<HtmlBindedAttribute> getBindedAttributes(final List<Element> elements) {
+        return DocumentLookup.getBindedAttributes(elements, HtmlBindedAttribute.class);
     }
 
 }
