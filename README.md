@@ -4,6 +4,8 @@ Form model html binding is a form model binding implementation for HTML.
 
 JSoup selectors
 ===============
+[https://jsoup.org/cookbook/extracting-data/selector-syntax](https://jsoup.org/cookbook/extracting-data/selector-syntax)
+
 Selector overview
 -----------------
 * `tagname`: find elements by tag, e.g. `a`
