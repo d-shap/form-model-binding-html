@@ -51,4 +51,13 @@ public final class HtmlBindedElement implements BindedElement {
         return _element;
     }
 
+    /**
+     * Get the text of this element.
+     *
+     * @return the text of this element.
+     */
+    public String text() {
+        return _element.text();
+    }
+
 }
