@@ -52,21 +52,32 @@ public final class HtmlBindedElement implements BindedElement {
     }
 
     /**
-     * Get the text of this element.
+     * Get the element's text.
      *
-     * @return the text of this element.
+     * @return the element's text.
      */
-    public String ownText() {
+    public String getOwnText() {
         return _element.ownText();
     }
 
     /**
-     * Get the text of this element and all its children.
+     * Get the element's text and the text of the element's children.
      *
-     * @return the text of this element and all its children.
+     * @return Get the element's text and the text of the element's children.
      */
-    public String text() {
+    public String getText() {
         return _element.text();
+    }
+
+    /**
+     * Get the element's attribute value.
+     *
+     * @param attributeName the element's attribute name.
+     *
+     * @return the element's attribute value.
+     */
+    public String getAttributeValue(final String attributeName) {
+        return _element.attr(attributeName);
     }
 
 }
