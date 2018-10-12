@@ -22,7 +22,7 @@ package ru.d_shap.formmodel.binding.html;
 import org.jsoup.nodes.Document;
 
 /**
- * The HTML binding source, obtained from the Document.
+ * The HTML binding source, obtained from the document.
  *
  * @author Dmitry Shapovalov
  */
