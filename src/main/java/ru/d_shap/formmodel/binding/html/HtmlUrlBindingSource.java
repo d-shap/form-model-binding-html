@@ -27,7 +27,7 @@ import org.jsoup.nodes.Document;
 import ru.d_shap.formmodel.InputSourceException;
 
 /**
- * The HTML binding source, obtained from URL.
+ * The HTML binding source, obtained from the URL.
  *
  * @author Dmitry Shapovalov
  */
