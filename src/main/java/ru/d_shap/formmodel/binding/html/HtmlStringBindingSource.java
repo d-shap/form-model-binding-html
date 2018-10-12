@@ -23,13 +23,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * The HTML binding source, obtained from String.
+ * The HTML binding source, obtained from the string.
  *
  * @author Dmitry Shapovalov
  */
 public final class HtmlStringBindingSource extends HtmlBindingSource {
 
     private final String _html;
+
+    private final String _baseUri;
 
     /**
      * Create new object.
@@ -39,11 +41,28 @@ public final class HtmlStringBindingSource extends HtmlBindingSource {
     public HtmlStringBindingSource(final String html) {
         super();
         _html = html;
+        _baseUri = null;
+    }
+
+    /**
+     * Create new object.
+     *
+     * @param html    the source HTML string.
+     * @param baseUri the base URI to resolve relative links.
+     */
+    public HtmlStringBindingSource(final String html, final String baseUri) {
+        super();
+        _html = html;
+        _baseUri = baseUri;
     }
 
     @Override
     public Document getDocument() {
-        return Jsoup.parse(_html);
+        if (_baseUri == null) {
+            return Jsoup.parse(_html);
+        } else {
+            return Jsoup.parse(_html, _baseUri);
+        }
     }
 
 }
