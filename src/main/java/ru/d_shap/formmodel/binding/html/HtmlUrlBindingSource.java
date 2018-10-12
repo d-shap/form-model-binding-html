@@ -24,7 +24,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import ru.d_shap.formmodel.InputSourceReadException;
+import ru.d_shap.formmodel.InputSourceException;
 
 /**
  * The HTML binding source, obtained from URL.
@@ -50,7 +50,7 @@ public final class HtmlUrlBindingSource extends HtmlBindingSource {
         try {
             return Jsoup.connect(_url).get();
         } catch (IOException ex) {
-            throw new InputSourceReadException(ex);
+            throw new InputSourceException(ex);
         }
     }
 
