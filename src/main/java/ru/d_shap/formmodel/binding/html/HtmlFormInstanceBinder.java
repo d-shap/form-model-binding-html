@@ -54,6 +54,11 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
     }
 
     @Override
+    public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition, final org.w3c.dom.Document document) {
+        // Ignore
+    }
+
+    @Override
     public BindedForm bindFormDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final FormDefinition formDefinition) {
         Document document;
         if (lastBindedForm == null) {
@@ -90,11 +95,6 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
         } else {
             return new HtmlBindedAttribute(element);
         }
-    }
-
-    @Override
-    public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition) {
-        // Ignore
     }
 
 }
