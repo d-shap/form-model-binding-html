@@ -80,4 +80,15 @@ public final class HtmlBindedElement implements BindedElement {
         return _element.attr(attributeName);
     }
 
+    /**
+     * Get the element's absolute attribute value.
+     *
+     * @param attributeName the element's attribute name.
+     *
+     * @return the element's absolute attribute value.
+     */
+    public String getAbsoluteAttributeValue(final String attributeName) {
+        return _element.attr("abs:" + attributeName);
+    }
+
 }
