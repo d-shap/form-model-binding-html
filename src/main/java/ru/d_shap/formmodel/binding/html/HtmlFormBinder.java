@@ -28,6 +28,7 @@ import org.w3c.dom.Node;
 import ru.d_shap.formmodel.binding.FormBinder;
 import ru.d_shap.formmodel.definition.model.FormDefinitions;
 import ru.d_shap.formmodel.document.DocumentLookup;
+import ru.d_shap.formmodel.document.DocumentProcessor;
 
 /**
  * The HTML form binder.
@@ -76,6 +77,35 @@ public final class HtmlFormBinder {
     /**
      * Bind the specified form definition with the source HTML string.
      *
+     * @param html              the source HTML string.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindHtml(final String html, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlStringBindingSource(html), id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML string.
+     *
+     * @param html              the source HTML string.
+     * @param group             the specified form's group.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindHtml(final String html, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlStringBindingSource(html), group, id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML string.
+     *
      * @param html    the source HTML string.
      * @param baseUrl the base URL to resolve relative links.
      * @param id      the specified form's ID.
@@ -98,6 +128,37 @@ public final class HtmlFormBinder {
      */
     public Document bindHtmlWithBaseUrl(final String html, final String baseUrl, final String group, final String id) {
         return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), group, id);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML string.
+     *
+     * @param html              the source HTML string.
+     * @param baseUrl           the base URL to resolve relative links.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindHtmlWithBaseUrl(final String html, final String baseUrl, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML string.
+     *
+     * @param html              the source HTML string.
+     * @param baseUrl           the base URL to resolve relative links.
+     * @param group             the specified form's group.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindHtmlWithBaseUrl(final String html, final String baseUrl, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), group, id, documentProcessor);
     }
 
     /**
@@ -126,6 +187,35 @@ public final class HtmlFormBinder {
     }
 
     /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url               the source URL.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindUrl(final String url, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlUrlBindingSource(url), id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url               the source URL.
+     * @param group             the specified form's group.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindUrl(final String url, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlUrlBindingSource(url), group, id, documentProcessor);
+    }
+
+    /**
      * Bind the specified form definition with the source HTML document.
      *
      * @param document the source HTML document.
@@ -148,6 +238,35 @@ public final class HtmlFormBinder {
      */
     public Document bindUrl(final org.jsoup.nodes.Document document, final String group, final String id) {
         return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML document.
+     *
+     * @param document          the source HTML document.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindDocument(final org.jsoup.nodes.Document document, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlDocumentBindingSource(document), id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML document.
+     *
+     * @param document          the source HTML document.
+     * @param group             the specified form's group.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindUrl(final org.jsoup.nodes.Document document, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id, documentProcessor);
     }
 
     /**
