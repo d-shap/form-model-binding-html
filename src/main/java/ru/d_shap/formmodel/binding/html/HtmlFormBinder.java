@@ -49,9 +49,9 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Bind the specified form definition with the specified binding source.
+     * Bind the specified form definition with the source HTML string.
      *
-     * @param html the specified binding source.
+     * @param html the source HTML string.
      * @param id   the specified form's ID.
      *
      * @return the binding result.
@@ -61,9 +61,9 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Bind the specified form definition with the specified binding source.
+     * Bind the specified form definition with the source HTML string.
      *
-     * @param html  the specified binding source.
+     * @param html  the source HTML string.
      * @param group the specified form's group.
      * @param id    the specified form's ID.
      *
@@ -74,9 +74,36 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Bind the specified form definition with the specified binding source.
+     * Bind the specified form definition with the source HTML string.
      *
-     * @param url the specified binding source.
+     * @param html    the source HTML string.
+     * @param baseUrl the base URL to resolve relative links.
+     * @param id      the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindHtmlWithBaseUrl(final String html, final String baseUrl, final String id) {
+        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), id);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML string.
+     *
+     * @param html    the source HTML string.
+     * @param baseUrl the base URL to resolve relative links.
+     * @param group   the specified form's group.
+     * @param id      the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindHtmlWithBaseUrl(final String html, final String baseUrl, final String group, final String id) {
+        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), group, id);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url the source URL.
      * @param id  the specified form's ID.
      *
      * @return the binding result.
@@ -86,9 +113,9 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Bind the specified form definition with the specified binding source.
+     * Bind the specified form definition with the source URL.
      *
-     * @param url   the specified binding source.
+     * @param url   the source URL.
      * @param group the specified form's group.
      * @param id    the specified form's ID.
      *
@@ -96,6 +123,31 @@ public final class HtmlFormBinder {
      */
     public Document bindUrl(final String url, final String group, final String id) {
         return _formBinder.bind(new HtmlUrlBindingSource(url), group, id);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML document.
+     *
+     * @param document the source HTML document.
+     * @param id       the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindDocument(final org.jsoup.nodes.Document document, final String id) {
+        return _formBinder.bind(new HtmlDocumentBindingSource(document), id);
+    }
+
+    /**
+     * Bind the specified form definition with the source HTML document.
+     *
+     * @param document the source HTML document.
+     * @param group    the specified form's group.
+     * @param id       the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindUrl(final org.jsoup.nodes.Document document, final String group, final String id) {
+        return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id);
     }
 
     /**
