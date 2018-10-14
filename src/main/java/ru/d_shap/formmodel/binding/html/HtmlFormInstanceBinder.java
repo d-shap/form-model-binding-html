@@ -22,8 +22,8 @@ package ru.d_shap.formmodel.binding.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import ru.d_shap.formmodel.binding.FormInstanceBinder;
 import ru.d_shap.formmodel.binding.model.BindedAttribute;
@@ -54,13 +54,13 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
     }
 
     @Override
-    public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition, final org.w3c.dom.Document document) {
+    public void postBind(final BindingSource bindingSource, final FormDefinition formDefinition, final Document document) {
         // Ignore
     }
 
     @Override
-    public BindedForm bindFormDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final org.w3c.dom.Element parentElement, final FormDefinition formDefinition) {
-        Document document;
+    public BindedForm bindFormDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final FormDefinition formDefinition) {
+        org.jsoup.nodes.Document document;
         if (lastBindedForm == null) {
             document = ((HtmlBindingSource) bindingSource).getDocument();
         } else {
@@ -70,16 +70,16 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
     }
 
     @Override
-    public List<BindedElement> bindElementDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final org.w3c.dom.Element parentElement, final ElementDefinition elementDefinition) {
-        Element element;
+    public List<BindedElement> bindElementDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final ElementDefinition elementDefinition) {
+        org.jsoup.nodes.Element element;
         if (lastBindedElement == null) {
             element = ((HtmlBindedForm) lastBindedForm).getDocument();
         } else {
             element = ((HtmlBindedElement) lastBindedElement).getElement();
         }
-        List<Element> childElements = element.select(elementDefinition.getLookup());
+        List<org.jsoup.nodes.Element> childElements = element.select(elementDefinition.getLookup());
         List<BindedElement> result = new ArrayList<>(childElements.size());
-        for (Element childElement : childElements) {
+        for (org.jsoup.nodes.Element childElement : childElements) {
             HtmlBindedElement htmlBindedElement = new HtmlBindedElement(childElement);
             result.add(htmlBindedElement);
         }
@@ -87,8 +87,8 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
     }
 
     @Override
-    public BindedAttribute bindAttributeDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final org.w3c.dom.Element parentElement, final AttributeDefinition attributeDefinition) {
-        Element element = ((HtmlBindedElement) lastBindedElement).getElement();
+    public BindedAttribute bindAttributeDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final AttributeDefinition attributeDefinition) {
+        org.jsoup.nodes.Element element = ((HtmlBindedElement) lastBindedElement).getElement();
         String attributeValule = element.attributes().get(attributeDefinition.getLookup());
         if (attributeValule == null) {
             return null;
