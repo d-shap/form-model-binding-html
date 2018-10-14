@@ -45,6 +45,15 @@ public final class HtmlUrlBindingSource extends HtmlBindingSource {
         _url = url;
     }
 
+    /**
+     * Get the source URL.
+     *
+     * @return the source URL.
+     */
+    public String getUrl() {
+        return _url;
+    }
+
     @Override
     public Document getDocument() {
         try {
