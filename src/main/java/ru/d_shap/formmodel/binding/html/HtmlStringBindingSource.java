@@ -31,7 +31,7 @@ public final class HtmlStringBindingSource extends HtmlBindingSource {
 
     private final String _html;
 
-    private final String _baseUri;
+    private final String _baseUrl;
 
     /**
      * Create new object.
@@ -41,27 +41,45 @@ public final class HtmlStringBindingSource extends HtmlBindingSource {
     public HtmlStringBindingSource(final String html) {
         super();
         _html = html;
-        _baseUri = null;
+        _baseUrl = null;
     }
 
     /**
      * Create new object.
      *
      * @param html    the source HTML string.
-     * @param baseUri the base URI to resolve relative links.
+     * @param baseUrl the base URL to resolve relative links.
      */
-    public HtmlStringBindingSource(final String html, final String baseUri) {
+    public HtmlStringBindingSource(final String html, final String baseUrl) {
         super();
         _html = html;
-        _baseUri = baseUri;
+        _baseUrl = baseUrl;
+    }
+
+    /**
+     * Get the source HTML string.
+     *
+     * @return the source HTML string.
+     */
+    public String getHtml() {
+        return _html;
+    }
+
+    /**
+     * Get the base URL to resolve relative links.
+     *
+     * @return the base URL to resolve relative links.
+     */
+    public String getBaseUrl() {
+        return _baseUrl;
     }
 
     @Override
     public Document getDocument() {
-        if (_baseUri == null) {
+        if (_baseUrl == null) {
             return Jsoup.parse(_html);
         } else {
-            return Jsoup.parse(_html, _baseUri);
+            return Jsoup.parse(_html, _baseUrl);
         }
     }
 
