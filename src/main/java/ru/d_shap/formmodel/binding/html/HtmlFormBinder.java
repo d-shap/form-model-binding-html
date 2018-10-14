@@ -236,7 +236,7 @@ public final class HtmlFormBinder {
      *
      * @return the binding result.
      */
-    public Document bindUrl(final org.jsoup.nodes.Document document, final String group, final String id) {
+    public Document bindDocument(final org.jsoup.nodes.Document document, final String group, final String id) {
         return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id);
     }
 
@@ -265,7 +265,7 @@ public final class HtmlFormBinder {
      *
      * @return the result of the document processing.
      */
-    public <T> T bindUrl(final org.jsoup.nodes.Document document, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+    public <T> T bindDocument(final org.jsoup.nodes.Document document, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
         return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id, documentProcessor);
     }
 
