@@ -39,6 +39,8 @@ public final class HtmlFormBinder {
 
     private final FormBinder _formBinder;
 
+    private final DocumentLookup _documentLookup;
+
     /**
      * Create new object.
      *
@@ -47,6 +49,7 @@ public final class HtmlFormBinder {
     public HtmlFormBinder(final FormDefinitions formDefinitions) {
         super();
         _formBinder = new FormBinder(formDefinitions, new HtmlFormInstanceBinder());
+        _documentLookup = DocumentLookup.getDocumentLookup();
     }
 
     /**
@@ -270,27 +273,40 @@ public final class HtmlFormBinder {
     }
 
     /**
-     * Perform XPath lookup and return the XML elements found.
+     * Perform lookup and return the XML elements found.
      *
      * @param node   the source node.
      * @param lookup the XPath lookup expression.
      *
      * @return the XML elements found.
      */
-    public static List<Element> getElements(final Node node, final String lookup) {
-        return DocumentLookup.getElements(node, lookup);
+    public List<Element> getElements(final Node node, final String lookup) {
+        return _documentLookup.getElements(node, lookup);
     }
 
     /**
-     * Perform XPath lookup and return the XML elements with the specified ID.
+     * Perform lookup and return the XML elements with the specified ID.
      *
      * @param node the source node.
      * @param id   the specified ID.
      *
-     * @return the XML elements with the specified ID.
+     * @return the XML elements found.
      */
-    public static List<Element> getElementsWithId(final Node node, final String id) {
-        return DocumentLookup.getElementsWithId(node, id);
+    public List<Element> getElementsWithId(final Node node, final String id) {
+        return _documentLookup.getElementsWithId(node, id);
+    }
+
+    /**
+     * Perform lookup and return the XML elements with the specified attribute value for the specified attribute name.
+     *
+     * @param node           the source node.
+     * @param attributeName  the specified attribute name.
+     * @param attributeValue the specified attribute value.
+     *
+     * @return the XML elements found.
+     */
+    public List<Element> getElementsWithAttribute(final Node node, final String attributeName, final String attributeValue) {
+        return _documentLookup.getElementsWithAttribute(node, attributeName, attributeValue);
     }
 
     /**
@@ -300,8 +316,8 @@ public final class HtmlFormBinder {
      *
      * @return the binded elements.
      */
-    public static List<HtmlBindedElement> getBindedElements(final List<Element> elements) {
-        return DocumentLookup.getBindedElements(elements, HtmlBindedElement.class);
+    public List<HtmlBindedElement> getBindedElements(final List<Element> elements) {
+        return _documentLookup.getBindedElements(elements, HtmlBindedElement.class);
     }
 
     /**
@@ -311,8 +327,8 @@ public final class HtmlFormBinder {
      *
      * @return the binded attributes.
      */
-    public static List<HtmlBindedAttribute> getBindedAttributes(final List<Element> elements) {
-        return DocumentLookup.getBindedAttributes(elements, HtmlBindedAttribute.class);
+    public List<HtmlBindedAttribute> getBindedAttributes(final List<Element> elements) {
+        return _documentLookup.getBindedAttributes(elements, HtmlBindedAttribute.class);
     }
 
 }
