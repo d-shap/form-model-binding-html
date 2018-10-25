@@ -36,21 +36,11 @@ final class HtmlUrlBindingSourceImpl implements HtmlBindingSource {
 
     private final String _url;
 
-    /**
-     * Create new object.
-     *
-     * @param url the source URL.
-     */
     HtmlUrlBindingSourceImpl(final String url) {
         super();
         _url = url;
     }
 
-    /**
-     * Create new object.
-     *
-     * @param url the source URL.
-     */
     HtmlUrlBindingSourceImpl(final URL url) {
         super();
         _url = url.toExternalForm();

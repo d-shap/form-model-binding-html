@@ -30,11 +30,6 @@ final class HtmlDocumentBindingSourceImpl implements HtmlBindingSource {
 
     private final Document _document;
 
-    /**
-     * Create new object.
-     *
-     * @param document the source HTML document.
-     */
     HtmlDocumentBindingSourceImpl(final Document document) {
         super();
         _document = document;

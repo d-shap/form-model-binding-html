@@ -33,23 +33,12 @@ final class HtmlStringBindingSourceImpl implements HtmlBindingSource {
 
     private final String _baseUrl;
 
-    /**
-     * Create new object.
-     *
-     * @param html the source HTML string.
-     */
     HtmlStringBindingSourceImpl(final String html) {
         super();
         _html = html;
         _baseUrl = null;
     }
 
-    /**
-     * Create new object.
-     *
-     * @param html    the source HTML string.
-     * @param baseUrl the base URL to resolve relative links.
-     */
     HtmlStringBindingSourceImpl(final String html, final String baseUrl) {
         super();
         _html = html;
