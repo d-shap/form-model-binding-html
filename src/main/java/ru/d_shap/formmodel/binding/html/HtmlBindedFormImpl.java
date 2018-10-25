@@ -30,11 +30,6 @@ final class HtmlBindedFormImpl implements HtmlBindedForm {
 
     private final Document _document;
 
-    /**
-     * Create new object.
-     *
-     * @param document the HTML document.
-     */
     HtmlBindedFormImpl(final Document document) {
         super();
         _document = document;
