@@ -19,27 +19,33 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import ru.d_shap.formmodel.binding.model.BindedAttribute;
+import org.jsoup.nodes.Element;
 
 /**
- * The HTML binded attribute.
+ * The HTML binded attribute implementation.
  *
  * @author Dmitry Shapovalov
  */
-public interface HtmlBindedAttribute extends BindedAttribute {
+final class HtmlBindedAttributeImpl implements HtmlBindedAttribute {
 
-    /**
-     * Get the attribute value.
-     *
-     * @return the attribute value.
-     */
-    String getValue();
+    private final Element _element;
 
-    /**
-     * Get the absolute attribute value.
-     *
-     * @return the absolute attribute value.
-     */
-    String getAbsoluteValue();
+    private final String _attributeName;
+
+    HtmlBindedAttributeImpl(final Element element, final String attributeName) {
+        super();
+        _element = element;
+        _attributeName = attributeName;
+    }
+
+    @Override
+    public String getValue() {
+        return _element.attr(_attributeName);
+    }
+
+    @Override
+    public String getAbsoluteValue() {
+        return _element.attr("abs:" + _attributeName);
+    }
 
 }
