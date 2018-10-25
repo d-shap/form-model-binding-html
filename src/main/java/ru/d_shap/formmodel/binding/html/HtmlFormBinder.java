@@ -19,6 +19,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.net.URL;
 import java.util.List;
 
 import org.w3c.dom.Document;
@@ -61,7 +62,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindHtml(final String html, final String id) {
-        return _formBinder.bind(new HtmlStringBindingSource(html), id);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html), id);
     }
 
     /**
@@ -74,7 +75,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindHtml(final String html, final String group, final String id) {
-        return _formBinder.bind(new HtmlStringBindingSource(html), group, id);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html), group, id);
     }
 
     /**
@@ -88,7 +89,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindHtml(final String html, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlStringBindingSource(html), id, documentProcessor);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html), id, documentProcessor);
     }
 
     /**
@@ -103,7 +104,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindHtml(final String html, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlStringBindingSource(html), group, id, documentProcessor);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html), group, id, documentProcessor);
     }
 
     /**
@@ -116,7 +117,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindHtmlWithBaseUrl(final String html, final String baseUrl, final String id) {
-        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), id);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html, baseUrl), id);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindHtmlWithBaseUrl(final String html, final String baseUrl, final String group, final String id) {
-        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), group, id);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html, baseUrl), group, id);
     }
 
     /**
@@ -145,7 +146,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindHtmlWithBaseUrl(final String html, final String baseUrl, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), id, documentProcessor);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html, baseUrl), id, documentProcessor);
     }
 
     /**
@@ -161,7 +162,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindHtmlWithBaseUrl(final String html, final String baseUrl, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlStringBindingSource(html, baseUrl), group, id, documentProcessor);
+        return _formBinder.bind(new HtmlStringBindingSourceImpl(html, baseUrl), group, id, documentProcessor);
     }
 
     /**
@@ -173,7 +174,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindUrl(final String url, final String id) {
-        return _formBinder.bind(new HtmlUrlBindingSource(url), id);
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), id);
     }
 
     /**
@@ -186,7 +187,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindUrl(final String url, final String group, final String id) {
-        return _formBinder.bind(new HtmlUrlBindingSource(url), group, id);
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), group, id);
     }
 
     /**
@@ -200,7 +201,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindUrl(final String url, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlUrlBindingSource(url), id, documentProcessor);
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), id, documentProcessor);
     }
 
     /**
@@ -215,7 +216,61 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindUrl(final String url, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlUrlBindingSource(url), group, id, documentProcessor);
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), group, id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url the source URL.
+     * @param id  the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindUrl(final URL url, final String id) {
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), id);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url   the source URL.
+     * @param group the specified form's group.
+     * @param id    the specified form's ID.
+     *
+     * @return the binding result.
+     */
+    public Document bindUrl(final URL url, final String group, final String id) {
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), group, id);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url               the source URL.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindUrl(final URL url, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), id, documentProcessor);
+    }
+
+    /**
+     * Bind the specified form definition with the source URL.
+     *
+     * @param url               the source URL.
+     * @param group             the specified form's group.
+     * @param id                the specified form's ID.
+     * @param documentProcessor the document processor.
+     * @param <T>               the generic type of the result of the document processing.
+     *
+     * @return the result of the document processing.
+     */
+    public <T> T bindUrl(final URL url, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
+        return _formBinder.bind(new HtmlUrlBindingSourceImpl(url), group, id, documentProcessor);
     }
 
     /**
@@ -227,7 +282,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindDocument(final org.jsoup.nodes.Document document, final String id) {
-        return _formBinder.bind(new HtmlDocumentBindingSource(document), id);
+        return _formBinder.bind(new HtmlDocumentBindingSourceImpl(document), id);
     }
 
     /**
@@ -240,7 +295,7 @@ public final class HtmlFormBinder {
      * @return the binding result.
      */
     public Document bindDocument(final org.jsoup.nodes.Document document, final String group, final String id) {
-        return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id);
+        return _formBinder.bind(new HtmlDocumentBindingSourceImpl(document), group, id);
     }
 
     /**
@@ -254,7 +309,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindDocument(final org.jsoup.nodes.Document document, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlDocumentBindingSource(document), id, documentProcessor);
+        return _formBinder.bind(new HtmlDocumentBindingSourceImpl(document), id, documentProcessor);
     }
 
     /**
@@ -269,7 +324,7 @@ public final class HtmlFormBinder {
      * @return the result of the document processing.
      */
     public <T> T bindDocument(final org.jsoup.nodes.Document document, final String group, final String id, final DocumentProcessor<T> documentProcessor) {
-        return _formBinder.bind(new HtmlDocumentBindingSource(document), group, id, documentProcessor);
+        return _formBinder.bind(new HtmlDocumentBindingSourceImpl(document), group, id, documentProcessor);
     }
 
     /**
