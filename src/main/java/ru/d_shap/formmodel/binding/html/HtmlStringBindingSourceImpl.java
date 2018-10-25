@@ -23,7 +23,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * The HTML binding source, obtained from the string.
+ * The HTML binding source implementation, obtained from the string.
  *
  * @author Dmitry Shapovalov
  */
