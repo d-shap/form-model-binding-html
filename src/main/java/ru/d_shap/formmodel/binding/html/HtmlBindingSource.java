@@ -28,20 +28,13 @@ import ru.d_shap.formmodel.binding.model.BindingSource;
  *
  * @author Dmitry Shapovalov
  */
-public abstract class HtmlBindingSource implements BindingSource {
-
-    /**
-     * Create new object.
-     */
-    protected HtmlBindingSource() {
-        super();
-    }
+public interface HtmlBindingSource extends BindingSource {
 
     /**
      * Get the HTML document.
      *
      * @return the HTML document.
      */
-    public abstract Document getDocument();
+    Document getDocument();
 
 }

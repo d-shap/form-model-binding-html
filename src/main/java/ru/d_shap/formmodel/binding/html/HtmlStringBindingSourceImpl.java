@@ -19,30 +19,50 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * The HTML binding source, obtained from the document.
+ * The HTML binding source, obtained from the string.
  *
  * @author Dmitry Shapovalov
  */
-public final class HtmlDocumentBindingSource extends HtmlBindingSource {
+final class HtmlStringBindingSourceImpl implements HtmlBindingSource {
 
-    private final Document _document;
+    private final String _html;
+
+    private final String _baseUrl;
 
     /**
      * Create new object.
      *
-     * @param document the source HTML document.
+     * @param html the source HTML string.
      */
-    public HtmlDocumentBindingSource(final Document document) {
+    HtmlStringBindingSourceImpl(final String html) {
         super();
-        _document = document;
+        _html = html;
+        _baseUrl = null;
+    }
+
+    /**
+     * Create new object.
+     *
+     * @param html    the source HTML string.
+     * @param baseUrl the base URL to resolve relative links.
+     */
+    HtmlStringBindingSourceImpl(final String html, final String baseUrl) {
+        super();
+        _html = html;
+        _baseUrl = baseUrl;
     }
 
     @Override
     public Document getDocument() {
-        return _document;
+        if (_baseUrl == null) {
+            return Jsoup.parse(_html);
+        } else {
+            return Jsoup.parse(_html, _baseUrl);
+        }
     }
 
 }

@@ -20,6 +20,7 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,7 +32,7 @@ import ru.d_shap.formmodel.InputSourceException;
  *
  * @author Dmitry Shapovalov
  */
-public final class HtmlUrlBindingSource extends HtmlBindingSource {
+final class HtmlUrlBindingSourceImpl implements HtmlBindingSource {
 
     private final String _url;
 
@@ -40,18 +41,19 @@ public final class HtmlUrlBindingSource extends HtmlBindingSource {
      *
      * @param url the source URL.
      */
-    public HtmlUrlBindingSource(final String url) {
+    HtmlUrlBindingSourceImpl(final String url) {
         super();
         _url = url;
     }
 
     /**
-     * Get the source URL.
+     * Create new object.
      *
-     * @return the source URL.
+     * @param url the source URL.
      */
-    public String getUrl() {
-        return _url;
+    HtmlUrlBindingSourceImpl(final URL url) {
+        super();
+        _url = url.toExternalForm();
     }
 
     @Override
