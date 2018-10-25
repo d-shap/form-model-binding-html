@@ -30,11 +30,6 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     private final Element _element;
 
-    /**
-     * Create new object.
-     *
-     * @param element the HTML element.
-     */
     HtmlBindedElementImpl(final Element element) {
         super();
         _element = element;
