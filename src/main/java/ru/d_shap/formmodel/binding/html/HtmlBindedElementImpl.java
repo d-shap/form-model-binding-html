@@ -21,52 +21,48 @@ package ru.d_shap.formmodel.binding.html;
 
 import org.jsoup.nodes.Element;
 
-import ru.d_shap.formmodel.binding.model.BindedElement;
-
 /**
- * The HTML binded element.
+ * The HTML binded element implementation.
  *
  * @author Dmitry Shapovalov
  */
-public interface HtmlBindedElement extends BindedElement {
+final class HtmlBindedElementImpl implements HtmlBindedElement {
+
+    private final Element _element;
 
     /**
-     * Get the HTML element.
+     * Create new object.
      *
-     * @return the HTML element.
+     * @param element the HTML element.
      */
-    Element getElement();
+    HtmlBindedElementImpl(final Element element) {
+        super();
+        _element = element;
+    }
 
-    /**
-     * Get the element's text.
-     *
-     * @return the element's text.
-     */
-    String getOwnText();
+    @Override
+    public Element getElement() {
+        return _element;
+    }
 
-    /**
-     * Get the element's text and the text of the element's children.
-     *
-     * @return Get the element's text and the text of the element's children.
-     */
-    String getText();
+    @Override
+    public String getOwnText() {
+        return _element.ownText();
+    }
 
-    /**
-     * Get the element's attribute value.
-     *
-     * @param attributeName the element's attribute name.
-     *
-     * @return the element's attribute value.
-     */
-    String getAttributeValue(String attributeName);
+    @Override
+    public String getText() {
+        return _element.text();
+    }
 
-    /**
-     * Get the element's absolute attribute value.
-     *
-     * @param attributeName the element's attribute name.
-     *
-     * @return the element's absolute attribute value.
-     */
-    String getAbsoluteAttributeValue(String attributeName);
+    @Override
+    public String getAttributeValue(final String attributeName) {
+        return _element.attr(attributeName);
+    }
+
+    @Override
+    public String getAbsoluteAttributeValue(final String attributeName) {
+        return _element.attr("abs:" + attributeName);
+    }
 
 }
