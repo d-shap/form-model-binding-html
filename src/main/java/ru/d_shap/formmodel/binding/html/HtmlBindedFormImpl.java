@@ -21,20 +21,28 @@ package ru.d_shap.formmodel.binding.html;
 
 import org.jsoup.nodes.Document;
 
-import ru.d_shap.formmodel.binding.model.BindedForm;
-
 /**
- * The HTML binded form.
+ * The HTML binded form implementation.
  *
  * @author Dmitry Shapovalov
  */
-public interface HtmlBindedForm extends BindedForm {
+final class HtmlBindedFormImpl implements HtmlBindedForm {
+
+    private final Document _document;
 
     /**
-     * Get the HTML document.
+     * Create new object.
      *
-     * @return the HTML document.
+     * @param document the HTML document.
      */
-    Document getDocument();
+    HtmlBindedFormImpl(final Document document) {
+        super();
+        _document = document;
+    }
+
+    @Override
+    public Document getDocument() {
+        return _document;
+    }
 
 }
