@@ -66,7 +66,7 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
         } else {
             document = ((HtmlBindedForm) lastBindedForm).getDocument();
         }
-        return new HtmlBindedForm(document);
+        return new HtmlBindedFormImpl(document);
     }
 
     @Override
@@ -80,7 +80,7 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
         List<org.jsoup.nodes.Element> childElements = element.select(elementDefinition.getLookup());
         List<BindedElement> result = new ArrayList<>(childElements.size());
         for (org.jsoup.nodes.Element childElement : childElements) {
-            HtmlBindedElement htmlBindedElement = new HtmlBindedElement(childElement);
+            HtmlBindedElement htmlBindedElement = new HtmlBindedElementImpl(childElement);
             result.add(htmlBindedElement);
         }
         return result;
@@ -89,11 +89,11 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
     @Override
     public BindedAttribute bindAttributeDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final AttributeDefinition attributeDefinition) {
         org.jsoup.nodes.Element element = ((HtmlBindedElement) lastBindedElement).getElement();
-        String attributeValule = element.attributes().get(attributeDefinition.getLookup());
-        if (attributeValule == null) {
-            return null;
+        String attributeName = attributeDefinition.getLookup();
+        if (element.attributes().hasKey(attributeName)) {
+            return new HtmlBindedAttributeImpl(element, attributeName);
         } else {
-            return new HtmlBindedAttribute(element);
+            return null;
         }
     }
 
