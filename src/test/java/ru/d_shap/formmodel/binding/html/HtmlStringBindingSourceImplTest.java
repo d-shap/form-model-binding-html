@@ -19,6 +19,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.junit.Test;
+
+import ru.d_shap.assertions.Assertions;
+
 /**
  * Tests for {@link HtmlStringBindingSourceImpl}.
  *
@@ -31,6 +35,33 @@ public final class HtmlStringBindingSourceImplTest {
      */
     public HtmlStringBindingSourceImplTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlStringBindingSourceImpl} class test.
+     */
+    @Test
+    public void getDocumentTest() {
+        String html = createHtml();
+
+        HtmlBindingSource htmlBindingSource1 = new HtmlStringBindingSourceImpl(html);
+        Assertions.assertThat(htmlBindingSource1.getDocument()).isNotNull();
+        Assertions.assertThat(htmlBindingSource1.getDocument().getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
+
+        HtmlBindingSource htmlBindingSource2 = new HtmlStringBindingSourceImpl(html, "http://foo.com");
+        Assertions.assertThat(htmlBindingSource2.getDocument()).isNotNull();
+        Assertions.assertThat(htmlBindingSource2.getDocument().getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
+    }
+
+    private String createHtml() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page title</title>";
+        html += "</head>";
+        html += "<body>Test page body</body>";
+        html += "</html>";
+        return html;
     }
 
 }
