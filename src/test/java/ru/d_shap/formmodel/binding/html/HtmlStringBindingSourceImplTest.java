@@ -19,6 +19,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import ru.d_shap.assertions.Assertions;
@@ -45,12 +46,14 @@ public final class HtmlStringBindingSourceImplTest {
         String html = createHtml();
 
         HtmlBindingSource htmlBindingSource1 = new HtmlStringBindingSourceImpl(html);
-        Assertions.assertThat(htmlBindingSource1.getDocument()).isNotNull();
-        Assertions.assertThat(htmlBindingSource1.getDocument().getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
+        Document resultDocument1 = htmlBindingSource1.getDocument();
+        Assertions.assertThat(resultDocument1).isNotNull();
+        Assertions.assertThat(resultDocument1.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
 
         HtmlBindingSource htmlBindingSource2 = new HtmlStringBindingSourceImpl(html, "http://foo.com");
-        Assertions.assertThat(htmlBindingSource2.getDocument()).isNotNull();
-        Assertions.assertThat(htmlBindingSource2.getDocument().getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
+        Document resultDocument2 = htmlBindingSource2.getDocument();
+        Assertions.assertThat(resultDocument2).isNotNull();
+        Assertions.assertThat(resultDocument2.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
     }
 
     private String createHtml() {

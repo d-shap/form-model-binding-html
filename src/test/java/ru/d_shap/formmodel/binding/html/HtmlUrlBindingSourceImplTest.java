@@ -51,7 +51,25 @@ public final class HtmlUrlBindingSourceImplTest {
      * {@link HtmlUrlBindingSourceImpl} class test.
      */
     @Test
-    public void getDocumentTest() {
+    public void getDocumentTest() throws IOException {
+        NanoHTTPD server = new NanoHTTPDImpl();
+        try {
+            server.start();
+            String url = "http://127.0.0.1:" + PORT;
+            HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(url);
+            Document document = htmlBindingSource.getDocument();
+            Assertions.assertThat(document).isNotNull();
+            Assertions.assertThat(document.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
+        } finally {
+            server.stop();
+        }
+    }
+
+    /**
+     * {@link HtmlUrlBindingSourceImpl} class test.
+     */
+    @Test
+    public void getDocumentWrongUrlFailTest() {
         try {
             String url1 = "file://fake_url";
             HtmlBindingSource htmlBindingSource1 = new HtmlUrlBindingSourceImpl(url1);
@@ -70,24 +88,6 @@ public final class HtmlUrlBindingSourceImplTest {
             Assertions.fail(ex.getMessage());
         } catch (InputSourceException ex) {
             Assertions.assertThat(ex).hasCause(MalformedURLException.class);
-        }
-    }
-
-    /**
-     * {@link HtmlUrlBindingSourceImpl} class test.
-     */
-    @Test
-    public void getDocumentFromLocalServerTest() throws IOException {
-        NanoHTTPD server = new NanoHTTPDImpl();
-        try {
-            server.start();
-            String url = "http://127.0.0.1:" + PORT;
-            HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(url);
-            Document document = htmlBindingSource.getDocument();
-            Assertions.assertThat(document).isNotNull();
-            Assertions.assertThat(document.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
-        } finally {
-            server.stop();
         }
     }
 

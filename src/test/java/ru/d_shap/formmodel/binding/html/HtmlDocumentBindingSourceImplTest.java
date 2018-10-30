@@ -45,10 +45,11 @@ public final class HtmlDocumentBindingSourceImplTest {
     @Test
     public void getDocumentTest() {
         String html = createHtml();
-        Document document = Jsoup.parse(html);
-        HtmlBindingSource htmlBindingSource = new HtmlDocumentBindingSourceImpl(document);
-        Assertions.assertThat(htmlBindingSource.getDocument()).isNotNull();
-        Assertions.assertThat(htmlBindingSource.getDocument()).isSameAs(document);
+        Document sourceDocument = Jsoup.parse(html);
+        HtmlBindingSource htmlBindingSource = new HtmlDocumentBindingSourceImpl(sourceDocument);
+        Document resultDocument = htmlBindingSource.getDocument();
+        Assertions.assertThat(resultDocument).isNotNull();
+        Assertions.assertThat(resultDocument).isSameAs(sourceDocument);
     }
 
     private String createHtml() {
