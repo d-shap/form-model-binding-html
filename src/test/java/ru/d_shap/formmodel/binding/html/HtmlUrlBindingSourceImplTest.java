@@ -54,7 +54,7 @@ public final class HtmlUrlBindingSourceImplTest {
      */
     @Test
     public void getDocumentTest() throws IOException {
-        NanoHTTPD server = new NanoHTTPDImpl();
+        NanoHTTPD server = new NanoHttpdImpl();
         try {
             server.start();
             String url = "http://127.0.0.1:" + PORT;
@@ -98,9 +98,9 @@ public final class HtmlUrlBindingSourceImplTest {
      *
      * @author Dmitry Shapovalov
      */
-    private static final class NanoHTTPDImpl extends NanoHTTPD {
+    private static final class NanoHttpdImpl extends NanoHTTPD {
 
-        NanoHTTPDImpl() {
+        NanoHttpdImpl() {
             super(PORT);
         }
 
