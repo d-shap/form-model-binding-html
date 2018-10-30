@@ -19,6 +19,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Test;
+
+import ru.d_shap.assertions.Assertions;
+
 /**
  * Tests for {@link HtmlDocumentBindingSourceImpl}.
  *
@@ -31,6 +37,29 @@ public final class HtmlDocumentBindingSourceImplTest {
      */
     public HtmlDocumentBindingSourceImplTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlDocumentBindingSourceImpl} class test.
+     */
+    @Test
+    public void getDocumentTest() {
+        String html = createHtml();
+        Document document = Jsoup.parse(html);
+        HtmlBindingSource htmlBindingSource = new HtmlDocumentBindingSourceImpl(document);
+        Assertions.assertThat(htmlBindingSource.getDocument()).isNotNull();
+        Assertions.assertThat(htmlBindingSource.getDocument()).isSameAs(document);
+    }
+
+    private String createHtml() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page</title>";
+        html += "</head>";
+        html += "<body>Test page</body>";
+        html += "</html>";
+        return html;
     }
 
 }
