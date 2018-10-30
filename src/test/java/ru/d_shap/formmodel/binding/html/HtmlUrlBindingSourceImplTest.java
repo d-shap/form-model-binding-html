@@ -47,8 +47,8 @@ public final class HtmlUrlBindingSourceImplTest {
     @Test
     public void getDocumentTest() {
         try {
-            String url = "file://fake_url";
-            HtmlBindingSource htmlBindingSource1 = new HtmlUrlBindingSourceImpl(url);
+            String url1 = "file://fake_url";
+            HtmlBindingSource htmlBindingSource1 = new HtmlUrlBindingSourceImpl(url1);
             htmlBindingSource1.getDocument();
             Assertions.fail("HtmlUrlBindingSourceImpl test fail");
         } catch (InputSourceException ex) {
@@ -56,8 +56,8 @@ public final class HtmlUrlBindingSourceImplTest {
         }
 
         try {
-            URL url = new URL("file://fake_url");
-            HtmlBindingSource htmlBindingSource2 = new HtmlUrlBindingSourceImpl(url);
+            URL url2 = new URL("file://fake_url");
+            HtmlBindingSource htmlBindingSource2 = new HtmlUrlBindingSourceImpl(url2);
             htmlBindingSource2.getDocument();
             Assertions.fail("HtmlUrlBindingSourceImpl test fail");
         } catch (MalformedURLException ex) {
