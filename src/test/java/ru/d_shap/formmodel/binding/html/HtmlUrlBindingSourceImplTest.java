@@ -19,6 +19,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.junit.Test;
+
+import ru.d_shap.assertions.Assertions;
+import ru.d_shap.formmodel.InputSourceException;
+
 /**
  * Tests for {@link HtmlUrlBindingSourceImpl}.
  *
@@ -31,6 +39,32 @@ public final class HtmlUrlBindingSourceImplTest {
      */
     public HtmlUrlBindingSourceImplTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlUrlBindingSourceImpl} class test.
+     */
+    @Test
+    public void getDocumentTest() {
+        try {
+            String url = "file://fake_url";
+            HtmlBindingSource htmlBindingSource1 = new HtmlUrlBindingSourceImpl(url);
+            htmlBindingSource1.getDocument();
+            Assertions.fail("HtmlUrlBindingSourceImpl test fail");
+        } catch (InputSourceException ex) {
+            Assertions.assertThat(ex).hasCause(MalformedURLException.class);
+        }
+
+        try {
+            URL url = new URL("file://fake_url");
+            HtmlBindingSource htmlBindingSource2 = new HtmlUrlBindingSourceImpl(url);
+            htmlBindingSource2.getDocument();
+            Assertions.fail("HtmlUrlBindingSourceImpl test fail");
+        } catch (MalformedURLException ex) {
+            Assertions.fail(ex.getMessage());
+        } catch (InputSourceException ex) {
+            Assertions.assertThat(ex).hasCause(MalformedURLException.class);
+        }
     }
 
 }
