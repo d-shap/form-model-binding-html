@@ -22,7 +22,6 @@ package ru.d_shap.formmodel.binding.html;
 import java.io.IOException;
 import java.net.URL;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -50,8 +49,7 @@ final class HtmlUrlBindingSourceImpl implements HtmlBindingSource {
     @Override
     public Document getDocument() {
         try {
-            Connection connection = Jsoup.connect(_url);
-            return connection.get();
+            return Jsoup.connect(_url).get();
         } catch (IOException ex) {
             throw new InputSourceException(ex);
         }
