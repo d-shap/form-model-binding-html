@@ -49,6 +49,8 @@ public final class HtmlUrlBindingSourceImplTest {
 
     /**
      * {@link HtmlUrlBindingSourceImpl} class test.
+     *
+     * @throws IOException IO exception.
      */
     @Test
     public void getDocumentTest() throws IOException {
