@@ -137,7 +137,41 @@ public final class HtmlBindedElementImplTest {
      */
     @Test
     public void getAttributeValueTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='ref' lookup='a' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
 
+        Document document1 = htmlFormBinder.bindHtml(html, "id");
+
+        List<Element> elements11 = htmlFormBinder.getElementsWithId(document1, "pclass");
+        List<HtmlBindedElement> bindedElements11 = htmlFormBinder.getBindedElements(elements11);
+        Assertions.assertThat(bindedElements11).hasSize(2);
+        Assertions.assertThat(bindedElements11.get(0).getAttributeValue("style")).isEqualTo("padding: 0px; display: none;");
+        Assertions.assertThat(bindedElements11.get(1).getAttributeValue("style")).isEqualTo("");
+
+        List<Element> elements12 = htmlFormBinder.getElementsWithId(document1, "ref");
+        List<HtmlBindedElement> bindedElements12 = htmlFormBinder.getBindedElements(elements12);
+        Assertions.assertThat(bindedElements12).hasSize(1);
+        Assertions.assertThat(bindedElements12.get(0).getAttributeValue("href")).isEqualTo("linkref/id");
+
+        Document document2 = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://foo.com", "id");
+
+        List<Element> elements21 = htmlFormBinder.getElementsWithId(document2, "pclass");
+        List<HtmlBindedElement> bindedElements21 = htmlFormBinder.getBindedElements(elements21);
+        Assertions.assertThat(bindedElements21).hasSize(2);
+        Assertions.assertThat(bindedElements21.get(0).getAttributeValue("style")).isEqualTo("padding: 0px; display: none;");
+        Assertions.assertThat(bindedElements21.get(1).getAttributeValue("style")).isEqualTo("");
+
+        List<Element> elements22 = htmlFormBinder.getElementsWithId(document2, "ref");
+        List<HtmlBindedElement> bindedElements22 = htmlFormBinder.getBindedElements(elements22);
+        Assertions.assertThat(bindedElements22).hasSize(1);
+        Assertions.assertThat(bindedElements22.get(0).getAttributeValue("href")).isEqualTo("linkref/id");
     }
 
     /**
@@ -145,7 +179,41 @@ public final class HtmlBindedElementImplTest {
      */
     @Test
     public void getAbsoluteAttributeValueTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='ref' lookup='a' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
 
+        Document document1 = htmlFormBinder.bindHtml(html, "id");
+
+        List<Element> elements11 = htmlFormBinder.getElementsWithId(document1, "pclass");
+        List<HtmlBindedElement> bindedElements11 = htmlFormBinder.getBindedElements(elements11);
+        Assertions.assertThat(bindedElements11).hasSize(2);
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttributeValue("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttributeValue("style")).isEqualTo("");
+
+        List<Element> elements12 = htmlFormBinder.getElementsWithId(document1, "ref");
+        List<HtmlBindedElement> bindedElements12 = htmlFormBinder.getBindedElements(elements12);
+        Assertions.assertThat(bindedElements12).hasSize(1);
+        Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttributeValue("href")).isEqualTo("");
+
+        Document document2 = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://foo.com", "id");
+
+        List<Element> elements21 = htmlFormBinder.getElementsWithId(document2, "pclass");
+        List<HtmlBindedElement> bindedElements21 = htmlFormBinder.getBindedElements(elements21);
+        Assertions.assertThat(bindedElements21).hasSize(2);
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttributeValue("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttributeValue("style")).isEqualTo("");
+
+        List<Element> elements22 = htmlFormBinder.getElementsWithId(document2, "ref");
+        List<HtmlBindedElement> bindedElements22 = htmlFormBinder.getBindedElements(elements22);
+        Assertions.assertThat(bindedElements22).hasSize(1);
+        Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttributeValue("href")).isEqualTo("http://foo.com/linkref/id");
     }
 
     private String createHtml() {
@@ -155,9 +223,9 @@ public final class HtmlBindedElementImplTest {
         html += "<title>Test page</title>";
         html += "</head>";
         html += "<body>";
-        html += "<p class='pclass'>";
+        html += "<p class='pclass' style='padding: 0px; display: none;'>";
         html += "This is a ";
-        html += "<a href='linkref'>link</a>";
+        html += "<a href='linkref/id' style='color: blue;'>link</a>";
         html += " to somewhere.";
         html += "</p>";
         html += "<p class='pclass'>";
