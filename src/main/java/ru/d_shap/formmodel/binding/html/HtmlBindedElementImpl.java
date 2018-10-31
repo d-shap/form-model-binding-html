@@ -154,7 +154,7 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
     }
 
     private String getClassAttribute(final String[] splittedName) {
-        String classValue = _element.attr(ATTRIBUTE_NAME_STYLE);
+        String classValue = _element.attr(ATTRIBUTE_NAME_CLASS);
         String[] classes = classValue.split("\\s+");
         for (String clazz : classes) {
             if (clazz.equals(splittedName[1])) {
