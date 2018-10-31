@@ -19,8 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import org.jsoup.nodes.Element;
-
 /**
  * The HTML binded attribute implementation.
  *
@@ -28,24 +26,32 @@ import org.jsoup.nodes.Element;
  */
 final class HtmlBindedAttributeImpl implements HtmlBindedAttribute {
 
-    private final Element _element;
+    private final String _name;
 
-    private final String _attributeName;
+    private final String _value;
 
-    HtmlBindedAttributeImpl(final Element element, final String attributeName) {
+    private final String _absoluteValue;
+
+    HtmlBindedAttributeImpl(final String name, final String value, final String absoluteValue) {
         super();
-        _element = element;
-        _attributeName = attributeName;
+        _name = name;
+        _value = value;
+        _absoluteValue = absoluteValue;
+    }
+
+    @Override
+    public String getName() {
+        return _name;
     }
 
     @Override
     public String getValue() {
-        return _element.attr(_attributeName);
+        return _value;
     }
 
     @Override
     public String getAbsoluteValue() {
-        return _element.attr("abs:" + _attributeName);
+        return _absoluteValue;
     }
 
 }
