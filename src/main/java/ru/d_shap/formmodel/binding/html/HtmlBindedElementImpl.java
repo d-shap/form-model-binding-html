@@ -66,13 +66,13 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     @Override
     public boolean hasAttribute(final String name) {
-        String[] names = name.split("[.]");
-        if (isStyleAttribute(names)) {
-            String value = getStyleAttribute(names);
+        String[] splittedName = splitName(name);
+        if (isStyleAttribute(splittedName)) {
+            String value = getStyleAttribute(splittedName);
             return value != null;
         }
-        if (isClassAttribute(names)) {
-            String value = getClassAttribute(names);
+        if (isClassAttribute(splittedName)) {
+            String value = getClassAttribute(splittedName);
             return value != null;
         }
         return _element.attributes().hasKey(name);
@@ -80,17 +80,17 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     @Override
     public String getAttribute(final String name) {
-        String[] names = name.split("[.]");
-        if (isStyleAttribute(names)) {
-            String value = getStyleAttribute(names);
+        String[] splittedName = splitName(name);
+        if (isStyleAttribute(splittedName)) {
+            String value = getStyleAttribute(splittedName);
             if (value == null) {
                 return "";
             } else {
                 return value;
             }
         }
-        if (isClassAttribute(names)) {
-            String value = getClassAttribute(names);
+        if (isClassAttribute(splittedName)) {
+            String value = getClassAttribute(splittedName);
             if (value == null) {
                 return "";
             } else {
@@ -102,32 +102,43 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     @Override
     public String getAbsoluteAttribute(final String name) {
-        String[] names = name.split("[.]");
-        if (isStyleAttribute(names)) {
+        String[] splittedName = splitName(name);
+        if (isStyleAttribute(splittedName)) {
             return "";
         }
-        if (isClassAttribute(names)) {
+        if (isClassAttribute(splittedName)) {
             return "";
         }
         return _element.attr("abs:" + name);
     }
 
-    private boolean isStyleAttribute(final String[] names) {
-        return names.length == 2 && ATTRIBUTE_NAME_STYLE.equalsIgnoreCase(names[0]);
+    private String[] splitName(final String name) {
+        int idx = name.indexOf('.');
+        if (idx >= 0) {
+            String str1 = name.substring(0, idx);
+            String str2 = name.substring(idx + 1);
+            return new String[]{str1, str2};
+        } else {
+            return new String[]{name};
+        }
     }
 
-    private String getStyleAttribute(final String[] names) {
+    private boolean isStyleAttribute(final String[] splittedName) {
+        return splittedName.length == 2 && ATTRIBUTE_NAME_STYLE.equalsIgnoreCase(splittedName[0]);
+    }
+
+    private String getStyleAttribute(final String[] splittedName) {
         String attributeValue = _element.attr(ATTRIBUTE_NAME_STYLE);
         StringReader reader = new StringReader(attributeValue);
         InputSource inputSource = new InputSource(reader);
-        return getStyleAttribute(inputSource, names);
+        return getStyleAttribute(inputSource, splittedName);
     }
 
-    String getStyleAttribute(final InputSource inputSource, final String[] names) {
+    String getStyleAttribute(final InputSource inputSource, final String[] splittedName) {
         try {
             CSSOMParser parser = new CSSOMParser();
             CSSStyleDeclaration styleDeclaration = parser.parseStyleDeclaration(inputSource);
-            CSSValue cssValue = styleDeclaration.getPropertyCSSValue(names[1]);
+            CSSValue cssValue = styleDeclaration.getPropertyCSSValue(splittedName[1]);
             if (cssValue == null) {
                 return null;
             } else {
@@ -138,16 +149,16 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
         }
     }
 
-    private boolean isClassAttribute(final String[] names) {
-        return names.length == 2 && ATTRIBUTE_NAME_CLASS.equalsIgnoreCase(names[0]);
+    private boolean isClassAttribute(final String[] splittedName) {
+        return splittedName.length == 2 && ATTRIBUTE_NAME_CLASS.equalsIgnoreCase(splittedName[0]);
     }
 
-    private String getClassAttribute(final String[] names) {
+    private String getClassAttribute(final String[] splittedName) {
         String classValue = _element.attr(ATTRIBUTE_NAME_STYLE);
         String[] classes = classValue.split("\\s+");
         for (String clazz : classes) {
-            if (clazz.equals(names[1])) {
-                return names[1];
+            if (clazz.equals(splittedName[1])) {
+                return splittedName[1];
             }
         }
         return null;
