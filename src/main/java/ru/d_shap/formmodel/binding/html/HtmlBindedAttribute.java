@@ -29,6 +29,13 @@ import ru.d_shap.formmodel.binding.model.BindedAttribute;
 public interface HtmlBindedAttribute extends BindedAttribute {
 
     /**
+     * Get the attribute name.
+     *
+     * @return the attribute name.
+     */
+    String getName();
+
+    /**
      * Get the attribute value.
      *
      * @return the attribute value.
