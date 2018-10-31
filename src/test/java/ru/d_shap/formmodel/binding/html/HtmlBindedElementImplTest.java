@@ -136,6 +136,14 @@ public final class HtmlBindedElementImplTest {
      * {@link HtmlBindedElementImpl} class test.
      */
     @Test
+    public void hasAttributeTest() {
+
+    }
+
+    /**
+     * {@link HtmlBindedElementImpl} class test.
+     */
+    @Test
     public void getAttributeTest() {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
@@ -153,7 +161,19 @@ public final class HtmlBindedElementImplTest {
         List<HtmlBindedElement> bindedElements11 = htmlFormBinder.getBindedElements(elements11);
         Assertions.assertThat(bindedElements11).hasSize(2);
         Assertions.assertThat(bindedElements11.get(0).getAttribute("style")).isEqualTo("padding: 0px; display: none;");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("style.padding")).isEqualTo("0px");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("style.display")).isEqualTo("none");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("style.border")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("class")).isEqualTo("pclass xx");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("class.pclass")).isEqualTo("pclass");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("class.xx")).isEqualTo("xx");
+        Assertions.assertThat(bindedElements11.get(0).getAttribute("class.yy")).isEqualTo("");
         Assertions.assertThat(bindedElements11.get(1).getAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAttribute("class")).isEqualTo("pclass xx");
+        Assertions.assertThat(bindedElements11.get(1).getAttribute("class.pclass")).isEqualTo("pclass");
+        Assertions.assertThat(bindedElements11.get(1).getAttribute("class.xx")).isEqualTo("xx");
+        Assertions.assertThat(bindedElements11.get(1).getAttribute("class.yy")).isEqualTo("");
 
         List<Element> elements12 = htmlFormBinder.getElementsWithId(document1, "ref");
         List<HtmlBindedElement> bindedElements12 = htmlFormBinder.getBindedElements(elements12);
@@ -166,7 +186,19 @@ public final class HtmlBindedElementImplTest {
         List<HtmlBindedElement> bindedElements21 = htmlFormBinder.getBindedElements(elements21);
         Assertions.assertThat(bindedElements21).hasSize(2);
         Assertions.assertThat(bindedElements21.get(0).getAttribute("style")).isEqualTo("padding: 0px; display: none;");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("style.padding")).isEqualTo("0px");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("style.display")).isEqualTo("none");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("style.border")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("class")).isEqualTo("pclass xx");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("class.pclass")).isEqualTo("pclass");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("class.xx")).isEqualTo("xx");
+        Assertions.assertThat(bindedElements21.get(0).getAttribute("class.yy")).isEqualTo("");
         Assertions.assertThat(bindedElements21.get(1).getAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAttribute("class")).isEqualTo("pclass xx");
+        Assertions.assertThat(bindedElements21.get(1).getAttribute("class.pclass")).isEqualTo("pclass");
+        Assertions.assertThat(bindedElements21.get(1).getAttribute("class.xx")).isEqualTo("xx");
+        Assertions.assertThat(bindedElements21.get(1).getAttribute("class.yy")).isEqualTo("");
 
         List<Element> elements22 = htmlFormBinder.getElementsWithId(document2, "ref");
         List<HtmlBindedElement> bindedElements22 = htmlFormBinder.getBindedElements(elements22);
@@ -195,7 +227,19 @@ public final class HtmlBindedElementImplTest {
         List<HtmlBindedElement> bindedElements11 = htmlFormBinder.getBindedElements(elements11);
         Assertions.assertThat(bindedElements11).hasSize(2);
         Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.display")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.border")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("class")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("class.pclass")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("class.xx")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("class.yy")).isEqualTo("");
         Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("class")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("class.pclass")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("class.xx")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(1).getAbsoluteAttribute("class.yy")).isEqualTo("");
 
         List<Element> elements12 = htmlFormBinder.getElementsWithId(document1, "ref");
         List<HtmlBindedElement> bindedElements12 = htmlFormBinder.getBindedElements(elements12);
@@ -208,7 +252,19 @@ public final class HtmlBindedElementImplTest {
         List<HtmlBindedElement> bindedElements21 = htmlFormBinder.getBindedElements(elements21);
         Assertions.assertThat(bindedElements21).hasSize(2);
         Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.display")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.border")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("class")).isEqualTo("http://foo.com/pclass xx");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("class.pclass")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("class.xx")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("class.yy")).isEqualTo("");
         Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("style.padding")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("class")).isEqualTo("http://foo.com/pclass xx");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("class.pclass")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("class.xx")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(1).getAbsoluteAttribute("class.yy")).isEqualTo("");
 
         List<Element> elements22 = htmlFormBinder.getElementsWithId(document2, "ref");
         List<HtmlBindedElement> bindedElements22 = htmlFormBinder.getBindedElements(elements22);
@@ -223,17 +279,17 @@ public final class HtmlBindedElementImplTest {
         html += "<title>Test page</title>";
         html += "</head>";
         html += "<body>";
-        html += "<p class='pclass' style='padding: 0px; display: none;'>";
+        html += "<p class='pclass xx' style='padding: 0px; display: none;'>";
         html += "This is a ";
         html += "<a href='linkref/id' style='color: blue;'>link</a>";
         html += " to somewhere.";
         html += "</p>";
-        html += "<p class='pclass'>";
-        html += "<div class='blockclass'>";
+        html += "<p class='pclass xx'>";
+        html += "<div class='blockclass xx'>";
         html += "<span>Span in Div 1.</span>";
         html += "</div>";
         html += "<div>";
-        html += "<span class='blockclass'>Span in Div 2.</span>";
+        html += "<span class='blockclass xx'>Span in Div 2.</span>";
         html += "</div>";
         html += "</p>";
         html += "</body>";
