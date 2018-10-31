@@ -117,11 +117,15 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
     }
 
     private String getStyleAttribute(final String[] names) {
+        String attributeValue = _element.attr(ATTRIBUTE_NAME_STYLE);
+        StringReader reader = new StringReader(attributeValue);
+        InputSource inputSource = new InputSource(reader);
+        return getStyleAttribute(inputSource, names);
+    }
+
+    String getStyleAttribute(final InputSource inputSource, final String[] names) {
         try {
-            String attributeValue = _element.attr(ATTRIBUTE_NAME_STYLE);
             CSSOMParser parser = new CSSOMParser();
-            StringReader reader = new StringReader(attributeValue);
-            InputSource inputSource = new InputSource(reader);
             CSSStyleDeclaration styleDeclaration = parser.parseStyleDeclaration(inputSource);
             CSSValue cssValue = styleDeclaration.getPropertyCSSValue(names[1]);
             if (cssValue == null) {
