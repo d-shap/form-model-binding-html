@@ -52,21 +52,30 @@ public interface HtmlBindedElement extends BindedElement {
     String getText();
 
     /**
-     * Get the element's attribute value.
+     * Check if the element has the specified attribute.
      *
-     * @param attributeName the element's attribute name.
+     * @param name the specified attribute.
      *
-     * @return the element's attribute value.
+     * @return true if the element has the specified attribute.
      */
-    String getAttributeValue(String attributeName);
+    boolean hasAttribute(String name);
 
     /**
-     * Get the element's absolute attribute value.
+     * Get the value of the specified attribute.
      *
-     * @param attributeName the element's attribute name.
+     * @param name the specified attribute.
      *
-     * @return the element's absolute attribute value.
+     * @return the value of the specified attribute.
      */
-    String getAbsoluteAttributeValue(String attributeName);
+    String getAttribute(String name);
+
+    /**
+     * Get the absolute value of the specified attribute.
+     *
+     * @param name the specified attribute.
+     *
+     * @return the absolute value of the specified attribute.
+     */
+    String getAbsoluteAttribute(String name);
 
 }

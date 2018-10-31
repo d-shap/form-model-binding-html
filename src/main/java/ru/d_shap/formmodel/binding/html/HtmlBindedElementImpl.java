@@ -51,13 +51,18 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
     }
 
     @Override
-    public String getAttributeValue(final String attributeName) {
-        return _element.attr(attributeName);
+    public boolean hasAttribute(final String name) {
+        return _element.attributes().hasKey(name);
     }
 
     @Override
-    public String getAbsoluteAttributeValue(final String attributeName) {
-        return _element.attr("abs:" + attributeName);
+    public String getAttribute(final String name) {
+        return _element.attr(name);
+    }
+
+    @Override
+    public String getAbsoluteAttribute(final String name) {
+        return _element.attr("abs:" + name);
     }
 
 }
