@@ -77,7 +77,8 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
         } else {
             element = ((HtmlBindedElement) lastBindedElement).getElement();
         }
-        List<org.jsoup.nodes.Element> childElements = element.select(elementDefinition.getLookup());
+        String lookup = elementDefinition.getLookup();
+        List<org.jsoup.nodes.Element> childElements = element.select(lookup);
         List<BindedElement> result = new ArrayList<>(childElements.size());
         for (org.jsoup.nodes.Element childElement : childElements) {
             HtmlBindedElement htmlBindedElement = new HtmlBindedElementImpl(childElement);
@@ -88,10 +89,11 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
 
     @Override
     public BindedAttribute bindAttributeDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final AttributeDefinition attributeDefinition) {
-        org.jsoup.nodes.Element element = ((HtmlBindedElement) lastBindedElement).getElement();
-        String attributeName = attributeDefinition.getLookup();
-        if (element.attributes().hasKey(attributeName)) {
-            return new HtmlBindedAttributeImpl(element, attributeName);
+        String lookup = attributeDefinition.getLookup();
+        if (((HtmlBindedElement) lastBindedElement).hasAttribute(lookup)) {
+            String attributeValue = ((HtmlBindedElement) lastBindedElement).getAttribute(lookup);
+            String absoluteAttributeValue = ((HtmlBindedElement) lastBindedElement).getAbsoluteAttribute(lookup);
+            return new HtmlBindedAttributeImpl(lookup, attributeValue, absoluteAttributeValue);
         } else {
             return null;
         }
