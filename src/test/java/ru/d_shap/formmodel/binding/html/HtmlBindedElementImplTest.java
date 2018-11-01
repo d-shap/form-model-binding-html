@@ -137,7 +137,40 @@ public final class HtmlBindedElementImplTest {
      */
     @Test
     public void hasAttributeTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='ref' lookup='a' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
 
+        Document document = htmlFormBinder.bindHtml(html, "id");
+
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "pclass");
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(2);
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("style")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("style.padding")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("style.display")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("style.border")).isFalse();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("class")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("class.pclass")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("class.xx")).isTrue();
+        Assertions.assertThat(bindedElements1.get(0).hasAttribute("class.yy")).isFalse();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("style")).isFalse();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("style.padding")).isFalse();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("class")).isTrue();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("class.pclass")).isTrue();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("class.xx")).isTrue();
+        Assertions.assertThat(bindedElements1.get(1).hasAttribute("class.yy")).isFalse();
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "ref");
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(1);
+        Assertions.assertThat(bindedElements2.get(0).hasAttribute("href")).isTrue();
     }
 
     /**
