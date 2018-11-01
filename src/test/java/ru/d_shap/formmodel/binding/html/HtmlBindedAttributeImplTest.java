@@ -19,6 +19,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.junit.Test;
+
+import ru.d_shap.assertions.Assertions;
+
 /**
  * Tests for {@link HtmlBindedAttributeImpl}.
  *
@@ -31,6 +35,39 @@ public final class HtmlBindedAttributeImplTest {
      */
     public HtmlBindedAttributeImplTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlBindedAttributeImpl} class test.
+     */
+    @Test
+    public void getNameTest() {
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, null).getName()).isNull();
+        Assertions.assertThat(new HtmlBindedAttributeImpl("", null, null).getName()).isEqualTo("");
+        Assertions.assertThat(new HtmlBindedAttributeImpl(" ", null, null).getName()).isEqualTo(" ");
+        Assertions.assertThat(new HtmlBindedAttributeImpl("name", null, null).getName()).isEqualTo("name");
+    }
+
+    /**
+     * {@link HtmlBindedAttributeImpl} class test.
+     */
+    @Test
+    public void getValueTest() {
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, null).getValue()).isNull();
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, "", null).getValue()).isEqualTo("");
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, " ", null).getValue()).isEqualTo(" ");
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, "value", null).getValue()).isEqualTo("value");
+    }
+
+    /**
+     * {@link HtmlBindedAttributeImpl} class test.
+     */
+    @Test
+    public void getAbsoluteValueTest() {
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, null).getAbsoluteValue()).isNull();
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, "").getAbsoluteValue()).isEqualTo("");
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, " ").getAbsoluteValue()).isEqualTo(" ");
+        Assertions.assertThat(new HtmlBindedAttributeImpl(null, null, "absolute value").getAbsoluteValue()).isEqualTo("absolute value");
     }
 
 }
