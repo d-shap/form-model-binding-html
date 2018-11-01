@@ -131,11 +131,11 @@ Pseudo selectors
 * `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
 * Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 
-Maven artifact
+Latest release
 ==============
-* **groupId**: ru.d-shap
-* **artifactId**: form-model-binding-html
-* **version**: 1.0
+* **&lt;groupId&gt;**: ru.d-shap
+* **&lt;artifactId&gt;**: form-model-binding-html
+* **&lt;version&gt;**: -.-
 
 Donation
 ========
