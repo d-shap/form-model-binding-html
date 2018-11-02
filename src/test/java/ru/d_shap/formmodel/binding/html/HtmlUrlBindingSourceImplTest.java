@@ -20,6 +20,7 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -57,7 +58,8 @@ public final class HtmlUrlBindingSourceImplTest {
         NanoHTTPD server = new NanoHttpdImpl();
         try {
             server.start();
-            String url = "http://127.0.0.1:" + PORT;
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            String url = "http://" + inetAddress.getHostAddress() + ":" + PORT;
             HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(url);
             Document document = htmlBindingSource.getDocument();
             Assertions.assertThat(document).isNotNull();
