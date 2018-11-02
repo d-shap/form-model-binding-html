@@ -44,6 +44,8 @@ public final class HtmlCssParserImplTest {
 
     /**
      * {@link HtmlCssParserImpl} class test.
+     *
+     * @throws IOException IO exception.
      */
     @Test
     public void getCssPropertiesTest() throws IOException {
