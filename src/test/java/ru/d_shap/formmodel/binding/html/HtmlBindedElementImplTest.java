@@ -19,13 +19,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
+import org.w3c.css.sac.InputSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import ru.d_shap.assertions.Assertions;
+import ru.d_shap.formmodel.InputSourceException;
 
 /**
  * Tests for {@link HtmlBindedElementImpl}.
@@ -305,6 +309,33 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("href")).isEqualTo("http://foo.com/linkref/id");
     }
 
+    /**
+     * {@link HtmlBindedElementImpl} class test.
+     */
+    @Test
+    public void htmlCssParserFailTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='ref' lookup='a' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "pclass");
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        try {
+            HtmlBindedElement bindedElement = new HtmlBindedElementImpl(bindedElements.get(0).getElement(), new HtmlCssParserPropertiesError());
+            bindedElement.getAttribute("style.padding");
+            Assertions.fail("HtmlBindedElementImpl test fail");
+        } catch (InputSourceException ex) {
+            Assertions.assertThat(ex).hasCause(IOException.class);
+            Assertions.assertThat(ex).hasCauseMessage("IOException!!!");
+        }
+    }
+
     private String createHtml() {
         String html = "";
         html += "<html>";
@@ -328,6 +359,24 @@ public final class HtmlBindedElementImplTest {
         html += "</body>";
         html += "</html>";
         return html;
+    }
+
+    /**
+     * Test class.
+     *
+     * @author Dmitry Shapovalov
+     */
+    private static final class HtmlCssParserPropertiesError implements HtmlCssParser {
+
+        HtmlCssParserPropertiesError() {
+            super();
+        }
+
+        @Override
+        public Map<String, String> getCssProperties(final InputSource inputSource) throws IOException {
+            throw new IOException("IOException!!!");
+        }
+
     }
 
 }
