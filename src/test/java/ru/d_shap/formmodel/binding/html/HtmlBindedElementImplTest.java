@@ -56,6 +56,8 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "<ns1:element id='blockclass' lookup='.blockclass' type='optional+'>";
         xml += "</ns1:element>";
+        xml += "<ns1:element id='someid' lookup='#someid' type='optional+'>";
+        xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
         String html = createHtml();
@@ -76,6 +78,12 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements2.get(0).getElement().tag().getName()).isEqualTo("div");
         Assertions.assertThat(bindedElements2.get(1).getElement()).isNotNull();
         Assertions.assertThat(bindedElements2.get(1).getElement().tag().getName()).isEqualTo("span");
+
+        List<Element> elements3 = htmlFormBinder.getElementsWithId(document, "someid");
+        List<HtmlBindedElement> bindedElements3 = htmlFormBinder.getBindedElements(elements3);
+        Assertions.assertThat(bindedElements3).hasSize(1);
+        Assertions.assertThat(bindedElements3.get(0).getElement()).isNotNull();
+        Assertions.assertThat(bindedElements3.get(0).getElement().tag().getName()).isEqualTo("span");
     }
 
     /**
@@ -88,6 +96,8 @@ public final class HtmlBindedElementImplTest {
         xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
         xml += "</ns1:element>";
         xml += "<ns1:element id='blockclass' lookup='.blockclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='someid' lookup='#someid' type='optional+'>";
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
@@ -105,6 +115,11 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements2).hasSize(2);
         Assertions.assertThat(bindedElements2.get(0).getOwnText()).isEqualTo("");
         Assertions.assertThat(bindedElements2.get(1).getOwnText()).isEqualTo("Span in Div 2.");
+
+        List<Element> elements3 = htmlFormBinder.getElementsWithId(document, "someid");
+        List<HtmlBindedElement> bindedElements3 = htmlFormBinder.getBindedElements(elements3);
+        Assertions.assertThat(bindedElements3).hasSize(1);
+        Assertions.assertThat(bindedElements3.get(0).getOwnText()).isEqualTo("Span in Div 1.");
     }
 
     /**
@@ -117,6 +132,8 @@ public final class HtmlBindedElementImplTest {
         xml += "<ns1:element id='pclass' lookup='p.pclass' type='optional+'>";
         xml += "</ns1:element>";
         xml += "<ns1:element id='blockclass' lookup='.blockclass' type='optional+'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='someid' lookup='#someid' type='optional+'>";
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
@@ -134,6 +151,11 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements2).hasSize(2);
         Assertions.assertThat(bindedElements2.get(0).getText()).isEqualTo("Span in Div 1.");
         Assertions.assertThat(bindedElements2.get(1).getText()).isEqualTo("Span in Div 2.");
+
+        List<Element> elements3 = htmlFormBinder.getElementsWithId(document, "someid");
+        List<HtmlBindedElement> bindedElements3 = htmlFormBinder.getBindedElements(elements3);
+        Assertions.assertThat(bindedElements3).hasSize(1);
+        Assertions.assertThat(bindedElements3.get(0).getText()).isEqualTo("Span in Div 1.");
     }
 
     /**
@@ -350,7 +372,7 @@ public final class HtmlBindedElementImplTest {
         html += "</p>";
         html += "<p class='pclass xx'>";
         html += "<div class='blockclass xx'>";
-        html += "<span>Span in Div 1.</span>";
+        html += "<span id='someid'>Span in Div 1.</span>";
         html += "</div>";
         html += "<div>";
         html += "<span class='blockclass xx'>Span in Div 2.</span>";
