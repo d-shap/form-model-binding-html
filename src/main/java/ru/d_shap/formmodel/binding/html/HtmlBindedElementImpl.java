@@ -21,13 +21,10 @@ package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
 import java.io.StringReader;
-
-import com.steadystate.css.parser.CSSOMParser;
+import java.util.Map;
 
 import org.jsoup.nodes.Element;
 import org.w3c.css.sac.InputSource;
-import org.w3c.dom.css.CSSStyleDeclaration;
-import org.w3c.dom.css.CSSValue;
 
 import ru.d_shap.formmodel.InputSourceException;
 
@@ -44,9 +41,16 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     private final Element _element;
 
+    private final HtmlCssParser _htmlCssParser;
+
     HtmlBindedElementImpl(final Element element) {
+        this(element, new HtmlCssParserImpl());
+    }
+
+    HtmlBindedElementImpl(final Element element, final HtmlCssParser htmlCssParser) {
         super();
         _element = element;
+        _htmlCssParser = htmlCssParser;
     }
 
     @Override
@@ -129,21 +133,11 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     private String getStyleAttribute(final String[] splittedName) {
         String attributeValue = _element.attr(ATTRIBUTE_NAME_STYLE);
-        StringReader reader = new StringReader(attributeValue);
-        InputSource inputSource = new InputSource(reader);
-        return getStyleAttribute(inputSource, splittedName);
-    }
-
-    String getStyleAttribute(final InputSource inputSource, final String[] splittedName) {
+        StringReader attributeValueReader = new StringReader(attributeValue);
+        InputSource attributeValueSource = new InputSource(attributeValueReader);
         try {
-            CSSOMParser parser = new CSSOMParser();
-            CSSStyleDeclaration styleDeclaration = parser.parseStyleDeclaration(inputSource);
-            CSSValue cssValue = styleDeclaration.getPropertyCSSValue(splittedName[1]);
-            if (cssValue == null) {
-                return null;
-            } else {
-                return cssValue.getCssText();
-            }
+            Map<String, String> cssProperties = _htmlCssParser.getCssProperties(attributeValueSource);
+            return cssProperties.get(splittedName[1]);
         } catch (IOException ex) {
             throw new InputSourceException(ex);
         }
@@ -154,11 +148,11 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
     }
 
     private String getClassAttribute(final String[] splittedName) {
-        String classValue = _element.attr(ATTRIBUTE_NAME_CLASS);
-        String[] classes = classValue.split("\\s+");
-        for (String clazz : classes) {
-            if (clazz.equals(splittedName[1])) {
-                return splittedName[1];
+        String attributeValue = _element.attr(ATTRIBUTE_NAME_CLASS);
+        String[] attributeValueClasses = attributeValue.split("\\s+");
+        for (String attributeValueClass : attributeValueClasses) {
+            if (attributeValueClass.equals(splittedName[1])) {
+                return attributeValueClass;
             }
         }
         return null;
