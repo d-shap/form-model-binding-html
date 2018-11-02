@@ -19,6 +19,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+
+import org.junit.Test;
+import org.w3c.css.sac.InputSource;
+
+import ru.d_shap.assertions.Assertions;
+
 /**
  * Tests for {@link HtmlCssParserImpl}.
  *
@@ -31,6 +40,37 @@ public final class HtmlCssParserImplTest {
      */
     public HtmlCssParserImplTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlCssParserImpl} class test.
+     */
+    @Test
+    public void getCssPropertiesTest() throws IOException {
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource(""))).isEmpty();
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("wrong text"))).isEmpty();
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value"))).hasSize(1);
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value"))).containsEntry("name", "value");
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value;"))).hasSize(1);
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value;"))).containsEntry("name", "value");
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value;"))).hasSize(1);
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name:value;"))).containsEntry("name", "value");
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name: value;"))).hasSize(1);
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("name: value;"))).containsEntry("name", "value");
+
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).hasSize(2);
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).containsEntry("display", "block");
+        Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).containsEntry("color", "red");
+    }
+
+    private InputSource getInputSource(final String style) {
+        Reader reader = new StringReader(style);
+        return new InputSource(reader);
     }
 
 }
