@@ -100,7 +100,71 @@ public final class HtmlFormInstanceBinderTest {
      */
     @Test
     public void bindAttributeDefinitionTest() {
+        String html1 = "";
+        html1 += "<html>";
+        html1 += "<head>";
+        html1 += "<title>Test page title</title>";
+        html1 += "</head>";
+        html1 += "<body>";
+        html1 += "<div class='divclass'>";
+        html1 += "</div>";
+        html1 += "</body>";
+        html1 += "</html>";
 
+        String html2 = "";
+        html2 += "<html>";
+        html2 += "<head>";
+        html2 += "<title>Test page title</title>";
+        html2 += "</head>";
+        html2 += "<body>";
+        html2 += "<div class='divclass' style='display: none;'>";
+        html2 += "</div>";
+        html2 += "</body>";
+        html2 += "</html>";
+
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element lookup='.divclass'>";
+        xml += "<ns1:attribute id='a1' lookup='style' type='optional'>";
+        xml += "</ns1:attribute>";
+        xml += "<ns1:attribute id='a2' lookup='style.padding' type='optional'>";
+        xml += "</ns1:attribute>";
+        xml += "<ns1:attribute id='a3' lookup='style.display' type='optional'>";
+        xml += "</ns1:attribute>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+
+        Document document1 = htmlFormBinder.bindHtml(html1, "id");
+        List<Element> elements11 = htmlFormBinder.getElementsWithId(document1, "a1");
+        Assertions.assertThat(elements11).hasSize(0);
+        List<HtmlBindedAttribute> bindedAttributes11 = htmlFormBinder.getBindedAttributes(elements11);
+        Assertions.assertThat(bindedAttributes11).hasSize(0);
+        List<Element> elements12 = htmlFormBinder.getElementsWithId(document1, "a2");
+        Assertions.assertThat(elements12).hasSize(0);
+        List<HtmlBindedAttribute> bindedAttributes12 = htmlFormBinder.getBindedAttributes(elements12);
+        Assertions.assertThat(bindedAttributes12).hasSize(0);
+        List<Element> elements13 = htmlFormBinder.getElementsWithId(document1, "a3");
+        Assertions.assertThat(elements13).hasSize(0);
+        List<HtmlBindedAttribute> bindedAttributes13 = htmlFormBinder.getBindedAttributes(elements13);
+        Assertions.assertThat(bindedAttributes13).hasSize(0);
+
+        Document document2 = htmlFormBinder.bindHtml(html2, "id");
+        List<Element> elements21 = htmlFormBinder.getElementsWithId(document2, "a1");
+        Assertions.assertThat(elements21).hasSize(1);
+        List<HtmlBindedAttribute> bindedAttributes21 = htmlFormBinder.getBindedAttributes(elements21);
+        Assertions.assertThat(bindedAttributes21).hasSize(1);
+        Assertions.assertThat(bindedAttributes21.get(0).getValue()).isEqualTo("display: none;");
+        List<Element> elements22 = htmlFormBinder.getElementsWithId(document2, "a2");
+        Assertions.assertThat(elements22).hasSize(0);
+        List<HtmlBindedAttribute> bindedAttributes22 = htmlFormBinder.getBindedAttributes(elements22);
+        Assertions.assertThat(bindedAttributes22).hasSize(0);
+        List<Element> elements23 = htmlFormBinder.getElementsWithId(document2, "a3");
+        Assertions.assertThat(elements23).hasSize(1);
+        List<HtmlBindedAttribute> bindedAttributes23 = htmlFormBinder.getBindedAttributes(elements23);
+        Assertions.assertThat(bindedAttributes23).hasSize(1);
+        Assertions.assertThat(bindedAttributes23.get(0).getValue()).isEqualTo("none");
     }
 
 }
