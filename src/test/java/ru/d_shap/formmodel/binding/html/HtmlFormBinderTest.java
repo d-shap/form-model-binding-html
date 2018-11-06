@@ -717,7 +717,26 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void getBindedElementsTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "<ns1:attribute id='d' lookup='style'>";
+        xml += "</ns1:attribute>";
+        xml += "<ns1:attribute id='d' lookup='style.display'>";
+        xml += "</ns1:attribute>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
 
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements).hasSize(3);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
+        Assertions.assertThat(bindedElements.get(0).getAttribute("style")).isEqualTo("display: none;");
+        Assertions.assertThat(bindedElements.get(0).getAttribute("style.display")).isEqualTo("none");
     }
 
     /**
@@ -725,7 +744,25 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void getBindedAttributesTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "<ns1:attribute id='d' lookup='style'>";
+        xml += "</ns1:attribute>";
+        xml += "<ns1:attribute id='d' lookup='style.display'>";
+        xml += "</ns1:attribute>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
 
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements).hasSize(3);
+        List<HtmlBindedAttribute> bindedAttributes = htmlFormBinder.getBindedAttributes(elements);
+        Assertions.assertThat(bindedAttributes).hasSize(2);
+        Assertions.assertThat(bindedAttributes.get(0).getValue()).isEqualTo("display: none;");
+        Assertions.assertThat(bindedAttributes.get(1).getValue()).isEqualTo("none");
     }
 
     private String createHtml() {
