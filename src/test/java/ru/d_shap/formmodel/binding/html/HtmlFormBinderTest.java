@@ -19,6 +19,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import org.junit.Test;
+
 /**
  * Tests for {@link HtmlFormBinder}.
  *
@@ -31,6 +33,206 @@ public final class HtmlFormBinderTest {
      */
     public HtmlFormBinderTest() {
         super();
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlAndProcessWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlAndProcessWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithBaseUrlWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithBaseUrlWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithBaseUrlAndProcessWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindHtmlWithBaseUrlAndProcessWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlStringWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlStringWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlStringAndProcessWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlStringAndProcessWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlObjectWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlObjectWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlObjectAndProcessWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindUrlObjectAndProcessWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindDocumentStringWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindDocumentStringWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindDocumentStringAndProcessWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void bindDocumentStringAndProcessWithGroupAndIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void getElementsTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void getElementsWithIdTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void getElementsWithAttributeTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void getBindedElementsTest() {
+
+    }
+
+    /**
+     * {@link HtmlFormBinder} class test.
+     */
+    @Test
+    public void getBindedAttributesTest() {
+
     }
 
 }
