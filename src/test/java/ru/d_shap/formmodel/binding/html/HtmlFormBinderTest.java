@@ -148,7 +148,29 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithBaseUrlWithIdTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "id");
 
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements1).hasSize(1);
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(1);
+        Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+        Assertions.assertThat(elements2).hasSize(1);
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(1);
+        Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+        Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo("http://example.com/path/to/resource");
     }
 
     /**
@@ -156,7 +178,29 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithBaseUrlWithGroupAndIdTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "group", "id");
 
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements1).hasSize(1);
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(1);
+        Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+        Assertions.assertThat(elements2).hasSize(1);
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(1);
+        Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+        Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo("http://example.com/path/to/resource");
     }
 
     /**
@@ -164,7 +208,19 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithBaseUrlAndProcessWithIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        List<String> tagNames = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+        Assertions.assertThat(tagNames).containsExactly("div");
+        List<String> references = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+        Assertions.assertThat(references).containsExactly("path/to/resource", "http://example.com/path/to/resource");
     }
 
     /**
@@ -172,7 +228,19 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithBaseUrlAndProcessWithGroupAndIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        List<String> tagNames = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "group", "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+        Assertions.assertThat(tagNames).containsExactly("div");
+        List<String> references = htmlFormBinder.bindHtmlWithBaseUrl(html, "http://example.com", "group", "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+        Assertions.assertThat(references).containsExactly("path/to/resource", "http://example.com/path/to/resource");
     }
 
     /**
