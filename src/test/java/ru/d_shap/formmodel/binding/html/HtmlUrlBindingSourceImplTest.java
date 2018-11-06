@@ -20,7 +20,6 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -30,16 +29,12 @@ import org.junit.Test;
 import ru.d_shap.assertions.Assertions;
 import ru.d_shap.formmodel.InputSourceException;
 
-import fi.iki.elonen.NanoHTTPD;
-
 /**
  * Tests for {@link HtmlUrlBindingSourceImpl}.
  *
  * @author Dmitry Shapovalov
  */
 public final class HtmlUrlBindingSourceImplTest {
-
-    private static final int PORT = 43472;
 
     /**
      * Test class constructor.
@@ -55,11 +50,11 @@ public final class HtmlUrlBindingSourceImplTest {
      */
     @Test
     public void getDocumentTest() throws IOException {
-        NanoHTTPD server = new NanoHttpdImpl();
+        String html = createHtml();
+        NanoHttpdImpl server = new NanoHttpdImpl(html);
         try {
             server.start();
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            String url = "http://" + inetAddress.getHostAddress() + ":" + PORT;
+            String url = server.getUrl();
             HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(url);
             Document document = htmlBindingSource.getDocument();
             Assertions.assertThat(document).isNotNull();
@@ -95,34 +90,15 @@ public final class HtmlUrlBindingSourceImplTest {
         }
     }
 
-    /**
-     * Test class.
-     *
-     * @author Dmitry Shapovalov
-     */
-    private static final class NanoHttpdImpl extends NanoHTTPD {
-
-        NanoHttpdImpl() {
-            super(PORT);
-        }
-
-        @Override
-        public Response serve(final IHTTPSession session) {
-            String html = createHtml();
-            return newFixedLengthResponse(html);
-        }
-
-        private String createHtml() {
-            String html = "";
-            html += "<html>";
-            html += "<head>";
-            html += "<title>Test page title</title>";
-            html += "</head>";
-            html += "<body>Test page body</body>";
-            html += "</html>";
-            return html;
-        }
-
+    private String createHtml() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page title</title>";
+        html += "</head>";
+        html += "<body>Test page body</body>";
+        html += "</html>";
+        return html;
     }
 
 }
