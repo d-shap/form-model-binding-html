@@ -52,15 +52,25 @@ public final class HtmlFormBinderTest {
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
         xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
         String html = createHtml();
         Document document = htmlFormBinder.bindHtml(html, "id");
-        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
-        Assertions.assertThat(elements).hasSize(1);
-        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
-        Assertions.assertThat(bindedElements).hasSize(1);
-        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements1).hasSize(1);
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(1);
+        Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+        Assertions.assertThat(elements2).hasSize(1);
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(1);
+        Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+        Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo("");
     }
 
     /**
@@ -72,15 +82,25 @@ public final class HtmlFormBinderTest {
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
         xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
         String html = createHtml();
         Document document = htmlFormBinder.bindHtml(html, "group", "id");
-        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
-        Assertions.assertThat(elements).hasSize(1);
-        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
-        Assertions.assertThat(bindedElements).hasSize(1);
-        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements1).hasSize(1);
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(1);
+        Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+        Assertions.assertThat(elements2).hasSize(1);
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(1);
+        Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+        Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo("");
     }
 
     /**
@@ -92,11 +112,15 @@ public final class HtmlFormBinderTest {
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
         xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
         String html = createHtml();
         List<String> tagNames = htmlFormBinder.bindHtml(html, "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
         Assertions.assertThat(tagNames).containsExactly("div");
+        List<String> references = htmlFormBinder.bindHtml(html, "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+        Assertions.assertThat(references).containsExactly("path/to/resource", "");
     }
 
     /**
@@ -108,11 +132,15 @@ public final class HtmlFormBinderTest {
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
         xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
         String html = createHtml();
         List<String> tagNames = htmlFormBinder.bindHtml(html, "group", "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
         Assertions.assertThat(tagNames).containsExactly("div");
+        List<String> references = htmlFormBinder.bindHtml(html, "group", "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+        Assertions.assertThat(references).containsExactly("path/to/resource", "");
     }
 
     /**
@@ -292,6 +320,7 @@ public final class HtmlFormBinderTest {
         html += "<body>";
         html += "<div id='divid' class='divclass' style='display: none;'>";
         html += "</div>";
+        html += "<a href='path/to/resource'>link</a>";
         html += "</body>";
         html += "</html>";
         return html;
@@ -324,6 +353,38 @@ public final class HtmlFormBinderTest {
             }
             return result;
         }
+
+    }
+
+    /**
+     * Test class.
+     *
+     * @author Dmitry Shapovalov
+     */
+    private static final class ReferenceDocumentProcessor implements DocumentProcessor<List<String>> {
+
+        private final HtmlFormBinder _htmlFormBinder;
+
+        private final String _id;
+
+        ReferenceDocumentProcessor(final HtmlFormBinder htmlFormBinder, final String id) {
+            super();
+            _htmlFormBinder = htmlFormBinder;
+            _id = id;
+        }
+
+        @Override
+        public List<String> process(final Document document) {
+            List<Element> elements = _htmlFormBinder.getElementsWithId(document, _id);
+            List<HtmlBindedElement> bindedElements = _htmlFormBinder.getBindedElements(elements);
+            List<String> result = new ArrayList<>();
+            for (HtmlBindedElement bindedElement : bindedElements) {
+                result.add(bindedElement.getAttribute("href"));
+                result.add(bindedElement.getAbsoluteAttribute("href"));
+            }
+            return result;
+        }
+
     }
 
 }
