@@ -647,7 +647,23 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void getElementsTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
 
+        List<Element> elements = htmlFormBinder.getElements(document, "//*[local-name() = 'element']");
+        Assertions.assertThat(elements).hasSize(2);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(2);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
+        Assertions.assertThat(bindedElements.get(1).getElement().tagName()).isEqualTo("a");
     }
 
     /**
@@ -655,7 +671,22 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void getElementsWithIdTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
 
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements).hasSize(1);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
     }
 
     /**
@@ -663,7 +694,22 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void getElementsWithAttributeTest() {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass' attr='val1'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a' attr='val2'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
 
+        List<Element> elements = htmlFormBinder.getElementsWithAttribute(document, "attr", "val1");
+        Assertions.assertThat(elements).hasSize(1);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
     }
 
     /**
