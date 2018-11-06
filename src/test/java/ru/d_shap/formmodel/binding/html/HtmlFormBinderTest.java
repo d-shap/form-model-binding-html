@@ -20,6 +20,7 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -399,7 +400,36 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindUrlObjectWithIdTest() throws IOException {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        NanoHttpdImpl server = new NanoHttpdImpl(html);
+        try {
+            server.start();
+            URL url = new URL(server.getUrl());
+            Document document = htmlFormBinder.bindUrl(url, "id");
 
+            List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+            Assertions.assertThat(elements1).hasSize(1);
+            List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+            Assertions.assertThat(bindedElements1).hasSize(1);
+            Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+            List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+            Assertions.assertThat(elements2).hasSize(1);
+            List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+            Assertions.assertThat(bindedElements2).hasSize(1);
+            Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+            Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo(url + "/path/to/resource");
+        } finally {
+            server.stop();
+        }
     }
 
     /**
@@ -409,7 +439,36 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindUrlObjectWithGroupAndIdTest() throws IOException {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        NanoHttpdImpl server = new NanoHttpdImpl(html);
+        try {
+            server.start();
+            URL url = new URL(server.getUrl());
+            Document document = htmlFormBinder.bindUrl(url, "group", "id");
 
+            List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+            Assertions.assertThat(elements1).hasSize(1);
+            List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+            Assertions.assertThat(bindedElements1).hasSize(1);
+            Assertions.assertThat(bindedElements1.get(0).getElement().tagName()).isEqualTo("div");
+
+            List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "a");
+            Assertions.assertThat(elements2).hasSize(1);
+            List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+            Assertions.assertThat(bindedElements2).hasSize(1);
+            Assertions.assertThat(bindedElements2.get(0).getAttribute("href")).isEqualTo("path/to/resource");
+            Assertions.assertThat(bindedElements2.get(0).getAbsoluteAttribute("href")).isEqualTo(url + "/path/to/resource");
+        } finally {
+            server.stop();
+        }
     }
 
     /**
@@ -419,7 +478,28 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindUrlObjectAndProcessWithIdTest() throws IOException {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        NanoHttpdImpl server = new NanoHttpdImpl(html);
+        try {
+            server.start();
+            URL url = new URL(server.getUrl());
 
+            List<String> tagNames = htmlFormBinder.bindUrl(url, "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+            Assertions.assertThat(tagNames).containsExactly("div");
+
+            List<String> references = htmlFormBinder.bindUrl(url, "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+            Assertions.assertThat(references).containsExactly("path/to/resource", url + "/path/to/resource");
+        } finally {
+            server.stop();
+        }
     }
 
     /**
@@ -429,7 +509,28 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindUrlObjectAndProcessWithGroupAndIdTest() throws IOException {
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        NanoHttpdImpl server = new NanoHttpdImpl(html);
+        try {
+            server.start();
+            URL url = new URL(server.getUrl());
 
+            List<String> tagNames = htmlFormBinder.bindUrl(url, "group", "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+            Assertions.assertThat(tagNames).containsExactly("div");
+
+            List<String> references = htmlFormBinder.bindUrl(url, "group", "id", new ReferenceDocumentProcessor(htmlFormBinder, "a"));
+            Assertions.assertThat(references).containsExactly("path/to/resource", url + "/path/to/resource");
+        } finally {
+            server.stop();
+        }
     }
 
     /**
