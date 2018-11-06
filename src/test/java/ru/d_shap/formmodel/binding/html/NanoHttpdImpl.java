@@ -20,6 +20,7 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 import fi.iki.elonen.NanoHTTPD;
 
@@ -38,20 +39,25 @@ public final class NanoHttpdImpl extends NanoHTTPD {
      * Create new object.
      *
      * @param html the HTML to serve.
+     *
+     * @throws IOException IO exception.
      */
-    public NanoHttpdImpl(final String html) {
-        super(PORT);
+    public NanoHttpdImpl(final String html) throws IOException {
+        super(getHost(), PORT);
         _html = html;
+    }
+
+    private static String getHost() throws IOException {
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        return inetAddress.getHostAddress();
     }
 
     /**
      * Get the URL.
      *
      * @return the URL.
-     *
-     * @throws IOException IO exception.
      */
-    public String getUrl() throws IOException {
+    public String getUrl() {
         return "http://" + getHostname() + ":" + getListeningPort();
     }
 
