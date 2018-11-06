@@ -19,7 +19,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import ru.d_shap.assertions.Assertions;
+import ru.d_shap.formmodel.document.DocumentProcessor;
 
 /**
  * Tests for {@link HtmlFormBinder}.
@@ -40,7 +48,19 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "id");
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements).hasSize(1);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
     }
 
     /**
@@ -48,7 +68,19 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlWithGroupAndIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        Document document = htmlFormBinder.bindHtml(html, "group", "id");
+        List<Element> elements = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements).hasSize(1);
+        List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getElement().tagName()).isEqualTo("div");
     }
 
     /**
@@ -56,7 +88,15 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlAndProcessWithIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        List<String> tagNames = htmlFormBinder.bindHtml(html, "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+        Assertions.assertThat(tagNames).containsExactly("div");
     }
 
     /**
@@ -64,7 +104,15 @@ public final class HtmlFormBinderTest {
      */
     @Test
     public void bindHtmlAndProcessWithGroupAndIdTest() {
-
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        String html = createHtml();
+        List<String> tagNames = htmlFormBinder.bindHtml(html, "group", "id", new TagNameDocumentProcessor(htmlFormBinder, "d"));
+        Assertions.assertThat(tagNames).containsExactly("div");
     }
 
     /**
@@ -233,6 +281,49 @@ public final class HtmlFormBinderTest {
     @Test
     public void getBindedAttributesTest() {
 
+    }
+
+    private String createHtml() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page title</title>";
+        html += "</head>";
+        html += "<body>";
+        html += "<div id='divid' class='divclass' style='display: none;'>";
+        html += "</div>";
+        html += "</body>";
+        html += "</html>";
+        return html;
+    }
+
+    /**
+     * Test class.
+     *
+     * @author Dmitry Shapovalov
+     */
+    private static final class TagNameDocumentProcessor implements DocumentProcessor<List<String>> {
+
+        private final HtmlFormBinder _htmlFormBinder;
+
+        private final String _id;
+
+        TagNameDocumentProcessor(final HtmlFormBinder htmlFormBinder, final String id) {
+            super();
+            _htmlFormBinder = htmlFormBinder;
+            _id = id;
+        }
+
+        @Override
+        public List<String> process(final Document document) {
+            List<Element> elements = _htmlFormBinder.getElementsWithId(document, _id);
+            List<HtmlBindedElement> bindedElements = _htmlFormBinder.getBindedElements(elements);
+            List<String> result = new ArrayList<>();
+            for (HtmlBindedElement bindedElement : bindedElements) {
+                result.add(bindedElement.getElement().tagName());
+            }
+            return result;
+        }
     }
 
 }
