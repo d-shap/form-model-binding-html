@@ -38,6 +38,13 @@ public interface HtmlBindedElement extends BindedElement {
     Element getElement();
 
     /**
+     * Get the CSS selector for the HTML element.
+     *
+     * @return the CSS selector for the HTML element.
+     */
+    String cssSelector();
+
+    /**
      * Get the element's text.
      *
      * @return the element's text.

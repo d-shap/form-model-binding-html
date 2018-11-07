@@ -41,6 +41,8 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
 
     private final Element _element;
 
+    private final String _cssSelector;
+
     private final HtmlCssParser _htmlCssParser;
 
     HtmlBindedElementImpl(final Element element) {
@@ -50,12 +52,18 @@ final class HtmlBindedElementImpl implements HtmlBindedElement {
     HtmlBindedElementImpl(final Element element, final HtmlCssParser htmlCssParser) {
         super();
         _element = element;
+        _cssSelector = _element.cssSelector();
         _htmlCssParser = htmlCssParser;
     }
 
     @Override
     public Element getElement() {
         return _element;
+    }
+
+    @Override
+    public String cssSelector() {
+        return _cssSelector;
     }
 
     @Override
