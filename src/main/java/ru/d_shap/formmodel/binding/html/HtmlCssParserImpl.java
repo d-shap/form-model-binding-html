@@ -60,7 +60,7 @@ final class HtmlCssParserImpl implements HtmlCssParser {
      *
      * @author Dmitry Shapovalov
      */
-    private static final class IgnoreCssExceptionErrorHandler implements ErrorHandler {
+    static final class IgnoreCssExceptionErrorHandler implements ErrorHandler {
 
         IgnoreCssExceptionErrorHandler() {
             super();
