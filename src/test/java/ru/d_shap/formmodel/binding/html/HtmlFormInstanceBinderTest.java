@@ -154,6 +154,7 @@ public final class HtmlFormInstanceBinderTest {
         html1 += "</head>";
         html1 += "<body>";
         html1 += "<div class='divclass'>";
+        html1 += "<a>Link</a>";
         html1 += "</div>";
         html1 += "</body>";
         html1 += "</html>";
@@ -165,6 +166,7 @@ public final class HtmlFormInstanceBinderTest {
         html2 += "</head>";
         html2 += "<body>";
         html2 += "<div class='divclass' style='display: none;'>";
+        html2 += "<a href='/path/to/resource'>Link</a>";
         html2 += "</div>";
         html2 += "</body>";
         html2 += "</html>";
@@ -178,12 +180,16 @@ public final class HtmlFormInstanceBinderTest {
         xml += "</ns1:attribute>";
         xml += "<ns1:attribute id='a3' lookup='style.display' type='optional'>";
         xml += "</ns1:attribute>";
+        xml += "<ns1:element lookup='a'>";
+        xml += "<ns1:attribute id='a4' lookup='href' type='optional'>";
+        xml += "</ns1:attribute>";
+        xml += "</ns1:element>";
         xml += "</ns1:element>";
         xml += "</ns1:form>";
 
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
 
-        Document document1 = htmlFormBinder.bindHtml(html1, "id");
+        Document document1 = htmlFormBinder.bindHtmlWithBaseUrl(html1, "http://example.com", "id");
         List<Element> elements11 = htmlFormBinder.getElementsWithId(document1, "a1");
         Assertions.assertThat(elements11).hasSize(0);
         List<HtmlBindedAttribute> bindedAttributes11 = htmlFormBinder.getBindedAttributes(elements11);
@@ -196,8 +202,12 @@ public final class HtmlFormInstanceBinderTest {
         Assertions.assertThat(elements13).hasSize(0);
         List<HtmlBindedAttribute> bindedAttributes13 = htmlFormBinder.getBindedAttributes(elements13);
         Assertions.assertThat(bindedAttributes13).hasSize(0);
+        List<Element> elements14 = htmlFormBinder.getElementsWithId(document1, "a4");
+        Assertions.assertThat(elements14).hasSize(0);
+        List<HtmlBindedAttribute> bindedAttributes14 = htmlFormBinder.getBindedAttributes(elements14);
+        Assertions.assertThat(bindedAttributes14).hasSize(0);
 
-        Document document2 = htmlFormBinder.bindHtml(html2, "id");
+        Document document2 = htmlFormBinder.bindHtmlWithBaseUrl(html2, "http://example.com", "id");
         List<Element> elements21 = htmlFormBinder.getElementsWithId(document2, "a1");
         Assertions.assertThat(elements21).hasSize(1);
         List<HtmlBindedAttribute> bindedAttributes21 = htmlFormBinder.getBindedAttributes(elements21);
@@ -212,6 +222,12 @@ public final class HtmlFormInstanceBinderTest {
         List<HtmlBindedAttribute> bindedAttributes23 = htmlFormBinder.getBindedAttributes(elements23);
         Assertions.assertThat(bindedAttributes23).hasSize(1);
         Assertions.assertThat(bindedAttributes23.get(0).getValue()).isEqualTo("none");
+        List<Element> elements24 = htmlFormBinder.getElementsWithId(document2, "a4");
+        Assertions.assertThat(elements24).hasSize(1);
+        List<HtmlBindedAttribute> bindedAttributes24 = htmlFormBinder.getBindedAttributes(elements24);
+        Assertions.assertThat(bindedAttributes24).hasSize(1);
+        Assertions.assertThat(bindedAttributes24.get(0).getValue()).isEqualTo("/path/to/resource");
+        Assertions.assertThat(bindedAttributes24.get(0).getAbsoluteValue()).isEqualTo("http://example.com/path/to/resource");
     }
 
 }
