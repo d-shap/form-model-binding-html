@@ -92,7 +92,54 @@ public final class HtmlFormInstanceBinderTest {
      */
     @Test
     public void bindElementDefinitionTest() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page title</title>";
+        html += "</head>";
+        html += "<body>";
+        html += "<div id='divid1' class='divclass'>";
+        html += "<span><a href='resource1'>link</a></span>";
+        html += "</div>";
+        html += "<div id='divid2' class='divclass'>";
+        html += "<span><a href='resource2'>link</a></span>";
+        html += "</div>";
+        html += "</body>";
+        html += "</html>";
 
+        String xml = "<?xml version='1.0'?>\n";
+        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
+        xml += "<ns1:element id='d' lookup='.divclass' type='required+'>";
+        xml += "<ns1:element id='s' lookup='span'>";
+        xml += "<ns1:element id='a' lookup='a'>";
+        xml += "</ns1:element>";
+        xml += "</ns1:element>";
+        xml += "</ns1:element>";
+        xml += "</ns1:form>";
+
+        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
+        Document document = htmlFormBinder.bindHtml(html, "id");
+
+        List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
+        Assertions.assertThat(elements1).hasSize(2);
+        List<HtmlBindedElement> bindedElements1 = htmlFormBinder.getBindedElements(elements1);
+        Assertions.assertThat(bindedElements1).hasSize(2);
+        Assertions.assertThat(bindedElements1.get(0).getAttribute("id")).isEqualTo("divid1");
+        Assertions.assertThat(bindedElements1.get(1).getAttribute("id")).isEqualTo("divid2");
+
+        List<Element> elements2 = htmlFormBinder.getElementsWithId(document, "s");
+        Assertions.assertThat(elements2).hasSize(2);
+        List<HtmlBindedElement> bindedElements2 = htmlFormBinder.getBindedElements(elements2);
+        Assertions.assertThat(bindedElements2).hasSize(2);
+        Assertions.assertThat(bindedElements2.get(0).getElement().tagName()).isEqualTo("span");
+        Assertions.assertThat(bindedElements2.get(1).getElement().tagName()).isEqualTo("span");
+
+        List<Element> elements3 = htmlFormBinder.getElementsWithId(document, "a");
+        Assertions.assertThat(elements3).hasSize(2);
+        List<HtmlBindedElement> bindedElements3 = htmlFormBinder.getBindedElements(elements3);
+        Assertions.assertThat(bindedElements3).hasSize(2);
+        Assertions.assertThat(bindedElements3.get(0).getAttribute("href")).isEqualTo("resource1");
+        Assertions.assertThat(bindedElements3.get(1).getAttribute("href")).isEqualTo("resource2");
     }
 
     /**
