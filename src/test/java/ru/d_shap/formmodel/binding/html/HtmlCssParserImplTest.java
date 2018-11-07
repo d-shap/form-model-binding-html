@@ -19,9 +19,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
 import org.w3c.css.sac.InputSource;
@@ -34,6 +37,8 @@ import ru.d_shap.assertions.Assertions;
  * @author Dmitry Shapovalov
  */
 public final class HtmlCssParserImplTest {
+
+    private static final String ENCODING_UTF_8 = "UTF-8";
 
     /**
      * Test class constructor.
@@ -68,6 +73,40 @@ public final class HtmlCssParserImplTest {
         Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).hasSize(2);
         Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).containsEntry("display", "block");
         Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("display: block; color: red;"))).containsEntry("color", "red");
+    }
+
+    /**
+     * {@link HtmlCssParserImpl} class test.
+     */
+    @Test
+    public void errorHandlerTest() {
+        new HtmlCssParserImpl.IgnoreCssExceptionErrorHandler().warning(null);
+        new HtmlCssParserImpl.IgnoreCssExceptionErrorHandler().error(null);
+        new HtmlCssParserImpl.IgnoreCssExceptionErrorHandler().fatalError(null);
+    }
+
+    /**
+     * {@link HtmlCssParserImpl} class test.
+     *
+     * @throws IOException IO exception.
+     */
+    @Test
+    public void stderrTest() throws IOException {
+        PrintStream err = System.err;
+        try {
+            try {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                PrintStream printStream = new PrintStream(byteArrayOutputStream, true, ENCODING_UTF_8);
+                System.setErr(printStream);
+                new HtmlCssParserImpl().getCssProperties(getInputSource("wrong text"));
+                String message = new String(byteArrayOutputStream.toByteArray(), ENCODING_UTF_8);
+                Assertions.assertThat(message).isBlank();
+            } catch (UnsupportedEncodingException ex) {
+                Assertions.fail(ex.getMessage());
+            }
+        } finally {
+            System.setErr(err);
+        }
     }
 
     private InputSource getInputSource(final String style) {
