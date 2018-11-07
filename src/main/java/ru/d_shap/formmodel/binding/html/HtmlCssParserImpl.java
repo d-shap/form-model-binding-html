@@ -25,6 +25,8 @@ import java.util.Map;
 
 import com.steadystate.css.parser.CSSOMParser;
 
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
@@ -42,6 +44,7 @@ final class HtmlCssParserImpl implements HtmlCssParser {
     @Override
     public Map<String, String> getCssProperties(final InputSource inputSource) throws IOException {
         CSSOMParser parser = new CSSOMParser();
+        parser.setErrorHandler(new IgnoreCssExceptionErrorHandler());
         CSSStyleDeclaration styleDeclaration = parser.parseStyleDeclaration(inputSource);
         Map<String, String> result = new HashMap<>();
         for (int i = 0; i < styleDeclaration.getLength(); i++) {
@@ -50,6 +53,34 @@ final class HtmlCssParserImpl implements HtmlCssParser {
             result.put(propertyName, propertyValue);
         }
         return result;
+    }
+
+    /**
+     * The HTML CSS parser error handler.
+     *
+     * @author Dmitry Shapovalov
+     */
+    private static final class IgnoreCssExceptionErrorHandler implements ErrorHandler {
+
+        IgnoreCssExceptionErrorHandler() {
+            super();
+        }
+
+        @Override
+        public void warning(final CSSParseException exception) {
+            // Ignore
+        }
+
+        @Override
+        public void error(final CSSParseException exception) {
+            // Ignore
+        }
+
+        @Override
+        public void fatalError(final CSSParseException exception) {
+            // Ignore
+        }
+
     }
 
 }
