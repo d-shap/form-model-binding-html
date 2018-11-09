@@ -72,5 +72,31 @@
  *     bindedElement.getOwnText();
  * }
  * }</pre>
+ * <p>
+ * The application's code does not depend on the HTML source. All the changes in HTML affect only on the
+ * form definition XML, so no recompilation is needed. Also the there is no need to change the code
+ * if binding rules change.
+ * </p>
+ * <p>
+ * For example, if &lt;h1&gt; and &lt;h2&gt; tags are added to the source HTML and we need to extract
+ * the text from this elements too. Then we need to change only the form definition XML as following:
+ * </p>
+ * <pre>{@code
+ * <?xml version='1.0'?>
+ *     <ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+ *         <ns1:element id='p-element' lookup='h1' type='required+'/>
+ *         <ns1:element id='p-element' lookup='h2' type='required+'/>
+ *         <ns1:element id='p-element' lookup='p' type='required+'/>
+ *     </ns1:form>
+ * }</pre>
+ * <p>
+ * Or as following:
+ * </p>
+ * <pre>{@code
+ * <?xml version='1.0'?>
+ *     <ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+ *         <ns1:element id='p-element' lookup='h1, h2, p' type='required+'/>
+ *     </ns1:form>
+ * }</pre>
  */
 package ru.d_shap.formmodel.binding.html;
