@@ -30,7 +30,7 @@
  * <p>
  * For example, suppose the following HTML:
  * </p>
- * <pre>{@code
+ * <pre>
  * &lt;html&gt;
  *     &lt;head&gt;
  *         &lt;title&gt;Test page&lt;/title&gt;
@@ -41,18 +41,18 @@
  *         &lt;p&gt;Some more text.&lt;/p&gt;
  *     &lt;/body&gt;
  * &lt;/html&gt;
- * }</pre>
+ * </pre>
  * <p>
- * To extract the &lt;p&gt; tags text, suppose the following form definition:
+ * To extract the <i>&lt;p&gt;</i> tags text, suppose the following form definition:
  * </p>
- * <pre>{@code
+ * <pre>
  * &lt;?xml version='1.0'?&gt;
  * &lt;ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'&gt;
  *     &lt;ns1:element id='p-element' lookup='p' type='required+'/&gt;
  * &lt;/ns1:form&gt;
- * }</pre>
+ * </pre>
  * <p>
- * Here we define that the form contains one or more &lt;p&gt; tags.
+ * Here we define that the form contains one or more <i>&lt;p&gt;</i> tags.
  * </p>
  * <p>The following code implements the binding:</p>
  * <pre>{@code
@@ -66,47 +66,47 @@
  * Document document = formBinder.bindHtml(html, "p-extractor");
  *
  * // Get the binded elements and text
- * List&lt;Element&gt; elements = formBinder.getElementsWithId(document, "p-element");
- * List&lt;HtmlBindedElement&gt; bindedElements = formBinder.getBindedElements(elements);
+ * List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+ * List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
  * for (HtmlBindedElement bindedElement: bindedElements) {
  *     bindedElement.getOwnText();
  * }
  * }</pre>
  * <p>
- * The application's code does not depend on the HTML source. All the changes in HTML affect only on the
- * form definition XML, so no recompilation is needed. Also there is no need to change the code
- * if the binding rules change.
+ * The application's code does not depend on the HTML source. All the changes in the source HTML affect
+ * only on the form definition XML, so no recompilation is needed. Also there is no need to change the
+ * code if the binding rules change.
  * </p>
  * <p>
- * For example, if &lt;h1&gt; and &lt;h2&gt; tags are added to the source HTML and we need to extract
+ * For example, if <i>&lt;h1&gt;</i> and <i>&lt;h2&gt;</i> tags are added to the source HTML and we need to extract
  * the text from this new tags too. Then we need to change only the form definition XML as following:
  * </p>
- * <pre>{@code
+ * <pre>
  * &lt;?xml version='1.0'?&gt;
  * &lt;ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'&gt;
  *     &lt;ns1:element id='p-element' lookup='h1' type='required+'/&gt;
  *     &lt;ns1:element id='p-element' lookup='h2' type='required+'/&gt;
  *     &lt;ns1:element id='p-element' lookup='p' type='required+'/&gt;
  * &lt;/ns1:form&gt;
- * }</pre>
+ * </pre>
  * <p>
  * Or as following:
  * </p>
- * <pre>{@code
+ * <pre>
  * &lt;?xml version='1.0'?&gt;
  * &lt;ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'&gt;
  *     &lt;ns1:element id='p-element' lookup='h1, h2, p' type='required+'/&gt;
  * &lt;/ns1:form&gt;
- * }</pre>
+ * </pre>
  * <p>
- * If, for example, we need to extract the text not from all &lt;p&gt; tags, but from &lt;p&gt; tags
- * with class <i>pclass</i>. Then we need to change the form definition XML as following:
+ * If, for example, we need to extract the text not from all <i>&lt;p&gt;</i> tags, but from <i>&lt;p&gt;</i>
+ * tags with class <i>pclass</i>. Then we need to change the form definition XML as following:
  * </p>
- * <pre>{@code
+ * <pre>
  * &lt;?xml version='1.0'?&gt;
  * &lt;ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'&gt;
  *     &lt;ns1:element id='p-element' lookup='p.pclass' type='required+'/&gt;
  * &lt;/ns1:form&gt;
- * }</pre>
+ * </pre>
  */
 package ru.d_shap.formmodel.binding.html;
