@@ -22,13 +22,13 @@
  * Form-model binding implementation for HTML.
  * </p>
  * <p>
- * Form model library mediates between the HTML and the application and encapsulates the complexity of the HTML.
- * The essential parts of the HTML are described in the form definition XML. Then this form definition is
- * binded with the HTML source and the result of this binding is a binded form. Binded elements can be obtained by
- * the application from this binded form.
+ * Form model library mediates between the source HTML and the application and encapsulates the complexity of
+ * the source HTML. The essential parts of the HTML are described in the form definition XML. Then this
+ * form definition is binded with the source HTML and the result of this binding is a binded form. Binded
+ * elements can be obtained by the application from this binded form.
  * </p>
  * <p>
- * For example, suppose the following HTML:
+ * For example, suppose the following source HTML:
  * </p>
  * <pre>
  * &lt;html&gt;
@@ -73,7 +73,7 @@
  * }
  * }</pre>
  * <p>
- * The application's code does not depend on the HTML source. All the changes in the source HTML affect
+ * The application's code does not depend on the source HTML. All the changes in the source HTML affect
  * only on the form definition XML, so no recompilation is needed. Also there is no need to change the
  * code if the binding rules change.
  * </p>
