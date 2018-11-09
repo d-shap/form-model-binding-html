@@ -60,12 +60,7 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
 
     @Override
     public BindedForm bindFormDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final FormDefinition formDefinition) {
-        org.jsoup.nodes.Document document;
-        if (lastBindedForm == null) {
-            document = ((HtmlBindingSource) bindingSource).getDocument();
-        } else {
-            document = ((HtmlBindedForm) lastBindedForm).getDocument();
-        }
+        org.jsoup.nodes.Document document = ((HtmlBindingSource) bindingSource).getDocument();
         return new HtmlBindedFormImpl(document);
     }
 
@@ -89,11 +84,11 @@ public final class HtmlFormInstanceBinder implements FormInstanceBinder {
 
     @Override
     public BindedAttribute bindAttributeDefinition(final BindingSource bindingSource, final BindedForm lastBindedForm, final BindedElement lastBindedElement, final Element parentElement, final AttributeDefinition attributeDefinition) {
-        String lookup = attributeDefinition.getLookup();
-        if (((HtmlBindedElement) lastBindedElement).hasAttribute(lookup)) {
-            String attributeValue = ((HtmlBindedElement) lastBindedElement).getAttribute(lookup);
-            String absoluteAttributeValue = ((HtmlBindedElement) lastBindedElement).getAbsoluteAttribute(lookup);
-            return new HtmlBindedAttributeImpl(lookup, attributeValue, absoluteAttributeValue);
+        String attributeName = attributeDefinition.getLookup();
+        if (((HtmlBindedElement) lastBindedElement).hasAttribute(attributeName)) {
+            String attributeValue = ((HtmlBindedElement) lastBindedElement).getAttribute(attributeName);
+            String absoluteAttributeValue = ((HtmlBindedElement) lastBindedElement).getAbsoluteAttribute(attributeName);
+            return new HtmlBindedAttributeImpl(attributeName, attributeValue, absoluteAttributeValue);
         } else {
             return null;
         }
