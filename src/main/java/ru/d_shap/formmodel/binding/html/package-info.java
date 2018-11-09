@@ -43,7 +43,7 @@
  * </html>
  * }</pre>
  * <p>
- * To extract &lt;p&gt; elements text, suppose the following form definition:
+ * To extract &lt;p&gt; tags text, suppose the following form definition:
  * </p>
  * <pre>{@code
  * <?xml version='1.0'?>
@@ -52,7 +52,7 @@
  *     </ns1:form>
  * }</pre>
  * <p>
- * Here we define that the form contains one or more &lt;p&gt; elements.
+ * Here we define that the form contains one or more &lt;p&gt; tags.
  * </p>
  * <p>The following code implements binding:</p>
  * <pre>{@code
@@ -79,7 +79,7 @@
  * </p>
  * <p>
  * For example, if &lt;h1&gt; and &lt;h2&gt; tags are added to the source HTML and we need to extract
- * the text from this elements too. Then we need to change only the form definition XML as following:
+ * the text from this tags too. Then we need to change only the form definition XML as following:
  * </p>
  * <pre>{@code
  * <?xml version='1.0'?>
@@ -96,6 +96,16 @@
  * <?xml version='1.0'?>
  *     <ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
  *         <ns1:element id='p-element' lookup='h1, h2, p' type='required+'/>
+ *     </ns1:form>
+ * }</pre>
+ * <p>
+ * If, for example, we need to extract text not from all &lt;p&gt; tags, but from &lt;p&gt; tags
+ * with class <i>pclass</i>. Then we need to change the form definition XML as following:
+ * </p>
+ * <pre>{@code
+ * <?xml version='1.0'?>
+ *     <ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+ *         <ns1:element id='p-element' lookup='p.pclass' type='required+'/>
  *     </ns1:form>
  * }</pre>
  */
