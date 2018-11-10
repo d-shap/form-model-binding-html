@@ -211,11 +211,28 @@ Pseudo selectors
 * `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
 * Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 
+HTML with AJAX
+==============
+If HTML is rendered by subsequent ajax-requests, then the final HTML should be obtained first.
+**HttpUnit** or **Selenium** can be used to obtain the final HTML and then this final HTML can be binded with the form model.
+
+HttpUnit example
+----------------
+HttpUnit example goes here...
+
+Selenium example
+----------------
+Selenium example goes here...
+
+HOW TO
+======
+[HOW TO examples](HOWTO.md)
+
 Latest release
 ==============
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model-binding-html
-* **&lt;version&gt;**: -.-
+* **&lt;version&gt;**: 1.0.0
 
 Donation
 ========
