@@ -19,7 +19,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * <p>
- * Form-model binding implementation for HTML.
+ * Form model html binding is a form model binding implementation for HTML.
  * </p>
  * <p>
  * Form model library mediates between the source HTML and the application and encapsulates the complexity of
@@ -60,9 +60,9 @@
  * FormDefinitions formDefinitions = new FormDefinitions();
  * FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(new File("file with the form definition"));
  * formDefinitionsLoader.load(formDefinitions);
+ * HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
  *
  * // Bind the HTML
- * HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
  * Document document = formBinder.bindHtml(html, "p-extractor");
  *
  * // Get the binded elements and text
