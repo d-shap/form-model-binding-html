@@ -2,6 +2,86 @@ Form model html binding
 =======================
 Form model html binding is a form model binding implementation for HTML.
 
+Form model library mediates between the source HTML and the application and encapsulates the complexity of the source HTML.
+The essential parts of the HTML are described in the form definition XML.
+Then this form definition is binded with the source HTML and the result of this binding is a binded form.
+Binded elements can be obtained by the application from this binded form.
+
+For example, suppose the following source HTML:
+```
+<html>
+    <head>
+        <title>Test page</title>
+    </head>
+    <body>
+        <p>Some text.</p>
+        <p>Some other text.</p>
+        <p>Some more text.</p>
+    </body>
+</html>
+```
+
+To extract the *&lt;p&gt;* tags text, suppose the following form definition:
+```
+<?xml version='1.0'?>
+<ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+    <ns1:element id='p-element' lookup='p' type='required+'/>
+</ns1:form>
+```
+
+Here we define that the form contains one or more *&lt;p&gt;* tags.
+
+The following code implements the binding:
+```
+// Load form definitions
+FormDefinitions formDefinitions = new FormDefinitions();
+FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(new File("file with the form definition"));
+formDefinitionsLoader.load(formDefinitions);
+HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+
+// Bind the HTML
+Document document = formBinder.bindHtml(html, "p-extractor");
+
+// Get the binded elements and text
+List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+for (HtmlBindedElement bindedElement: bindedElements) {
+    bindedElement.getOwnText();
+}
+```
+
+The application's code does not depend on the source HTML.
+All the changes in the source HTML affect only on the form definition XML, so no recompilation is needed.
+Also there is no need to change the code if the binding rules change.
+
+For example, if *&lt;h1&gt;* and *&lt;h2&gt;* tags are added to the source HTML and we need to extract the text from this new tags too.
+Then we need to change only the form definition XML as following:
+```
+<?xml version='1.0'?>
+<ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+    <ns1:element id='p-element' lookup='h1' type='required+'/>
+    <ns1:element id='p-element' lookup='h2' type='required+'/>
+    <ns1:element id='p-element' lookup='p' type='required+'/>
+</ns1:form>
+```
+
+Or as following:
+```
+<?xml version='1.0'?>
+<ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+    <ns1:element id='p-element' lookup='h1, h2, p' type='required+'/>
+</ns1:form>
+```
+
+If, for example, we need to extract the text not from all *&lt;p&gt;* tags, but from *&lt;p&gt;* tags with class *pclass*.
+Then we need to change the form definition XML as following:
+```
+<?xml version='1.0'?>
+<ns1:form id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
+    <ns1:element id='p-element' lookup='p.pclass' type='required+'/>
+</ns1:form>
+```
+
 XML definition
 ==============
 Namespace: ```http://d-shap.ru/schema/form-model/1.0```
