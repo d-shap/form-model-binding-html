@@ -213,12 +213,22 @@ Pseudo selectors
 
 HTML with AJAX
 ==============
-If HTML is rendered by subsequent ajax-requests, then the final HTML should be obtained first.
-**HttpUnit** or **Selenium** can be used to obtain the final HTML and then this final HTML can be binded with the form model.
+If HTML is rendered with subsequent AJAX-requests, then the final source HTML should be obtained first.
+**HtmlUnit** or **Selenium** can be used to obtain the final source HTML and then this final source HTML can be binded with the form model.
 
-HttpUnit example
+HtmlUnit example
 ----------------
-HttpUnit example goes here...
+```
+String url = "https://bash.im/";
+
+WebClient webClient = new WebClient();
+webClient.getOptions().setThrowExceptionOnScriptError(false);
+HtmlPage page = webClient.getPage(url);
+String pageAsText = page.getWebResponse().getContentAsString();
+webClient.close();
+
+Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
+```
 
 Selenium example
 ----------------
