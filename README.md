@@ -212,10 +212,17 @@ Pseudo selectors
 * `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
 * Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 
-HTML with AJAX
-==============
-If HTML is rendered with subsequent AJAX-requests, then the final source HTML should be obtained first.
-**HtmlUnit** or **Selenium** can be used to obtain the final source HTML and then this final source HTML can be binded with the form model.
+JavaScript DOM manipulations and AJAX-requests
+==============================================
+In many cases the source HTML can not be obtained by one request to the server.
+After the HTML page is loaded, JavaScript changes this HTML.
+Also some parts of the HTML page are loaded with subsequent AJAX-requests (and again the JavaScript changes the HTML).
+In this cases the final source HTML should be obtained first and then this final source HTML can be binded with the form model.
+
+The final source HTML can be obtained with the headless Internet Browsers or with the real Internet Browsers.
+**HtmlUnit** is an example of the headless Internet Browser.
+To work with the real Internet Browsers **Selenium WebDriver** can be used.
+Also real Internet Browsers can work in headless mode.
 
 HtmlUnit example
 ----------------
@@ -231,8 +238,8 @@ webClient.close();
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
 
-Selenium example
-----------------
+Selenium WebDriver example
+--------------------------
 ```
 String url = "some url";
 
