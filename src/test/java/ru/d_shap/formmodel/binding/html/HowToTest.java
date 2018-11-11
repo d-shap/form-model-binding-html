@@ -20,7 +20,7 @@
 package ru.d_shap.formmodel.binding.html;
 
 /**
- * How To tests.
+ * How To examples.
  *
  * @author Dmitry Shapovalov
  */
