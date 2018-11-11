@@ -35,7 +35,8 @@ The following code implements the binding:
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
-FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(new File("file with the form definition"));
+File file = new File("file with the form definition");
+FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(file);
 formDefinitionsLoader.load(formDefinitions);
 HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
 
