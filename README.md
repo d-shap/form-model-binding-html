@@ -47,7 +47,7 @@ Document document = formBinder.bindHtml(html, "p-extractor");
 List<Element> elements = formBinder.getElementsWithId(document, "p-element");
 List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
 for (HtmlBindedElement bindedElement: bindedElements) {
-    bindedElement.getOwnText();
+    bindedElement.getText();
 }
 ```
 
