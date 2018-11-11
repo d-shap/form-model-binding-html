@@ -219,7 +219,7 @@ If HTML is rendered with subsequent AJAX-requests, then the final source HTML sh
 HtmlUnit example
 ----------------
 ```
-String url = "https://bash.im/";
+String url = "some url";
 
 WebClient webClient = new WebClient();
 webClient.getOptions().setThrowExceptionOnScriptError(false);
@@ -232,7 +232,18 @@ Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 
 Selenium example
 ----------------
-Selenium example goes here...
+```
+String url = "some url";
+
+System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
+WebDriver driver = new ChromeDriver();
+driver.get(url);
+Thread.sleep(1000);
+String pageAsText = driver.getPageSource();
+driver.quit();
+
+Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
+```
 
 HOW TO
 ======
