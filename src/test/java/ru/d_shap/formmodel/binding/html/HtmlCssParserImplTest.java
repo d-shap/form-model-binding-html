@@ -38,8 +38,6 @@ import ru.d_shap.assertions.Assertions;
  */
 public final class HtmlCssParserImplTest {
 
-    private static final String ENCODING_UTF_8 = "UTF-8";
-
     /**
      * Test class constructor.
      */
@@ -96,10 +94,10 @@ public final class HtmlCssParserImplTest {
         try {
             try {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                PrintStream printStream = new PrintStream(byteArrayOutputStream, true, ENCODING_UTF_8);
+                PrintStream printStream = new PrintStream(byteArrayOutputStream, true, TestHelper.ENCODING);
                 System.setErr(printStream);
                 new HtmlCssParserImpl().getCssProperties(getInputSource("wrong text"));
-                String message = new String(byteArrayOutputStream.toByteArray(), ENCODING_UTF_8);
+                String message = new String(byteArrayOutputStream.toByteArray(), TestHelper.ENCODING);
                 Assertions.assertThat(message).isBlank();
             } catch (UnsupportedEncodingException ex) {
                 Assertions.fail(ex.getMessage());
