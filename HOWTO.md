@@ -129,3 +129,91 @@ Form definition:
 Result:
 * Some other text.
 * Some more text.
+
+... bind child elements, example 1
+----------------------------------
+HTML:
+```
+<html>
+<head>
+    <title>Test page</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Row 1 column 1</td>
+        <td>Row 1 column 2</td>
+        <td>Row 1 column 3</td>
+    </tr>
+    <tr>
+        <td>Row 2 column 1</td>
+        <td>Row 2 column 2</td>
+        <td>Row 2 column 3</td>
+    </tr>
+    <tr>
+        <td>Row 3 column 1</td>
+        <td>Row 3 column 2</td>
+        <td>Row 3 column 3</td>
+    </tr>
+</table>
+</body>
+</html>
+```
+
+Form definition:
+```
+<?xml version="1.0"?>
+<ns1:form group="bindChildElements-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:element lookup="tr" type="required+">
+        <ns1:element id="elementId" lookup="td:eq(1)" />
+    </ns1:element>
+</ns1:form>
+```
+
+Result:
+* Row 1 column 2
+* Row 2 column 2
+* Row 3 column 2
+
+... bind child elements, example 2
+----------------------------------
+HTML:
+```
+<html>
+<head>
+    <title>Test page</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Row 1 column 1</td>
+        <td>Row 1 column 2</td>
+        <td>Row 1 column 3</td>
+    </tr>
+    <tr>
+        <td>Row 2 column 1</td>
+        <td>Row 2 column 2</td>
+        <td>Row 2 column 3</td>
+    </tr>
+    <tr>
+        <td>Row 3 column 1</td>
+        <td>Row 3 column 2</td>
+        <td>Row 3 column 3</td>
+    </tr>
+</table>
+</body>
+</html>
+```
+
+Form definition:
+```
+<?xml version="1.0"?>
+<ns1:form group="bindChildElements-01" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:element id="elementId" lookup="tr > td:eq(1)" type="required+" />
+</ns1:form>
+```
+
+Result:
+* Row 1 column 2
+* Row 2 column 2
+* Row 3 column 2
