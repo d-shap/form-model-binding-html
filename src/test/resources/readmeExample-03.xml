@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
-<ns1:form group='readme-example-03' id='p-extractor' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>
-    <ns1:element id='p-element' lookup='p.pclass' type='required+' />
+<?xml version="1.0"?>
+<ns1:form group="readme-example-03" id="p-extractor" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:element id="p-element" lookup="p.pclass" type="required+" />
 </ns1:form>
