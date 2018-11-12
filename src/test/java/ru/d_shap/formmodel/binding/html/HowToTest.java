@@ -119,4 +119,40 @@ public final class HowToTest {
         Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Some more text.");
     }
 
+    /**
+     * How To example.
+     */
+    @Test
+    public void bindChildElements01Form01Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("bindChildElements-01.html");
+
+        Document document = formBinder.bindHtml(html, "bindChildElements-01", "form-01");
+        List<Element> elements = formBinder.getElementsWithId(document, "elementId");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(3);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Row 1 column 2");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Row 2 column 2");
+        Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Row 3 column 2");
+    }
+
+    /**
+     * How To example.
+     */
+    @Test
+    public void bindChildElements01Form02Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("bindChildElements-01.html");
+
+        Document document = formBinder.bindHtml(html, "bindChildElements-01", "form-02");
+        List<Element> elements = formBinder.getElementsWithId(document, "elementId");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(3);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Row 1 column 2");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Row 2 column 2");
+        Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Row 3 column 2");
+    }
+
 }
