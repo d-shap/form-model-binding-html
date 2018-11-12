@@ -19,6 +19,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import ru.d_shap.assertions.Assertions;
+import ru.d_shap.formmodel.definition.model.FormDefinitions;
+
 /**
  * How To examples.
  *
@@ -31,6 +41,21 @@ public final class HowToTest {
      */
     public HowToTest() {
         super();
+    }
+
+    @Test
+    public void readmeExample01Test() throws IOException {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("readmeExample-01.html");
+
+        Document document = formBinder.bindHtml(html, "readme-example-01", "p-extractor");
+        List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(3);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Some text.");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Some other text.");
+        Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Some more text.");
     }
 
 }
