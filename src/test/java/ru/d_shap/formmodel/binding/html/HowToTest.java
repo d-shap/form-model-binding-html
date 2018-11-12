@@ -19,7 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -47,7 +46,7 @@ public final class HowToTest {
      * How To example.
      */
     @Test
-    public void readmeExample01Test() throws IOException {
+    public void readmeExample01Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
         String html = TestHelper.loadHtml("readmeExample-01.html");
