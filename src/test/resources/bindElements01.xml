@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<ns1:form group="bindElements01" id="p-extractor" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
-    <ns1:element id="p-element" lookup="p" type="required+" />
-</ns1:form>
