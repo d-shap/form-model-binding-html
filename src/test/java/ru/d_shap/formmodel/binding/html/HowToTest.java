@@ -60,4 +60,46 @@ public final class HowToTest {
         Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Some more text.");
     }
 
+    /**
+     * How To example.
+     */
+    @Test
+    public void readmeExample0201Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("readmeExample-02.html");
+
+        Document document = formBinder.bindHtml(html, "readme-example-02-01", "p-extractor");
+        List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(6);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Header 1");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Header 1.1");
+        Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Header 1.2");
+        Assertions.assertThat(bindedElements.get(3).getText()).isEqualTo("Some text.");
+        Assertions.assertThat(bindedElements.get(4).getText()).isEqualTo("Some other text.");
+        Assertions.assertThat(bindedElements.get(5).getText()).isEqualTo("Some more text.");
+    }
+
+    /**
+     * How To example.
+     */
+    @Test
+    public void readmeExample0202Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("readmeExample-02.html");
+
+        Document document = formBinder.bindHtml(html, "readme-example-02-02", "p-extractor");
+        List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(6);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Header 1");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Header 1.1");
+        Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Some text.");
+        Assertions.assertThat(bindedElements.get(3).getText()).isEqualTo("Some other text.");
+        Assertions.assertThat(bindedElements.get(4).getText()).isEqualTo("Header 1.2");
+        Assertions.assertThat(bindedElements.get(5).getText()).isEqualTo("Some more text.");
+    }
+
 }
