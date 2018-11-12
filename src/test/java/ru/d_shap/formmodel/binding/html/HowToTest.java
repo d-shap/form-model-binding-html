@@ -102,4 +102,21 @@ public final class HowToTest {
         Assertions.assertThat(bindedElements.get(5).getText()).isEqualTo("Some more text.");
     }
 
+    /**
+     * How To example.
+     */
+    @Test
+    public void readmeExample03Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("readmeExample-03.html");
+
+        Document document = formBinder.bindHtml(html, "readme-example-03", "p-extractor");
+        List<Element> elements = formBinder.getElementsWithId(document, "p-element");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(2);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Some other text.");
+        Assertions.assertThat(bindedElements.get(1).getText()).isEqualTo("Some more text.");
+    }
+
 }
