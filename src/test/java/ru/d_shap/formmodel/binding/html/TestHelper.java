@@ -19,16 +19,24 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import ru.d_shap.formmodel.InputSourceException;
 import ru.d_shap.formmodel.XmlDocumentBuilder;
+import ru.d_shap.formmodel.definition.loader.FormDefinitionsLoader;
 import ru.d_shap.formmodel.definition.loader.xml.FormXmlDefinitionsElementLoader;
+import ru.d_shap.formmodel.definition.loader.xml.FormXmlDefinitionsFileLoader;
 import ru.d_shap.formmodel.definition.model.FormDefinition;
 import ru.d_shap.formmodel.definition.model.FormDefinitions;
 
@@ -38,6 +46,8 @@ import ru.d_shap.formmodel.definition.model.FormDefinitions;
  * @author Dmitry Shapovalov
  */
 public final class TestHelper {
+
+    public static final String ENCODING = "UTF-8";
 
     private TestHelper() {
         super();
@@ -64,6 +74,47 @@ public final class TestHelper {
         FormDefinitions formDefinitions = new FormDefinitions();
         formDefinitions.addFormDefinitions(formDefinitions1);
         return formDefinitions;
+    }
+
+    /**
+     * Load the form definitions.
+     *
+     * @return the form definitions.
+     */
+    public static FormDefinitions loadFormDefinitions() {
+        FormDefinitions formDefinitions = new FormDefinitions();
+        URL url = TestHelper.class.getClassLoader().getResource(".");
+        File parentDirectory = new File(url.getFile());
+        FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(parentDirectory);
+        formDefinitionsLoader.load(formDefinitions);
+        return formDefinitions;
+    }
+
+    /**
+     * Load the HTML from resource with the specified resource name.
+     *
+     * @param name the specified resource name.
+     *
+     * @return the loaded HTML.
+     */
+    public static String loadHtml(final String name) {
+        try {
+            InputStream inputStream = TestHelper.class.getClassLoader().getResourceAsStream(name);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            int read;
+            byte[] buffer = new byte[1000];
+            while (true) {
+                read = inputStream.read(buffer);
+                if (read <= 0) {
+                    break;
+                }
+                byteArrayOutputStream.write(buffer, 0, read);
+            }
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            return new String(bytes, ENCODING);
+        } catch (IOException ex) {
+            throw new InputSourceException(ex);
+        }
     }
 
     /**
