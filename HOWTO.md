@@ -4,7 +4,7 @@ HOW TO ...
 ... bind elements
 -----------------
 HTML:
-```html
+```
 <html>
 <head>
     <title>Test page</title>
@@ -18,7 +18,7 @@ HTML:
 ```
 
 Form definition:
-```xml
+```
 <?xml version="1.0"?>
 <ns1:form group="bindElements-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="elementId" lookup="p" type="required+" />
@@ -33,7 +33,7 @@ Result:
 ... bind elements with the same id, example 1
 ---------------------------------------------
 HTML:
-```html
+```
 <html>
 <head>
     <title>Test page</title>
@@ -50,7 +50,7 @@ HTML:
 ```
 
 Form definition:
-```xml
+```
 <?xml version="1.0"?>
 <ns1:form group="bindElementsWithSameId-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="elementId" lookup="h1" type="required+" />
@@ -70,7 +70,7 @@ Result:
 ... bind elements with the same id, example 2
 ---------------------------------------------
 HTML:
-```html
+```
 <html>
 <head>
     <title>Test page</title>
@@ -87,7 +87,7 @@ HTML:
 ```
 
 Form definition:
-```xml
+```
 <?xml version="1.0"?>
 <ns1:form group="bindElementsWithSameId-01" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="elementId" lookup="h1, h2, p" type="required+" />
@@ -105,7 +105,7 @@ Result:
 ... bind elements with class
 ----------------------------
 HTML:
-```html
+```
 <html>
 <head>
     <title>Test page</title>
@@ -119,7 +119,7 @@ HTML:
 ```
 
 Form definition:
-```xml
+```
 <?xml version="1.0"?>
 <ns1:form group="bindElementsWithClass-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="elementId" lookup="p.pclass" type="required+" />
