@@ -43,6 +43,9 @@ public final class HowToTest {
         super();
     }
 
+    /**
+     * How To example.
+     */
     @Test
     public void readmeExample01Test() throws IOException {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
