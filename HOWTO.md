@@ -26,9 +26,11 @@ Form definition:
 ```
 
 Result:
-* Some text.
-* Some other text.
-* Some more text.
+```
+Some text.
+Some other text.
+Some more text.
+```
 
 ... bind elements with the same id, example 1
 ---------------------------------------------
@@ -60,12 +62,14 @@ Form definition:
 ```
 
 Result:
-* Header 1
-* Header 1.1
-* Header 1.2
-* Some text.
-* Some other text.
-* Some more text.
+```
+Header 1
+Header 1.1
+Header 1.2
+Some text.
+Some other text.
+Some more text.
+```
 
 ... bind elements with the same id, example 2
 ---------------------------------------------
@@ -95,12 +99,14 @@ Form definition:
 ```
 
 Result:
-* Header 1
-* Header 1.1
-* Some text.
-* Some other text.
-* Header 1.2
-* Some more text.
+```
+Header 1
+Header 1.1
+Some text.
+Some other text.
+Header 1.2
+Some more text.
+```
 
 ... bind elements with class
 ----------------------------
@@ -127,8 +133,10 @@ Form definition:
 ```
 
 Result:
-* Some other text.
-* Some more text.
+```
+Some other text.
+Some more text.
+```
 
 ... bind child elements, example 1
 ----------------------------------
@@ -171,9 +179,11 @@ Form definition:
 ```
 
 Result:
-* Row 1 column 2
-* Row 2 column 2
-* Row 3 column 2
+```
+Row 1 column 2
+Row 2 column 2
+Row 3 column 2
+```
 
 ... bind child elements, example 2
 ----------------------------------
@@ -214,6 +224,8 @@ Form definition:
 ```
 
 Result:
-* Row 1 column 2
-* Row 2 column 2
-* Row 3 column 2
+```
+Row 1 column 2
+Row 2 column 2
+Row 3 column 2
+```
