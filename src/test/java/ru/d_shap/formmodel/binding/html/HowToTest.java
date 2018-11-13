@@ -49,9 +49,9 @@ public final class HowToTest {
     public void bindElements01Form01Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-01-01.html");
+        String html = TestHelper.loadHtml("bindElement-01-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-01", "form-01");
+        Document document = formBinder.bindHtml(html, "bindElement-01", "form-01");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(3);
@@ -67,9 +67,9 @@ public final class HowToTest {
     public void bindElements02Form01Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-02-01.html");
+        String html = TestHelper.loadHtml("bindElement-02-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-02", "form-01");
+        Document document = formBinder.bindHtml(html, "bindElement-02", "form-01");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(6);
@@ -88,9 +88,9 @@ public final class HowToTest {
     public void bindElements02Form02Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-02-01.html");
+        String html = TestHelper.loadHtml("bindElement-02-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-02", "form-02");
+        Document document = formBinder.bindHtml(html, "bindElement-02", "form-02");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(6);
@@ -109,9 +109,9 @@ public final class HowToTest {
     public void bindElements03Form01Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-03-01.html");
+        String html = TestHelper.loadHtml("bindElement-03-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-03", "form-01");
+        Document document = formBinder.bindHtml(html, "bindElement-03", "form-01");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(2);
@@ -126,9 +126,9 @@ public final class HowToTest {
     public void bindElements04Form01Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-04-01.html");
+        String html = TestHelper.loadHtml("bindElement-04-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-04", "form-01");
+        Document document = formBinder.bindHtml(html, "bindElement-04", "form-01");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(3);
@@ -144,9 +144,9 @@ public final class HowToTest {
     public void bindElements04Form02Test() {
         FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
         HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
-        String html = TestHelper.loadHtml("bindElements-04-01.html");
+        String html = TestHelper.loadHtml("bindElement-04-01.html");
 
-        Document document = formBinder.bindHtml(html, "bindElements-04", "form-02");
+        Document document = formBinder.bindHtml(html, "bindElement-04", "form-02");
         List<Element> elements = formBinder.getElementsWithId(document, "resultId");
         List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
         Assertions.assertThat(bindedElements).hasSize(3);
