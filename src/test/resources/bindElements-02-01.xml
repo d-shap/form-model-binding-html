@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ns1:form group="bindElementsWithSameId-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElements-02" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="elementId" lookup="h1" type="required+" />
     <ns1:element id="elementId" lookup="h2" type="required+" />
     <ns1:element id="elementId" lookup="p" type="required+" />
