@@ -3,6 +3,6 @@
     <ns1:element lookup="a">
         <ns1:element lookup="img" />
     </ns1:element>
-    <ns1:element id="elementId" lookup="div.description" />
+    <ns1:element id="resultId" lookup="div.description" />
     <ns1:element lookup="div:has(span.like) span:eq(0)" />
 </ns1:form>

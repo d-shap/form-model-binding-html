@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ns1:form group="bindSingleElement-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
-    <ns1:single-element id="elementId">
+    <ns1:single-element id="resultId">
         <ns1:element lookup=".subscribe" />
         <ns1:element lookup=".unsubscribe" />
     </ns1:single-element>
