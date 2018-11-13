@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ns1:form group="bindFormReference-01" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:element lookup="a">
+        <ns1:element lookup="img" />
+    </ns1:element>
+    <ns1:element id="elementId" lookup="div.description" />
+    <ns1:element lookup="div:has(span.like) span:eq(0)" />
+</ns1:form>
