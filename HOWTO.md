@@ -229,3 +229,81 @@ Row 1 column 2
 Row 2 column 2
 Row 3 column 2
 ```
+
+... bind toggle elements, example 1
+----------------------------------
+HTML:
+```
+<html>
+<head>
+    <title>Test page</title>
+</head>
+<body>
+<div>
+    <img src="someurl"/>
+    <br/>
+    <div>
+        <span>View count</span>
+        <span class="like">Like text</span>
+        <span class="dislike">Dislike text</span>
+        <span class="subscribe">Subscribe text</span>
+    </div>
+</div>
+</body>
+</html>
+```
+
+Form definition:
+```
+<?xml version="1.0"?>
+<ns1:form group="bindSingleElement-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:single-element id="elementId">
+        <ns1:element lookup=".subscribe" />
+        <ns1:element lookup=".unsubscribe" />
+    </ns1:single-element>
+</ns1:form>
+```
+
+Result:
+```
+Subscribe text
+```
+
+... bind toggle elements, example 2
+----------------------------------
+HTML:
+```
+<html>
+<head>
+    <title>Test page</title>
+</head>
+<body>
+<div>
+    <img src="someurl"/>
+    <br/>
+    <div>
+        <span>View count</span>
+        <span class="like">Like text</span>
+        <span class="dislike">Dislike text</span>
+        <span class="unsubscribe">Unsubscribe text</span>
+    </div>
+</div>
+</body>
+</html>
+```
+
+Form definition:
+```
+<?xml version="1.0"?>
+<ns1:form group="bindSingleElement-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:single-element id="elementId">
+        <ns1:element lookup=".subscribe" />
+        <ns1:element lookup=".unsubscribe" />
+    </ns1:single-element>
+</ns1:form>
+```
+
+Result:
+```
+Unsubscribe text
+```
