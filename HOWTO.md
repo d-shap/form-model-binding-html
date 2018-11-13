@@ -351,7 +351,7 @@ HTML:
     <title>Test page</title>
 </head>
 <body>
-<div class="imgblock item1">
+<div class="item1">
     <a href="viewurl1"> <img src="someurl1"/></a>
     <br/>
     <div class="description">Description 1</div>
@@ -361,7 +361,7 @@ HTML:
         <span class="dislike">Dislike text</span>
     </div>
 </div>
-<div class="imgblock item2">
+<div class="item2">
     <a href="viewurl2"> <img src="someurl2"/></a>
     <br/>
     <div class="description">Description 2</div>
@@ -371,7 +371,7 @@ HTML:
         <span class="dislike">Dislike text</span>
     </div>
 </div>
-<div class="imgblock item3">
+<div class="item3">
     <a href="viewurl3"> <img src="someurl3"/></a>
     <br/>
     <div class="description">Description 3</div>
@@ -389,7 +389,13 @@ Form definition:
 ```
 <?xml version="1.0"?>
 <ns1:form group="bindFormReference-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
-    <ns1:element lookup="div.imgblock" type="optional+">
+    <ns1:element lookup="div.item1">
+        <ns1:form-reference group="bindFormReference-01" id="form-02" />
+    </ns1:element>
+    <ns1:element lookup="div.item2">
+        <ns1:form-reference group="bindFormReference-01" id="form-02" />
+    </ns1:element>
+    <ns1:element lookup="div.item3">
         <ns1:form-reference group="bindFormReference-01" id="form-02" />
     </ns1:element>
 </ns1:form>
