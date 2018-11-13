@@ -3,6 +3,10 @@ HOW TO ...
 
 ... bind elements
 -----------------
+In this example we extract content from all *&lt;p&gt;* elements in HTML.
+The type of the element is *required+*.
+It means that there should be one ore more *&lt;p&gt;* elements.
+
 HTML:
 ```
 <html>
@@ -32,8 +36,12 @@ Some other text.
 Some more text.
 ```
 
-... bind elements with the same id, example 1
+... bind elements with the same ID, example 1
 ---------------------------------------------
+In this example we extract content from all *&lt;h1&gt;*, *&lt;h2&gt;* and *&lt;p&gt;* elements in HTML.
+Elemenst with the same ID are grouped together.
+The order of elements matches the order in the form definition XML.
+
 HTML:
 ```
 <html>
@@ -71,8 +79,12 @@ Some other text.
 Some more text.
 ```
 
-... bind elements with the same id, example 2
+... bind elements with the same ID, example 2
 ---------------------------------------------
+In this example we extract content from all *&lt;h1&gt;*, *&lt;h2&gt;* and *&lt;p&gt;* elements in HTML.
+Comma in element's *lookup* attribute means that HTML element should match any of the JSoup selectors.
+The order of elements matches the order in HTML.
+
 HTML:
 ```
 <html>
@@ -110,6 +122,9 @@ Some more text.
 
 ... bind elements with class
 ----------------------------
+In this example we extract content from all *&lt;p&gt;* elements with class value *pclass* in HTML.
+Here we use JSoup selector combination for elements with class.
+
 HTML:
 ```
 <html>
@@ -140,6 +155,9 @@ Some more text.
 
 ... bind child elements, example 1
 ----------------------------------
+In this example we extract content from the second column of every row.
+Nested elements perform lookup starting from their parent element, not from the root of HTML.
+
 HTML:
 ```
 <html>
@@ -187,6 +205,9 @@ Row 3 column 2
 
 ... bind child elements, example 2
 ----------------------------------
+In this example we extract content from the second column of every row.
+Here we use the complex JSoup selector instead of nested elements in the form definition XML.
+
 HTML:
 ```
 <html>
@@ -230,8 +251,12 @@ Row 2 column 2
 Row 3 column 2
 ```
 
-... bind toggle elements, example 1
------------------------------------
+... bind alternative elements, example 1
+----------------------------------------
+In this example we extract content from one of alternative HTML elements.
+There could be either subscribe element or unsubscribe element, but not both.
+The application obtains content from the subscribe element.
+
 HTML:
 ```
 <html>
@@ -269,8 +294,13 @@ Result:
 Subscribe text
 ```
 
-... bind toggle elements, example 2
------------------------------------
+... bind alternative elements, example 2
+----------------------------------------
+In this example we extract content from one of alternative HTML elements.
+There could be either subscribe element or unsubscribe element, but not both.
+The application obtains content from the unsubscribe element.
+The form definition XML and the application are the same as in the example 1, only HTML changes.
+
 HTML:
 ```
 <html>
