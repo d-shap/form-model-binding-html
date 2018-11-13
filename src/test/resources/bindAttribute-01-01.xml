@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <ns1:form group="bindAttribute-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
-    <ns1:element lookup="a">
+    <ns1:element lookup="a" type="optional+">
         <ns1:attribute id="resultId" lookup="href" />
     </ns1:element>
-    <ns1:element lookup="img">
+    <ns1:element lookup="img" type="optional+">
         <ns1:attribute id="resultId" lookup="src" />
     </ns1:element>
 </ns1:form>
