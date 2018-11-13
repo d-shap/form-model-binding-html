@@ -20,7 +20,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="resultId" lookup="p" type="required+" />
 </ns1:form>
 ```
@@ -54,7 +54,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-02" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-02" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="resultId" lookup="h1" type="required+" />
     <ns1:element id="resultId" lookup="h2" type="required+" />
     <ns1:element id="resultId" lookup="p" type="required+" />
@@ -93,7 +93,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-02" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-02" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="resultId" lookup="h1, h2, p" type="required+" />
 </ns1:form>
 ```
@@ -127,7 +127,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-03" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-03" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="resultId" lookup="p.pclass" type="required+" />
 </ns1:form>
 ```
@@ -171,7 +171,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-04" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-04" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element lookup="tr" type="required+">
         <ns1:element id="resultId" lookup="td:eq(1)" />
     </ns1:element>
@@ -218,7 +218,7 @@ HTML:
 Form definition:
 ```
 <?xml version="1.0"?>
-<ns1:form group="bindElements-04" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+<ns1:form group="bindElement-04" id="form-02" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
     <ns1:element id="resultId" lookup="tr > td:eq(1)" type="required+" />
 </ns1:form>
 ```
@@ -308,8 +308,8 @@ Result:
 Unsubscribe text
 ```
 
-... bind form references
-------------------------
+... bind form reference
+-----------------------
 HTML:
 ```
 <html>
