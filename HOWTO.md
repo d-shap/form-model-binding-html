@@ -254,8 +254,8 @@ Row 3 column 2
 ... bind alternative elements, example 1
 ----------------------------------------
 In this example we extract content from one of alternative HTML elements.
-There could be either subscribe element or unsubscribe element, but not both.
-The application obtains content from the subscribe element.
+There could be either *subscribe* element or *unsubscribe* element, but not both.
+The application obtains content from the *subscribe* element.
 
 HTML:
 ```
@@ -297,8 +297,8 @@ Subscribe text
 ... bind alternative elements, example 2
 ----------------------------------------
 In this example we extract content from one of alternative HTML elements.
-There could be either subscribe element or unsubscribe element, but not both.
-The application obtains content from the unsubscribe element.
+There could be either *subscribe* element or *unsubscribe* element, but not both.
+The application obtains content from the *unsubscribe* element.
 The form definition XML and the application are the same as in the example 1, only HTML changes.
 
 HTML:
@@ -340,6 +340,10 @@ Unsubscribe text
 
 ... bind form reference
 -----------------------
+Example shows the use of form references.
+Elements of the referenced form are inserted as child elements of the *form-reference* element.
+Referenced form elements perform lookup starting from their parent element, not from the root of HTML.
+
 HTML:
 ```
 <html>
@@ -410,6 +414,8 @@ Description 3
 
 ... bind attribute
 ------------------
+In this example we obtain all *href* and *src* attributes.
+
 HTML:
 ```
 <html>
