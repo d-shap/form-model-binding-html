@@ -377,3 +377,54 @@ Description 1
 Description 2
 Description 3
 ```
+
+... bind attribute
+------------------
+HTML:
+```
+<html>
+<head>
+    <title>Test page</title>
+</head>
+<body>
+<div class="imgblock item1">
+    <a href="viewurl1"> <img src="someurl1"/></a>
+    <br/>
+    <div class="description">Description 1</div>
+</div>
+<div class="imgblock item2">
+    <a href="viewurl2"> <img src="someurl2"/></a>
+    <br/>
+    <div class="description">Description 2</div>
+</div>
+<div class="imgblock item3">
+    <a href="viewurl3"> <img src="someurl3"/></a>
+    <br/>
+    <div class="description">Description 3</div>
+</div>
+</body>
+</html>
+```
+
+Form definition:
+```
+<?xml version="1.0"?>
+<ns1:form group="bindAttribute-01" id="form-01" xmlns:ns1="http://d-shap.ru/schema/form-model/1.0">
+    <ns1:element lookup="a" type="optional+">
+        <ns1:attribute id="resultId" lookup="href" />
+    </ns1:element>
+    <ns1:element lookup="img" type="optional+">
+        <ns1:attribute id="resultId" lookup="src" />
+    </ns1:element>
+</ns1:form>
+```
+
+Result:
+```
+viewurl1
+viewurl2
+viewurl3
+someurl1
+someurl2
+someurl3
+```
