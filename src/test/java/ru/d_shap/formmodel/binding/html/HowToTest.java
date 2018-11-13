@@ -205,4 +205,25 @@ public final class HowToTest {
         Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Description 3");
     }
 
+    /**
+     * How To example.
+     */
+    @Test
+    public void bindAttribute01Form01Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("bindAttribute-01-01.html");
+
+        Document document = formBinder.bindHtml(html, "bindAttribute-01", "form-01");
+        List<Element> elements = formBinder.getElementsWithId(document, "resultId");
+        List<HtmlBindedAttribute> bindedAttributes = formBinder.getBindedAttributes(elements);
+        Assertions.assertThat(bindedAttributes).hasSize(6);
+        Assertions.assertThat(bindedAttributes.get(0).getValue()).isEqualTo("viewurl1");
+        Assertions.assertThat(bindedAttributes.get(1).getValue()).isEqualTo("viewurl2");
+        Assertions.assertThat(bindedAttributes.get(2).getValue()).isEqualTo("viewurl3");
+        Assertions.assertThat(bindedAttributes.get(3).getValue()).isEqualTo("someurl1");
+        Assertions.assertThat(bindedAttributes.get(4).getValue()).isEqualTo("someurl2");
+        Assertions.assertThat(bindedAttributes.get(5).getValue()).isEqualTo("someurl3");
+    }
+
 }
