@@ -155,4 +155,36 @@ public final class HowToTest {
         Assertions.assertThat(bindedElements.get(2).getText()).isEqualTo("Row 3 column 2");
     }
 
+    /**
+     * How To example.
+     */
+    @Test
+    public void bindSingleElement01Form01Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("bindSingleElement-01-01.html");
+
+        Document document = formBinder.bindHtml(html, "bindSingleElement-01", "form-01");
+        List<Element> elements = formBinder.getElementsWithId(document, "elementId");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Subscribe text");
+    }
+
+    /**
+     * How To example.
+     */
+    @Test
+    public void bindSingleElement01Form02Test() {
+        FormDefinitions formDefinitions = TestHelper.loadFormDefinitions();
+        HtmlFormBinder formBinder = new HtmlFormBinder(formDefinitions);
+        String html = TestHelper.loadHtml("bindSingleElement-01-02.html");
+
+        Document document = formBinder.bindHtml(html, "bindSingleElement-01", "form-01");
+        List<Element> elements = formBinder.getElementsWithId(document, "elementId");
+        List<HtmlBindedElement> bindedElements = formBinder.getBindedElements(elements);
+        Assertions.assertThat(bindedElements).hasSize(1);
+        Assertions.assertThat(bindedElements.get(0).getText()).isEqualTo("Unsubscribe text");
+    }
+
 }
