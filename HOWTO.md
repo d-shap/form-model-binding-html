@@ -1,8 +1,6 @@
-HOW TO ...
-==========
+# HOW TO ...
 
-... bind elements
------------------
+## ... bind elements
 In this example we extract content from all *&lt;p&gt;* tags in HTML.
 The type of the element is *required+*.
 It means that there should be one ore more *&lt;p&gt;* tags.
@@ -36,8 +34,7 @@ Some other text.
 Some more text.
 ```
 
-... bind elements with the same ID, example 1
----------------------------------------------
+## ... bind elements with the same ID, example 1
 In this example we extract content from all *&lt;h1&gt;*, *&lt;h2&gt;* and *&lt;p&gt;* tags in HTML.
 Elemenst with the same ID are grouped together.
 The order of elements matches the order in the form definition XML.
@@ -79,8 +76,7 @@ Some other text.
 Some more text.
 ```
 
-... bind elements with the same ID, example 2
----------------------------------------------
+## ... bind elements with the same ID, example 2
 In this example we extract content from all *&lt;h1&gt;*, *&lt;h2&gt;* and *&lt;p&gt;* tags in HTML.
 Comma in element's *lookup* attribute means that HTML tag should match any of the JSoup selectors.
 The order of elements matches the order in HTML.
@@ -120,8 +116,7 @@ Header 1.2
 Some more text.
 ```
 
-... bind elements with class
-----------------------------
+## ... bind elements with class
 In this example we extract content from all *&lt;p&gt;* tags with class value *pclass* in HTML.
 Here we use JSoup selector combination for tags with class.
 
@@ -153,8 +148,7 @@ Some other text.
 Some more text.
 ```
 
-... bind child elements, example 1
-----------------------------------
+## ... bind child elements, example 1
 In this example we extract content from the second column of every row.
 Nested elements perform lookup starting from their parent element, not from the root of HTML.
 
@@ -203,8 +197,7 @@ Row 2 column 2
 Row 3 column 2
 ```
 
-... bind child elements, example 2
-----------------------------------
+## ... bind child elements, example 2
 In this example we extract content from the second column of every row.
 Here we use the complex JSoup selector instead of nested elements in the form definition XML.
 
@@ -251,8 +244,7 @@ Row 2 column 2
 Row 3 column 2
 ```
 
-... bind alternative elements, example 1
-----------------------------------------
+## ... bind alternative elements, example 1
 In this example we extract content from one of alternative HTML tags.
 There could be either *subscribe* element or *unsubscribe* element, but not both.
 The application obtains content from the *subscribe* element.
@@ -294,8 +286,7 @@ Result:
 Subscribe text
 ```
 
-... bind alternative elements, example 2
-----------------------------------------
+## ... bind alternative elements, example 2
 In this example we extract content from one of alternative HTML tags.
 There could be either *subscribe* element or *unsubscribe* element, but not both.
 The application obtains content from the *unsubscribe* element.
@@ -338,8 +329,7 @@ Result:
 Unsubscribe text
 ```
 
-... bind form reference
------------------------
+## ... bind form reference
 Example shows the use of form references.
 Elements of the referenced form are inserted as child elements of the *form-reference* element.
 Referenced form elements perform lookup starting from their parent element, not from the root of HTML.
@@ -418,8 +408,7 @@ Description 2
 Description 3
 ```
 
-... bind attribute
-------------------
+## ... bind attribute
 In this example we obtain all *href* and *src* tag's attributes.
 
 HTML:
