@@ -210,7 +210,7 @@ In this cases the final source HTML should be obtained first and then this final
 The final source HTML can be obtained with the headless Internet Browsers or with the real Internet Browsers.
 **HtmlUnit** is an example of the headless Internet Browser.
 To work with the real Internet Browsers **Selenium WebDriver** can be used.
-Also real Internet Browsers can work in headless mode.
+Also the real Internet Browsers can work in headless mode.
 
 ## HtmlUnit example
 ```
@@ -233,6 +233,22 @@ System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
 WebDriver driver = new ChromeDriver();
 driver.get(url);
 Thread.sleep(1000);
+String pageAsText = driver.getPageSource();
+driver.quit();
+
+Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
+```
+
+# Frames and child windows
+Sometimes frames and child windows are used.
+In this case every frame and every child window should be bounded separately.
+Neither the headless Internet Browsers nor the real Internet Browsers combine HTML from different frames or child windows.
+To obtain the source HTML, context should be switched to the target frame or target child window.
+```
+WebDriver driver = ...
+driver.get(url);
+Thread.sleep(1000);
+driver.switchTo().frame("nameOrId");
 String pageAsText = driver.getPageSource();
 driver.quit();
 
