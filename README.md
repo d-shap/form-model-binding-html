@@ -241,6 +241,30 @@ driver.quit();
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
 
+## form-model-binding-selenium example
+```
+// Load form definitions
+FormDefinitions formDefinitions = new FormDefinitions();
+File file = new File("file with the form definition");
+FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(file);
+formDefinitionsLoader.load(formDefinitions);
+SeleniumFormBinder formBinder = new SeleniumFormBinder(formDefinitions);
+
+// Create WebDriver
+System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
+ChromeOptions chromeOptions = new ChromeOptions();
+chromeOptions.setHeadless(true);
+WebDriver driver = new ChromeDriver(chromeOptions);
+
+// Bind the HTML
+String url = "some url";
+webDriver.get(url);
+Document document = formBinder.bind(webDriver, "p-extractor");
+
+// Quit WebDriver
+driver.quit();
+```
+
 # Frames and child windows
 Sometimes frames and child windows are used.
 In this case every frame and every child window should be bounded separately.
