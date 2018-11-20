@@ -241,7 +241,12 @@ driver.quit();
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
 
-## form-model-binding-selenium example
+## Form model selenium binding example
+Form model selenium binding is the binding implementation for Selenium WebDriver.
+This binding also can be used to obtain the source HTML and bind the form model.
+It's primary purpose is the Internet Browser automation, but it also can be used to extract content from the source HTML.
+It is slower then Form model html binding because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
+
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
