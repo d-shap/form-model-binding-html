@@ -232,11 +232,11 @@ String url = "some url";
 System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
 ChromeOptions chromeOptions = new ChromeOptions();
 chromeOptions.setHeadless(true);
-WebDriver driver = new ChromeDriver(chromeOptions);
-driver.get(url);
+WebDriver webDriver = new ChromeDriver(chromeOptions);
+webDriver.get(url);
 Thread.sleep(1000);
-String pageAsText = driver.getPageSource();
-driver.quit();
+String pageAsText = webDriver.getPageSource();
+webDriver.quit();
 
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
@@ -257,7 +257,7 @@ SeleniumFormBinder formBinder = new SeleniumFormBinder(formDefinitions);
 System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
 ChromeOptions chromeOptions = new ChromeOptions();
 chromeOptions.setHeadless(true);
-WebDriver driver = new ChromeDriver(chromeOptions);
+WebDriver webDriver = new ChromeDriver(chromeOptions);
 
 // Bind the HTML
 String url = "some url";
@@ -265,7 +265,7 @@ webDriver.get(url);
 Document document = formBinder.bind(webDriver, "p-extractor");
 
 // Quit WebDriver
-driver.quit();
+webDriver.quit();
 ```
 
 # Frames and child windows
@@ -274,12 +274,12 @@ In this case every frame and every child window should be bounded separately.
 Neither the headless Internet Browsers nor the real Internet Browsers combine HTML from different frames or child windows.
 To obtain the source HTML, context should be switched to the target frame or target child window.
 ```
-WebDriver driver = ...
-driver.get(url);
+WebDriver webDriver = ...
+webDriver.get(url);
 Thread.sleep(1000);
-driver.switchTo().frame("nameOrId");
-String pageAsText = driver.getPageSource();
-driver.quit();
+webDriver.switchTo().frame("nameOrId");
+String pageAsText = webDriver.getPageSource();
+webDriver.quit();
 
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
