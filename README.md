@@ -210,7 +210,7 @@ In this cases the final source HTML should be obtained first and then this final
 The final source HTML can be obtained with the headless Internet Browsers or with the real Internet Browsers.
 **HtmlUnit** is an example of the headless Internet Browser.
 To work with the real Internet Browsers **Selenium WebDriver** can be used.
-Also the real Internet Browsers can work in headless mode.
+Also some real Internet Browsers can work in headless mode.
 
 ## HtmlUnit example
 ```
@@ -225,12 +225,14 @@ webClient.close();
 Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ```
 
-## Selenium WebDriver example
+## Selenium WebDriver example for Headless Google Chrome Browser
 ```
 String url = "some url";
 
 System.setProperty("webdriver.chrome.driver", "path/to/chrome/webdriver");
-WebDriver driver = new ChromeDriver();
+ChromeOptions chromeOptions = new ChromeOptions();
+chromeOptions.setHeadless(true);
+WebDriver driver = new ChromeDriver(chromeOptions);
 driver.get(url);
 Thread.sleep(1000);
 String pageAsText = driver.getPageSource();
