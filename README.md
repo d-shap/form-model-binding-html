@@ -270,7 +270,7 @@ webDriver.quit();
 
 # Frames and child windows
 Sometimes frames and child windows are used.
-In this case every frame and every child window should be bounded separately.
+In this case every frame and every child window should be binded separately.
 Neither the headless Internet Browsers nor the real Internet Browsers combine HTML from different frames or child windows.
 To obtain the source HTML, context should be switched to the target frame or target child window.
 ```
