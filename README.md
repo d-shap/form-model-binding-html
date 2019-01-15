@@ -166,23 +166,29 @@ JSoup selectors are used in lookup attributes of the form definition.
 
 [https://jsoup.org/cookbook/extracting-data/selector-syntax](https://jsoup.org/cookbook/extracting-data/selector-syntax)
 
+A selector is a chain of simple selectors, separated by combinators.
+Selectors are case insensitive (including against elements, attributes, and attribute values).
+
 ## Selector overview
-* `tagname`: find elements by tag, e.g. `a`
-* `ns|tag`: find elements by tag in a namespace, e.g. `fb|name` finds `<fb:name>` elements
-* `#id`: find elements by ID, e.g. `#logo`
-* `.class`: find elements by class name, e.g. `.masthead`
-* `[attribute]`: elements with attribute, e.g. `[href]`
-* `[^attr]`: elements with an attribute name prefix, e.g. `[^data-]` finds elements with HTML5 dataset attributes
-* `[attr=value]`: elements with attribute value, e.g. `[width=500]` (also quotable, like `[data-name='launch sequence']`)
-* `[attr^=value]`, `[attr$=value]`, `[attr*=value]`: elements with attributes that start with, end with, or contain the value, e.g. `[href*=/path/]`
-* `[attr~=regex]`: elements with attribute values that match the regular expression; e.g. `img[src~=(?i)\.(png|jpe?g)]`
-* `*`: all elements, e.g. `*`
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`*`|any element|`*`|
+|`tag`|elements with the given tag name|`div`|
+|`*|E`|elements of type E in any namespace ns|`*|name` finds &lt;fb:name&gt; elements|
+|`ns|E`|elements of type E in the namespace ns|`fb|name` finds &lt;fb:name&gt; elements|
+|`#id`|elements with attribute ID of "id"|`div#wrap`, `#logo`|
+|`.class`|elements with a class name of "class"|`div.left`, `.result`|
+|`[attr]`|elements with an attribute named "attr" (with any value)|`a[href]`, `[title]`|
+|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix". Use to find elements with HTML5 datasets|`^data-]`, `div[^data-]`|
+|`[attr=val]`|elements with an attribute named "attr", and value equal to "val"|`img[width=500]`, `a[rel=nofollow]`|
+|`[attr="val"]`|elements with an attribute named "attr", and value equal to "val"|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
+|`[attr^=valPrefix]`|elements with an attribute named "attr", and value starting with "valPrefix"|`a[href^=http:]`|
+|`[attr$=valSuffix]`|elements with an attribute named "attr", and value ending with "valSuffix"|`img[src$=.png]`|
+|`[attr*=valContaining]`|elements with an attribute named "attr", and value containing "valContaining"|`a[href*=/search/]`|
+|`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png|jpe?g)]`|
+| |The above may be combined in any order|`div.header[title]`|
 
 ## Selector combinations
-* `el#id`: elements with ID, e.g. `div#logo`
-* `el.class`: elements with class, e.g. `div.masthead`
-* `el[attr]`: elements with attribute, e.g. `a[href]`
-* Any combination, e.g. `a[href].highlight`
 * `ancestor child`: child elements that descend from ancestor, e.g. `.body p` finds `p` elements anywhere under a block with class `body`
 * `parent > child`: child elements that descend directly from parent, e.g. `div.content > p` finds `p` elements; and `body > *` finds the direct children of the `body` tag
 * `siblingA + siblingB`: finds sibling B element immediately preceded by sibling A, e.g. `div.head + div`
