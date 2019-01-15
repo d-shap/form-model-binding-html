@@ -188,12 +188,14 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
 | |The above may be combined in any order|`div.header[title]`|
 
-## Selector combinations
-* `ancestor child`: child elements that descend from ancestor, e.g. `.body p` finds `p` elements anywhere under a block with class `body`
-* `parent > child`: child elements that descend directly from parent, e.g. `div.content > p` finds `p` elements; and `body > *` finds the direct children of the `body` tag
-* `siblingA + siblingB`: finds sibling B element immediately preceded by sibling A, e.g. `div.head + div`
-* `siblingA ~ siblingX`: finds sibling X element preceded by sibling A, e.g. `h1 ~ p`
-* `el, el, el`: group multiple selectors, find unique elements that match any of the selectors; e.g. `div.masthead, div.logo`
+## Selector combinators
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`E F`|an F element descended from an E element|`div a`, `.logo h1`|
+|`E > F`|an F direct child of E|`ol > li`|
+|`E + F`|an F element immediately preceded by sibling E|`li + li`, `div.head + div`|
+|`E ~ F`|an F element preceded by sibling E|`h1 ~ p`|
+|`E, F, G`|all matching elements E, F, or G|`a[href], div, h3`|
 
 ## Pseudo selectors
 * `:lt(n)`: find elements whose sibling index (i.e. its position in the DOM tree relative to its parent) is less than `n`; e.g. `td:lt(3)`
