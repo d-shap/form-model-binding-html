@@ -179,13 +179,13 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`#id`|elements with attribute ID of "id"|`div#wrap`, `#logo`|
 |`.class`|elements with a class name of "class"|`div.left`, `.result`|
 |`[attr]`|elements with an attribute named "attr" (with any value)|`a[href]`, `[title]`|
-|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix"|`^data-]`, `div[^data-]`|
+|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix"|`[^data-]`, `div[^data-]`|
 |`[attr=val]`|elements with an attribute named "attr", and value equal to "val"|`img[width=500]`, `a[rel=nofollow]`|
 |`[attr="val"]`|elements with an attribute named "attr", and value equal to "val"|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
 |`[attr^=valPrefix]`|elements with an attribute named "attr", and value starting with "valPrefix"|`a[href^=http:]`|
 |`[attr$=valSuffix]`|elements with an attribute named "attr", and value ending with "valSuffix"|`img[src$=.png]`|
 |`[attr*=valContaining]`|elements with an attribute named "attr", and value containing "valContaining"|`a[href*=/search/]`|
-|`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png|jpe?g)]`|
+|`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
 | |The above may be combined in any order|`div.header[title]`|
 
 ## Selector combinations
