@@ -174,8 +174,8 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |-------|-------|-------|
 |`*`|any element|`*`|
 |`tag`|elements with the given tag name|`div`|
-|`*|E`|elements of type E in any namespace ns|`*|name` finds &lt;fb:name&gt; elements|
-|`ns|E`|elements of type E in the namespace ns|`fb|name` finds &lt;fb:name&gt; elements|
+|`*&#124;E`|elements of type E in any namespace ns|`*&#124;name` finds &lt;fb:name&gt; elements|
+|`ns&#124;E`|elements of type E in the namespace ns|`fb&#124;name` finds &lt;fb:name&gt; elements|
 |`#id`|elements with attribute ID of "id"|`div#wrap`, `#logo`|
 |`.class`|elements with a class name of "class"|`div.left`, `.result`|
 |`[attr]`|elements with an attribute named "attr" (with any value)|`a[href]`, `[title]`|
