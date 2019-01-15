@@ -174,28 +174,28 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |-------|-------|-------|
 |`*`|any element|`*`|
 |`tag`|elements with the given tag name|`div`|
-|`*\|E`|elements of type E in any namespace ns|`*\|name` finds &lt;fb:name&gt; elements|
-|`ns\|E`|elements of type E in the namespace ns|`fb\|name` finds &lt;fb:name&gt; elements|
-|`#id`|elements with attribute ID of "id"|`div#wrap`, `#logo`|
-|`.class`|elements with a class name of "class"|`div.left`, `.result`|
-|`[attr]`|elements with an attribute named "attr" (with any value)|`a[href]`, `[title]`|
-|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix"|`[^data-]`, `div[^data-]`|
-|`[attr=val]`|elements with an attribute named "attr", and value equal to "val"|`img[width=500]`, `a[rel=nofollow]`|
-|`[attr="val"]`|elements with an attribute named "attr", and value equal to "val"|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
-|`[attr^=valPrefix]`|elements with an attribute named "attr", and value starting with "valPrefix"|`a[href^=http:]`|
-|`[attr$=valSuffix]`|elements with an attribute named "attr", and value ending with "valSuffix"|`img[src$=.png]`|
-|`[attr*=valContaining]`|elements with an attribute named "attr", and value containing "valContaining"|`a[href*=/search/]`|
-|`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
-| |The above may be combined in any order|`div.header[title]`|
+|`*\|E`|elements of type *E* in any namespace *ns*|`*\|name` finds *&lt;fb:name&gt;* elements|
+|`ns\|E`|elements of type *E* in the namespace *ns*|`fb\|name` finds *&lt;fb:name&gt;* elements|
+|`#id`|elements with attribute ID of *id*|`div#wrap`, `#logo`|
+|`.class`|elements with a class name of *class*|`div.left`, `.result`|
+|`[attr]`|elements with an attribute named *attr* (with any value)|`a[href]`, `[title]`|
+|`[^attrPrefix]`|elements with an attribute name starting with *attrPrefix*|`[^data-]`, `div[^data-]`|
+|`[attr=val]`|elements with an attribute named *attr"*, and value equal to *val*|`img[width=500]`, `a[rel=nofollow]`|
+|`[attr="val"]`|elements with an attribute named *attr*, and value equal to *val*|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
+|`[attr^=valPrefix]`|elements with an attribute named *attr*, and value starting with *valPrefix*|`a[href^=http:]`|
+|`[attr$=valSuffix]`|elements with an attribute named *attr*, and value ending with *valSuffix*|`img[src$=.png]`|
+|`[attr*=valContaining]`|elements with an attribute named *attr*, and value containing *valContaining*|`a[href*=/search/]`|
+|`[attr~=regex]`|elements with an attribute named *attr*, and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
+||the above may be combined in any order|`div.header[title]`|
 
 ## Combinators
 |Pattern|Matches|Example|
 |-------|-------|-------|
-|`E F`|an F element descended from an E element|`div a`, `.logo h1`|
-|`E > F`|an F direct child of E|`ol > li`|
-|`E + F`|an F element immediately preceded by sibling E|`li + li`, `div.head + div`|
-|`E ~ F`|an F element preceded by sibling E|`h1 ~ p`|
-|`E, F, G`|all matching elements E, F, or G|`a[href], div, h3`|
+|`E F`|an *F* element descended from an *E* element|`div a`, `.logo h1`|
+|`E > F`|an *F* direct child of *E*|`ol > li`|
+|`E + F`|an *F* element immediately preceded by sibling *E*|`li + li`, `div.head + div`|
+|`E ~ F`|an *F* element preceded by sibling *E*|`h1 ~ p`|
+|`E, F, G`|all matching elements *E*, *F*, or *G*|`a[href], div, h3`|
 
 ## Pseudo selectors
 |Pattern|Matches|Example|
@@ -210,9 +210,25 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds p elements with own text "jsoup"|
 |`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds divs containing the text, case insensitively|
 |`:containsData(data)`|elements that contains the specified data. The contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes|`script:contains(jsoup)` finds script elements containing the data "jsoup"|
-| |The above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
+||The above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
 * The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 * The above text pseudo-selectors are case insensitive
+
+## Structural pseudo selectors
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`:root`|||
+|`:nth-child(an+b)`|||
+|`:nth-last-child(an+b)`|||
+|`:nth-of-type(an+b)`|||
+|`:nth-last-of-type(an+b)`|||
+|`:first-child`|||
+|`:last-child`|||
+|`:first-of-type`|||
+|`:last-of-type`|||
+|`:only-child`|||
+|`:only-of-type`|||
+|`:empty`|elements that have no children at all||
 
 # JavaScript DOM manipulations and AJAX-requests
 In many cases the source HTML can not be obtained by one request to the server.
