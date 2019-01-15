@@ -169,7 +169,7 @@ JSoup selectors are used in lookup attributes of the form definition.
 A selector is a chain of simple selectors, separated by combinators.
 Selectors are case insensitive (including against elements, attributes, and attribute values).
 
-## Selector syntax
+## Selectors
 |Pattern|Matches|Example|
 |-------|-------|-------|
 |`*`|any element|`*`|
@@ -188,7 +188,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`[attr~=regex]`|elements with an attribute named "attr", and value matching the regular expression|`mg[src~=(?i)\\.(png\|jpe?g)]`|
 | |The above may be combined in any order|`div.header[title]`|
 
-## Selector combinators
+## Combinators
 |Pattern|Matches|Example|
 |-------|-------|-------|
 |`E F`|an F element descended from an E element|`div a`, `.logo h1`|
@@ -198,16 +198,21 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`E, F, G`|all matching elements E, F, or G|`a[href], div, h3`|
 
 ## Pseudo selectors
-* `:lt(n)`: find elements whose sibling index (i.e. its position in the DOM tree relative to its parent) is less than `n`; e.g. `td:lt(3)`
-* `:gt(n)`: find elements whose sibling index is greater than `n`; e.g. `div p:gt(2)`
-* `:eq(n)`: find elements whose sibling index is equal to `n`; e.g. form `input:eq(1)`
-* `:has(selector)`: find elements that contain elements matching the selector; e.g. `div:has(p)`
-* `:not(selector)`: find elements that do not match the selector; e.g. `div:not(.logo)`
-* `:contains(text)`: find elements that contain the given text. The search is case-insensitive; e.g. `p:contains(jsoup)`
-* `:containsOwn(text)`: find elements that directly contain the given text
-* `:matches(regex)`: find elements whose text matches the specified regular expression; e.g. `div:matches((?i)login)`
-* `:matchesOwn(regex)`: find elements whose own text matches the specified regular expression
-* Note that the above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
+|Pattern|Matches|Example|
+|-------|-------|-------|
+|`:lt(n)`|elements whose sibling index is less than `n`|`td:lt(3)` finds the first 3 cells of each row|
+|`:gt(n)`|elements whose sibling index is greater than `n`|`td:gt(1)` finds cells after skipping the first two|
+|`:eq(n)`|elements whose sibling index is equal to `n`|`td:eq(0)` finds the first cell of each row|
+|`:has(selector)`|elements that contains at least one element matching the `selector`|`div:has(p)` finds divs that contain p elements|
+|`:not(selector)`|elements that do not match the selector|`div:not(.logo)` finds all divs that do not have the "logo" class, `div:not(:has(div))` finds divs that do not contain divs|
+|`:contains(text)`|elements that contains the specified text|`p:contains(jsoup)` finds p elements containing the text "jsoup"|
+|`:matches(regex)`|elements whose text matches the specified regular expression|`td:matches(\\d+)` finds table cells containing digits, `div:matches((?i)login)` finds divs containing the text, case insensitively|
+|`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds p elements with own text "jsoup"|
+|`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds divs containing the text, case insensitively|
+|`:containsData(data)`|elements that contains the specified data. The contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes|`script:contains(jsoup)` finds script elements containing the data "jsoup"|
+| |The above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
+* The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
+* The above text pseudo-selectors are case insensitive
 
 # JavaScript DOM manipulations and AJAX-requests
 In many cases the source HTML can not be obtained by one request to the server.
