@@ -180,7 +180,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`.class`|elements with a class name of *class*|`div.left`, `.result`|
 |`[attr]`|elements with an attribute named *attr* (with any value)|`a[href]`, `[title]`|
 |`[^attrPrefix]`|elements with an attribute name starting with *attrPrefix*|`[^data-]`, `div[^data-]`|
-|`[attr=val]`|elements with an attribute named *attr"*, and value equal to *val*|`img[width=500]`, `a[rel=nofollow]`|
+|`[attr=val]`|elements with an attribute named *attr*, and value equal to *val*|`img[width=500]`, `a[rel=nofollow]`|
 |`[attr="val"]`|elements with an attribute named *attr*, and value equal to *val*|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
 |`[attr^=valPrefix]`|elements with an attribute named *attr*, and value starting with *valPrefix*|`a[href^=http:]`|
 |`[attr$=valSuffix]`|elements with an attribute named *attr*, and value ending with *valSuffix*|`img[src$=.png]`|
@@ -203,13 +203,13 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:lt(n)`|elements whose sibling index is less than `n`|`td:lt(3)` finds the first 3 cells of each row|
 |`:gt(n)`|elements whose sibling index is greater than `n`|`td:gt(1)` finds cells after skipping the first two|
 |`:eq(n)`|elements whose sibling index is equal to `n`|`td:eq(0)` finds the first cell of each row|
-|`:has(selector)`|elements that contains at least one element matching the `selector`|`div:has(p)` finds divs that contain p elements|
-|`:not(selector)`|elements that do not match the selector|`div:not(.logo)` finds all divs that do not have the "logo" class, `div:not(:has(div))` finds divs that do not contain divs|
-|`:contains(text)`|elements that contains the specified text|`p:contains(jsoup)` finds p elements containing the text "jsoup"|
-|`:matches(regex)`|elements whose text matches the specified regular expression|`td:matches(\\d+)` finds table cells containing digits, `div:matches((?i)login)` finds divs containing the text, case insensitively|
-|`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds p elements with own text "jsoup"|
-|`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds divs containing the text, case insensitively|
-|`:containsData(data)`|elements that contains the specified data. The contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes|`script:contains(jsoup)` finds script elements containing the data "jsoup"|
+|`:has(selector)`|elements that contains at least one element matching the `selector`|`div:has(p)` finds *div* elements that contain *p* elements|
+|`:not(selector)`|elements that do not match the selector|`div:not(.logo)` finds all *div* elements that do not have the *logo* class, `div:not(:has(div))` finds *div* elements that do not contain *div* elements|
+|`:contains(text)`|elements that contains the specified text|`p:contains(jsoup)` finds *p* elements containing the text *jsoup*|
+|`:matches(regex)`|elements whose text matches the specified regular expression|`td:matches(\\d+)` finds table cells containing digits, `div:matches((?i)login)` finds *div* elements containing the *login* text, case insensitively|
+|`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds *p* elements with own text *jsoup*|
+|`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds *div* containing the *login* text, case insensitively|
+|`:containsData(data)`|elements that contains the specified data (the contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes)|`script:contains(jsoup)` finds *script* elements containing the data *jsoup*|
 ||The above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
 * The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 * The above text pseudo-selectors are case insensitive
@@ -217,17 +217,17 @@ Selectors are case insensitive (including against elements, attributes, and attr
 ## Structural pseudo selectors
 |Pattern|Matches|Example|
 |-------|-------|-------|
-|`:root`|||
-|`:nth-child(an+b)`|||
-|`:nth-last-child(an+b)`|||
-|`:nth-of-type(an+b)`|||
-|`:nth-last-of-type(an+b)`|||
-|`:first-child`|||
-|`:last-child`|||
-|`:first-of-type`|||
-|`:last-of-type`|||
-|`:only-child`|||
-|`:only-of-type`|||
+|`:root`|the element that is the root of the document|`:root`|
+|`:nth-child(an+b)`|elements that have `an+b-1` siblings before it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-child(2n+1)` finds every odd row of a table, `:nth-child(10n-1)` the 9th, 19th, 29th, etc, element, `li:nth-child(5)` the 5th *li*|
+|`:nth-last-child(an+b)`|elements that have `an+b-1` siblings after it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-last-child(-n+2)` the last two rows of a table|
+|`:nth-of-type(an+b)`|elements that have `an+b-1` siblings with the same expanded element name before it in the document tree, for any zero or positive integer value of `n`, and has a parent element|`img:nth-of-type(2n+1)`|
+|`:nth-last-of-type(an+b)`|elements that have `an+b-1` siblings with the same expanded element name after it in the document tree, for any zero or positive integer value of `n`, and has a parent element|`img:nth-last-of-type(2n+1)`|
+|`:first-child`|elements that are the first child of some other element|`div > p:first-child`|
+|`:last-child`|elements that are the last child of some other element|`ol > li:last-child`|
+|`:first-of-type`|elements that are the first sibling of its type in the list of children of its parent element|`dl dt:first-of-type`|
+|`:last-of-type`|elements that are the last sibling of its type in the list of children of its parent element|`tr > td:last-of-type`|
+|`:only-child`|elements that have a parent element and whose parent element hasve no other element children||
+|`:only-of-type`|an element that has a parent element and whose parent element has no other element children with the same expanded element name||
 |`:empty`|elements that have no children at all||
 
 # JavaScript DOM manipulations and AJAX-requests
