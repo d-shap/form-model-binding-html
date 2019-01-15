@@ -174,12 +174,12 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |-------|-------|-------|
 |`*`|any element|`*`|
 |`tag`|elements with the given tag name|`div`|
-|`*&#124;E`|elements of type E in any namespace ns|`*&#124;name` finds &lt;fb:name&gt; elements|
-|`ns&#124;E`|elements of type E in the namespace ns|`fb&#124;name` finds &lt;fb:name&gt; elements|
+|`*\|E`|elements of type E in any namespace ns|`*\|name` finds &lt;fb:name&gt; elements|
+|`ns\|E`|elements of type E in the namespace ns|`fb\|name` finds &lt;fb:name&gt; elements|
 |`#id`|elements with attribute ID of "id"|`div#wrap`, `#logo`|
 |`.class`|elements with a class name of "class"|`div.left`, `.result`|
 |`[attr]`|elements with an attribute named "attr" (with any value)|`a[href]`, `[title]`|
-|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix". Use to find elements with HTML5 datasets|`^data-]`, `div[^data-]`|
+|`[^attrPrefix]`|elements with an attribute name starting with "attrPrefix"|`^data-]`, `div[^data-]`|
 |`[attr=val]`|elements with an attribute named "attr", and value equal to "val"|`img[width=500]`, `a[rel=nofollow]`|
 |`[attr="val"]`|elements with an attribute named "attr", and value equal to "val"|`span[hello="Cleveland"][goodbye="Columbus"]`, `a[rel="nofollow"]`|
 |`[attr^=valPrefix]`|elements with an attribute named "attr", and value starting with "valPrefix"|`a[href^=http:]`|
