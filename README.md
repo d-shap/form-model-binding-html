@@ -169,7 +169,7 @@ JSoup selectors are used in lookup attributes of the form definition.
 A selector is a chain of simple selectors, separated by combinators.
 Selectors are case insensitive (including against elements, attributes, and attribute values).
 
-## Selector overview
+## Selector syntax
 |Pattern|Matches|Example|
 |-------|-------|-------|
 |`*`|any element|`*`|
