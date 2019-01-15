@@ -210,14 +210,14 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:containsOwn(text)`|elements that directly contain the specified text|`p:containsOwn(jsoup)` finds *p* elements with own text *jsoup*|
 |`:matchesOwn(regex)`|elements whose own text matches the specified regular expression|`td:matchesOwn(\\d+)` finds table cells directly containing digits, `div:matchesOwn((?i)login)` finds *div* containing the *login* text, case insensitively|
 |`:containsData(data)`|elements that contains the specified data (the contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes)|`script:contains(jsoup)` finds *script* elements containing the data *jsoup*|
-||The above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
+||the above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
 * The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
 * The above text pseudo-selectors are case insensitive
 
 ## Structural pseudo selectors
 |Pattern|Matches|Example|
 |-------|-------|-------|
-|`:root`|the element that is the root of the document|`:root`|
+|`:root`|the element that is the root of the document or the last selected element|`:root`|
 |`:nth-child(an+b)`|elements that have `an+b-1` siblings before it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-child(2n+1)` finds every odd row of a table, `:nth-child(10n-1)` the 9th, 19th, 29th, etc, element, `li:nth-child(5)` the 5th *li*|
 |`:nth-last-child(an+b)`|elements that have `an+b-1` siblings after it in the document tree, for any positive integer or zero value of `n`, and has a parent element|`tr:nth-last-child(-n+2)` the last two rows of a table|
 |`:nth-of-type(an+b)`|elements that have `an+b-1` siblings with the same expanded element name before it in the document tree, for any zero or positive integer value of `n`, and has a parent element|`img:nth-of-type(2n+1)`|
