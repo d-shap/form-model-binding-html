@@ -83,8 +83,8 @@ public final class TestHelper {
      */
     public static FormDefinitions loadFormDefinitions() {
         FormDefinitions formDefinitions = new FormDefinitions();
-        URL url = TestHelper.class.getClassLoader().getResource(".");
-        File parentDirectory = new File(url.getFile());
+        URL url = TestHelper.class.getClassLoader().getResource("anchor.txt");
+        File parentDirectory = new File(url.getFile()).getParentFile();
         FormDefinitionsLoader formDefinitionsLoader = new FormXmlDefinitionsFileLoader(parentDirectory);
         formDefinitionsLoader.load(formDefinitions);
         return formDefinitions;
