@@ -19,7 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -46,10 +45,10 @@ public final class HtmlUrlBindingSourceImplTest {
     /**
      * {@link HtmlUrlBindingSourceImpl} class test.
      *
-     * @throws IOException IO exception.
+     * @throws Exception exception in test.
      */
     @Test
-    public void getDocumentTest() throws IOException {
+    public void getDocumentTest() throws Exception {
         String html = createHtml();
         NanoHttpdImpl server = new NanoHttpdImpl(html);
         try {

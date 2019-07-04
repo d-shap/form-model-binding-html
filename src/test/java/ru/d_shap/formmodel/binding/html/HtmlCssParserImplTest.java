@@ -20,7 +20,6 @@
 package ru.d_shap.formmodel.binding.html;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 import java.io.StringReader;
@@ -48,10 +47,10 @@ public final class HtmlCssParserImplTest {
     /**
      * {@link HtmlCssParserImpl} class test.
      *
-     * @throws IOException IO exception.
+     * @throws Exception exception in test.
      */
     @Test
-    public void getCssPropertiesTest() throws IOException {
+    public void getCssPropertiesTest() throws Exception {
         Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource(""))).isEmpty();
 
         Assertions.assertThat(new HtmlCssParserImpl().getCssProperties(getInputSource("wrong text"))).isEmpty();
@@ -86,10 +85,10 @@ public final class HtmlCssParserImplTest {
     /**
      * {@link HtmlCssParserImpl} class test.
      *
-     * @throws IOException IO exception.
+     * @throws Exception exception in test.
      */
     @Test
-    public void stderrTest() throws IOException {
+    public void stderrTest() throws Exception {
         PrintStream err = System.err;
         try {
             try {

@@ -19,7 +19,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 package ru.d_shap.formmodel.binding.html;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -257,10 +256,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlStringWithIdTest() throws IOException {
+    public void bindUrlStringWithIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -296,10 +295,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlStringWithGroupAndIdTest() throws IOException {
+    public void bindUrlStringWithGroupAndIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -335,10 +334,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlStringAndProcessWithIdTest() throws IOException {
+    public void bindUrlStringAndProcessWithIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -366,10 +365,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlStringAndProcessWithGroupAndIdTest() throws IOException {
+    public void bindUrlStringAndProcessWithGroupAndIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -397,10 +396,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlObjectWithIdTest() throws IOException {
+    public void bindUrlObjectWithIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -436,10 +435,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlObjectWithGroupAndIdTest() throws IOException {
+    public void bindUrlObjectWithGroupAndIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -475,10 +474,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlObjectAndProcessWithIdTest() throws IOException {
+    public void bindUrlObjectAndProcessWithIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
@@ -506,10 +505,10 @@ public final class HtmlFormBinderTest {
     /**
      * {@link HtmlFormBinder} class test.
      *
-     * @throws IOException IO exception
+     * @throws Exception exception in test.
      */
     @Test
-    public void bindUrlObjectAndProcessWithGroupAndIdTest() throws IOException {
+    public void bindUrlObjectAndProcessWithGroupAndIdTest() throws Exception {
         String xml = "<?xml version='1.0'?>\n";
         xml += "<ns1:form group='group' id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
         xml += "<ns1:element id='d' lookup='.divclass'>";
