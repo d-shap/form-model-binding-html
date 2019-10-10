@@ -1,5 +1,5 @@
-# Form model html binding
-Form model html binding is a form model binding implementation for HTML.
+# Form model HTML binding
+Form model HTML binding is a form model binding implementation for HTML.
 
 Form model library mediates between the source HTML and the application and encapsulates the complexity of the source HTML.
 The essential parts of the HTML are described in the form definition XML.
@@ -322,7 +322,7 @@ Form model library:
 * **&lt;artifactId&gt;**: form-model
 * **&lt;version&gt;**: 1.0
 
-Form model html binding:
+Form model HTML binding:
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model-binding-html
 * **&lt;version&gt;**: 1.0.0
