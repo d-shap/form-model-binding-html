@@ -3,7 +3,7 @@
 ## ... bind elements
 In this example we extract content from all *&lt;p&gt;* tags in HTML.
 The type of the element is *required+*.
-It means that there should be one ore more *&lt;p&gt;* tags.
+It means that there should be one or more *&lt;p&gt;* tags.
 
 HTML:
 ```

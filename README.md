@@ -52,9 +52,9 @@ for (HtmlBindedElement bindedElement: bindedElements) {
 
 The application's code does not depend on the source HTML.
 All the changes in the source HTML affect only on the form definition XML, so no recompilation is needed.
-Also there is no need to change the code if the binding rules change.
+Also, there is no need to change the code if the binding rules change.
 
-For example, if *&lt;h1&gt;* and *&lt;h2&gt;* tags are added to the source HTML and we need to extract the text from this new tags too.
+For example, if *&lt;h1&gt;* and *&lt;h2&gt;* tags are added to the source HTML, and we need to extract the text from this new tags too.
 Then we need to change only the form definition XML as following:
 ```
 <?xml version='1.0'?>
@@ -112,7 +112,7 @@ Possible values are:
 * ```required``` - there should be exactly one element.
 * ```required+``` - there should be at least one element.
 * ```optional``` - there could be one element or no element at all.
-* ```optional+``` - there could be more then one element or no element at all.
+* ```optional+``` - there could be more than one element or no element at all.
 * ```prohibited``` - there should not be any element.
 
 Child elements:
@@ -167,7 +167,7 @@ JSoup selectors are used in lookup attributes of the form definition.
 [https://jsoup.org/cookbook/extracting-data/selector-syntax](https://jsoup.org/cookbook/extracting-data/selector-syntax)
 
 A selector is a chain of simple selectors, separated by combinators.
-Selectors are case insensitive (including against elements, attributes, and attribute values).
+Selectors are case-insensitive (including against elements, attributes, and attribute values).
 
 ## Selectors
 |Pattern|Matches|Example|
@@ -212,7 +212,7 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:containsData(data)`|elements that contains the specified data (the contents of script and style elements, and comment nodes (etc) are considered data nodes, not text nodes)|`script:contains(jsoup)` finds *script* elements containing the data *jsoup*|
 ||the above may be combined in any order and with other selectors|`.light:contains(name):eq(0)`|
 * The above indexed pseudo-selectors are 0-based, that is, the first element is at index 0, the second at 1, etc
-* The above text pseudo-selectors are case insensitive
+* The above text pseudo-selectors are case-insensitive
 
 ## Structural pseudo selectors
 |Pattern|Matches|Example|
@@ -231,15 +231,15 @@ Selectors are case insensitive (including against elements, attributes, and attr
 |`:empty`|elements that have no children at all||
 
 # JavaScript DOM manipulations and AJAX-requests
-In many cases the source HTML can not be obtained by one request to the server.
+In many cases the source HTML cannot be obtained by one request to the server.
 After the HTML page is loaded, JavaScript changes this HTML.
-Also some parts of the HTML page are loaded with subsequent AJAX-requests (and again the JavaScript changes the HTML).
-In this cases the final source HTML should be obtained first and then this final source HTML can be binded with the form model.
+Also, some parts of the HTML page are loaded with subsequent AJAX-requests (and again the JavaScript changes the HTML).
+In these cases the final source HTML should be obtained first and then this final source HTML can be binded with the form model.
 
 The final source HTML can be obtained with the headless Internet Browsers or with the real Internet Browsers.
 **HtmlUnit** is an example of the headless Internet Browser.
 To work with the real Internet Browsers **Selenium WebDriver** can be used.
-Also some real Internet Browsers can work in headless mode.
+Also, some real Internet Browsers can work in headless mode.
 
 ## HtmlUnit example
 ```
@@ -273,7 +273,7 @@ Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 ## Form model Selenium binding example
 Form model Selenium binding is the binding implementation for Selenium WebDriver.
 It's primary purpose is the Internet Browser automation, but this binding also can be used to obtain the source HTML and bind the form model for HTML content extraction.
-It is slower then form model html binding because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between this processes is needed.
+It is slower than form model html binding because additional processes are created (Internet Browser process, Selenium WebDriver process) and additional communication between these processes is needed.
 ```
 // Load form definitions
 FormDefinitions formDefinitions = new FormDefinitions();
@@ -316,7 +316,7 @@ Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 # HOW TO
 [HOW TO examples](HOWTO.md)
 
-# Latest release
+# The latest release
 Form model library:
 * **&lt;groupId&gt;**: ru.d-shap
 * **&lt;artifactId&gt;**: form-model
