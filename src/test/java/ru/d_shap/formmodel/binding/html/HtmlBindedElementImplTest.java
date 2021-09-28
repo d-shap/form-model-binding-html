@@ -345,7 +345,7 @@ public final class HtmlBindedElementImplTest {
         List<Element> elements11 = htmlFormBinder.getElementsWithId(document1, "pclass");
         List<HtmlBindedElement> bindedElements11 = htmlFormBinder.getBindedElements(elements11);
         Assertions.assertThat(bindedElements11).hasSize(2);
-        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style")).isEqualTo("padding: 0px; display: none;");
         Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
         Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.display")).isEqualTo("");
         Assertions.assertThat(bindedElements11.get(0).getAbsoluteAttribute("style.border")).isEqualTo("");
@@ -365,7 +365,7 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements12).hasSize(1);
         Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("href")).isEqualTo("");
         Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("href.wrongvalue")).isEqualTo("");
-        Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("style")).isEqualTo("color: blue;");
         Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("style.color")).isEqualTo("");
         Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
         Assertions.assertThat(bindedElements12.get(0).getAbsoluteAttribute("class")).isEqualTo("");
@@ -378,7 +378,7 @@ public final class HtmlBindedElementImplTest {
         List<Element> elements21 = htmlFormBinder.getElementsWithId(document2, "pclass");
         List<HtmlBindedElement> bindedElements21 = htmlFormBinder.getBindedElements(elements21);
         Assertions.assertThat(bindedElements21).hasSize(2);
-        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style")).isEqualTo("padding: 0px; display: none;");
         Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
         Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.display")).isEqualTo("");
         Assertions.assertThat(bindedElements21.get(0).getAbsoluteAttribute("style.border")).isEqualTo("");
@@ -398,7 +398,7 @@ public final class HtmlBindedElementImplTest {
         Assertions.assertThat(bindedElements22).hasSize(1);
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("href")).isEqualTo("http://foo.com/linkref/id");
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("href.wrongvalue")).isEqualTo("");
-        Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("style")).isEqualTo("");
+        Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("style")).isEqualTo("color: blue;");
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("style.color")).isEqualTo("");
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("style.padding")).isEqualTo("");
         Assertions.assertThat(bindedElements22.get(0).getAbsoluteAttribute("class")).isEqualTo("");
