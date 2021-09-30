@@ -17,42 +17,29 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import ru.d_shap.formmodel.InputSourceException;
+import org.w3c.css.sac.InputSource;
 
 /**
- * The HTML binding source implementation, obtained from the URL.
+ * The HTML CSS parser.
  *
  * @author Dmitry Shapovalov
  */
-final class HtmlUrlBindingSourceImpl implements HtmlBindingSource {
+interface HtmlCssParser {
 
-    private final String _url;
-
-    HtmlUrlBindingSourceImpl(final String url) {
-        super();
-        _url = url;
-    }
-
-    HtmlUrlBindingSourceImpl(final URL url) {
-        super();
-        _url = url.toExternalForm();
-    }
-
-    @Override
-    public Document getDocument() {
-        try {
-            return Jsoup.connect(_url).get();
-        } catch (IOException ex) {
-            throw new InputSourceException(ex);
-        }
-    }
+    /**
+     * Parse the input source and return the CSS properties.
+     *
+     * @param inputSource the input source.
+     *
+     * @return the CSS properties.
+     *
+     * @throws IOException IO exception.
+     */
+    Map<String, String> getCssProperties(InputSource inputSource) throws IOException;
 
 }

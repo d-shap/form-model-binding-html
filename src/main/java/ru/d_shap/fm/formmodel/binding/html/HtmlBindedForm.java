@@ -17,11 +17,11 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
 import org.jsoup.nodes.Document;
 
-import ru.d_shap.formmodel.binding.model.BindedForm;
+import ru.d_shap.fm.formmodel.binding.model.BindedForm;
 
 /**
  * The HTML binded form.

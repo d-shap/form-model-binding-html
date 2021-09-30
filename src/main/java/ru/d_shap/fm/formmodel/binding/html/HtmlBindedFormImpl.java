@@ -17,36 +17,27 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
-import ru.d_shap.formmodel.binding.model.BindedAttribute;
+import org.jsoup.nodes.Document;
 
 /**
- * The HTML binded attribute.
+ * The HTML binded form implementation.
  *
  * @author Dmitry Shapovalov
  */
-public interface HtmlBindedAttribute extends BindedAttribute {
+final class HtmlBindedFormImpl implements HtmlBindedForm {
 
-    /**
-     * Get the attribute name.
-     *
-     * @return the attribute name.
-     */
-    String getName();
+    private final Document _document;
 
-    /**
-     * Get the attribute value.
-     *
-     * @return the attribute value.
-     */
-    String getValue();
+    HtmlBindedFormImpl(final Document document) {
+        super();
+        _document = document;
+    }
 
-    /**
-     * Get the absolute attribute value.
-     *
-     * @return the absolute attribute value.
-     */
-    String getAbsoluteValue();
+    @Override
+    public Document getDocument() {
+        return _document;
+    }
 
 }

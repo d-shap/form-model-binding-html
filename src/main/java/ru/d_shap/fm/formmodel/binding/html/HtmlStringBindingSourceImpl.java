@@ -17,41 +17,41 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 /**
- * The HTML binded attribute implementation.
+ * The HTML binding source implementation, obtained from the string.
  *
  * @author Dmitry Shapovalov
  */
-final class HtmlBindedAttributeImpl implements HtmlBindedAttribute {
+final class HtmlStringBindingSourceImpl implements HtmlBindingSource {
 
-    private final String _name;
+    private final String _html;
 
-    private final String _value;
+    private final String _baseUrl;
 
-    private final String _absoluteValue;
-
-    HtmlBindedAttributeImpl(final String name, final String value, final String absoluteValue) {
+    HtmlStringBindingSourceImpl(final String html) {
         super();
-        _name = name;
-        _value = value;
-        _absoluteValue = absoluteValue;
+        _html = html;
+        _baseUrl = null;
+    }
+
+    HtmlStringBindingSourceImpl(final String html, final String baseUrl) {
+        super();
+        _html = html;
+        _baseUrl = baseUrl;
     }
 
     @Override
-    public String getName() {
-        return _name;
-    }
-
-    @Override
-    public String getValue() {
-        return _value;
-    }
-
-    @Override
-    public String getAbsoluteValue() {
-        return _absoluteValue;
+    public Document getDocument() {
+        if (_baseUrl == null) {
+            return Jsoup.parse(_html);
+        } else {
+            return Jsoup.parse(_html, _baseUrl);
+        }
     }
 
 }

@@ -17,41 +17,41 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+package ru.d_shap.fm.formmodel.binding.html;
 
 /**
- * The HTML binding source implementation, obtained from the string.
+ * The HTML binded attribute implementation.
  *
  * @author Dmitry Shapovalov
  */
-final class HtmlStringBindingSourceImpl implements HtmlBindingSource {
+final class HtmlBindedAttributeImpl implements HtmlBindedAttribute {
 
-    private final String _html;
+    private final String _name;
 
-    private final String _baseUrl;
+    private final String _value;
 
-    HtmlStringBindingSourceImpl(final String html) {
+    private final String _absoluteValue;
+
+    HtmlBindedAttributeImpl(final String name, final String value, final String absoluteValue) {
         super();
-        _html = html;
-        _baseUrl = null;
-    }
-
-    HtmlStringBindingSourceImpl(final String html, final String baseUrl) {
-        super();
-        _html = html;
-        _baseUrl = baseUrl;
+        _name = name;
+        _value = value;
+        _absoluteValue = absoluteValue;
     }
 
     @Override
-    public Document getDocument() {
-        if (_baseUrl == null) {
-            return Jsoup.parse(_html);
-        } else {
-            return Jsoup.parse(_html, _baseUrl);
-        }
+    public String getName() {
+        return _name;
+    }
+
+    @Override
+    public String getValue() {
+        return _value;
+    }
+
+    @Override
+    public String getAbsoluteValue() {
+        return _absoluteValue;
     }
 
 }

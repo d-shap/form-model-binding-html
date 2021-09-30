@@ -110,4 +110,4 @@
  * &lt;/ns1:form&gt;
  * </pre>
  */
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
