@@ -318,12 +318,12 @@ Document document = formBinder.bindHtmlWithBaseUrl(pageAsText, url, "form-id");
 
 # The latest release
 Form model library:
-* **&lt;groupId&gt;**: ru.d-shap
+* **&lt;groupId&gt;**: ru.d-shap.fm
 * **&lt;artifactId&gt;**: form-model
 * **&lt;version&gt;**: 1.0
 
 Form model HTML binding:
-* **&lt;groupId&gt;**: ru.d-shap
+* **&lt;groupId&gt;**: ru.d-shap.fm
 * **&lt;artifactId&gt;**: form-model-binding-html
 * **&lt;version&gt;**: 1.0.0
 
