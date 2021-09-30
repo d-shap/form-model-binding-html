@@ -17,7 +17,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -32,13 +32,13 @@ import java.util.List;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import ru.d_shap.formmodel.InputSourceException;
-import ru.d_shap.formmodel.XmlDocumentBuilder;
-import ru.d_shap.formmodel.definition.loader.FormDefinitionsLoader;
-import ru.d_shap.formmodel.definition.loader.xml.FormXmlDefinitionsElementLoader;
-import ru.d_shap.formmodel.definition.loader.xml.FormXmlDefinitionsFileLoader;
-import ru.d_shap.formmodel.definition.model.FormDefinition;
-import ru.d_shap.formmodel.definition.model.FormDefinitions;
+import ru.d_shap.fm.formmodel.InputSourceException;
+import ru.d_shap.fm.formmodel.XmlDocumentBuilder;
+import ru.d_shap.fm.formmodel.definition.loader.FormDefinitionsLoader;
+import ru.d_shap.fm.formmodel.definition.loader.xml.FormXmlDefinitionsElementLoader;
+import ru.d_shap.fm.formmodel.definition.loader.xml.FormXmlDefinitionsFileLoader;
+import ru.d_shap.fm.formmodel.definition.model.FormDefinition;
+import ru.d_shap.fm.formmodel.definition.model.FormDefinitions;
 
 /**
  * Helper class for tests.

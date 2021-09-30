@@ -17,7 +17,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import ru.d_shap.assertions.Assertions;
-import ru.d_shap.formmodel.InputSourceException;
+import ru.d_shap.fm.formmodel.InputSourceException;
 
 /**
  * Tests for {@link HtmlBindedElementImpl}.

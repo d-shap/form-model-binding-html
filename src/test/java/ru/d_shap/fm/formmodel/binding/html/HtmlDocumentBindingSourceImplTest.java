@@ -17,51 +17,39 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-package ru.d_shap.formmodel.binding.html;
+package ru.d_shap.fm.formmodel.binding.html;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
-import org.w3c.dom.Element;
 
 import ru.d_shap.assertions.Assertions;
-import ru.d_shap.formmodel.binding.FormInstanceBuilder;
 
 /**
- * Tests for {@link HtmlBindedFormImpl}.
+ * Tests for {@link HtmlDocumentBindingSourceImpl}.
  *
  * @author Dmitry Shapovalov
  */
-public final class HtmlBindedFormImplTest {
+public final class HtmlDocumentBindingSourceImplTest {
 
     /**
      * Test class constructor.
      */
-    public HtmlBindedFormImplTest() {
+    public HtmlDocumentBindingSourceImplTest() {
         super();
     }
 
     /**
-     * {@link HtmlBindedFormImpl} class test.
+     * {@link HtmlDocumentBindingSourceImpl} class test.
      */
     @Test
     public void getDocumentTest() {
-        String xml = "<?xml version='1.0'?>\n";
-        xml += "<ns1:form id='id' xmlns:ns1='http://d-shap.ru/schema/form-model/1.0'>";
-        xml += "<ns1:element id='nonexisting' lookup='nonexisting' type='optional'>";
-        xml += "</ns1:element>";
-        xml += "</ns1:form>";
-        HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-
         String html = createHtml();
         Document sourceDocument = Jsoup.parse(html);
-        org.w3c.dom.Document resultDocument = htmlFormBinder.bindDocument(sourceDocument, "id");
-        Element element = resultDocument.getDocumentElement();
-        HtmlBindedForm bindedForm = (HtmlBindedForm) element.getUserData(FormInstanceBuilder.USER_DATA_BINDED_OBJECT);
-
-        Document bindedFormDocument = bindedForm.getDocument();
-        Assertions.assertThat(bindedFormDocument).isNotNull();
-        Assertions.assertThat(bindedFormDocument).isSameAs(sourceDocument);
+        HtmlBindingSource htmlBindingSource = new HtmlDocumentBindingSourceImpl(sourceDocument);
+        Document resultDocument = htmlBindingSource.getDocument();
+        Assertions.assertThat(resultDocument).isNotNull();
+        Assertions.assertThat(resultDocument).isSameAs(sourceDocument);
     }
 
     private String createHtml() {
