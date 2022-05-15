@@ -55,6 +55,8 @@ final class UrlHandler {
         HTML = Collections.unmodifiableMap(map);
     }
 
+    private static boolean factorySet = false;
+
     private UrlHandler() {
         super();
     }
@@ -86,7 +88,12 @@ final class UrlHandler {
     }
 
     static void setURLStreamHandlerFactory() {
-        URL.setURLStreamHandlerFactory(new URLStreamHandlerFactoryImpl());
+        synchronized (URL.class) {
+            if (!factorySet) {
+                URL.setURLStreamHandlerFactory(new URLStreamHandlerFactoryImpl());
+                factorySet = true;
+            }
+        }
     }
 
     static String getHtml1() {
