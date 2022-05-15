@@ -45,12 +45,15 @@ final class UrlHandler {
 
     public static final String URL_HTML_2 = URL_PREFIX + "2/";
 
+    public static final String URL_HTML_3 = URL_PREFIX + "3/";
+
     private static final Map<String, String> HTML;
 
     static {
         Map<String, String> map = new HashMap<>();
         map.put(URL_HTML_1, createHtml1());
         map.put(URL_HTML_2, createHtml2());
+        map.put(URL_HTML_3, createHtml3());
 
         HTML = Collections.unmodifiableMap(map);
     }
@@ -83,6 +86,31 @@ final class UrlHandler {
         html += "<title>Test page title</title>";
         html += "</head>";
         html += "<body>Test page body</body>";
+        html += "</html>";
+        return html;
+    }
+
+    private static String createHtml3() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page</title>";
+        html += "</head>";
+        html += "<body>";
+        html += "<p class='pclass xx' style='padding: 0px; display: none;'>";
+        html += "This is a ";
+        html += "<a href='linkref/id' style='color: blue;'>link</a>";
+        html += " to somewhere.";
+        html += "</p>";
+        html += "<p class='pclass xx'>";
+        html += "<div class='blockclass xx'>";
+        html += "<span id='someid'>Span in Div 1.</span>";
+        html += "</div>";
+        html += "<div>";
+        html += "<span class='blockclass xx'>Span in Div 2.</span>";
+        html += "</div>";
+        html += "</p>";
+        html += "</body>";
         html += "</html>";
         return html;
     }
