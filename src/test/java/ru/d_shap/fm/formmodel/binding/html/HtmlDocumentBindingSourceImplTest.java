@@ -44,23 +44,12 @@ public final class HtmlDocumentBindingSourceImplTest {
      */
     @Test
     public void getDocumentTest() {
-        String html = createHtml();
+        String html = UrlHandler.getHtml4();
         Document sourceDocument = Jsoup.parse(html);
         HtmlBindingSource htmlBindingSource = new HtmlDocumentBindingSourceImpl(sourceDocument);
         Document resultDocument = htmlBindingSource.getDocument();
         Assertions.assertThat(resultDocument).isNotNull();
         Assertions.assertThat(resultDocument).isSameAs(sourceDocument);
-    }
-
-    private String createHtml() {
-        String html = "";
-        html += "<html>";
-        html += "<head>";
-        html += "<title>Test page</title>";
-        html += "</head>";
-        html += "<body>Test page</body>";
-        html += "</html>";
-        return html;
     }
 
 }
