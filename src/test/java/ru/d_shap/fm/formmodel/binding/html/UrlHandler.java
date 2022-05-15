@@ -41,13 +41,16 @@ final class UrlHandler {
 
     public static final String URL_PREFIX = "https://localhost:8080/";
 
-    public static final String URL_HTML_1 = URL_PREFIX + "1";
+    public static final String URL_HTML_1 = URL_PREFIX + "1/";
+
+    public static final String URL_HTML_2 = URL_PREFIX + "2/";
 
     private static final Map<String, String> HTML;
 
     static {
         Map<String, String> map = new HashMap<>();
         map.put(URL_HTML_1, createHtml1());
+        map.put(URL_HTML_2, createHtml2());
 
         HTML = Collections.unmodifiableMap(map);
     }
@@ -67,6 +70,17 @@ final class UrlHandler {
         html += "</div>";
         html += "<a href='path/to/resource'>link</a>";
         html += "</body>";
+        html += "</html>";
+        return html;
+    }
+
+    private static String createHtml2() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page title</title>";
+        html += "</head>";
+        html += "<body>Test page body</body>";
         html += "</html>";
         return html;
     }
