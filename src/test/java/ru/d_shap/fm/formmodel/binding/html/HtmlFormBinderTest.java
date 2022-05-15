@@ -388,7 +388,8 @@ public final class HtmlFormBinderTest {
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
 
-        Document document = htmlFormBinder.bindUrl(UrlHandler.URL_HTML_1, "id");
+        URL url = new URL(UrlHandler.URL_HTML_1);
+        Document document = htmlFormBinder.bindUrl(url, "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
         Assertions.assertThat(elements1).hasSize(1);
@@ -420,7 +421,8 @@ public final class HtmlFormBinderTest {
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
 
-        Document document = htmlFormBinder.bindUrl(UrlHandler.URL_HTML_1, "group", "id");
+        URL url = new URL(UrlHandler.URL_HTML_1);
+        Document document = htmlFormBinder.bindUrl(url, "group", "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "d");
         Assertions.assertThat(elements1).hasSize(1);
