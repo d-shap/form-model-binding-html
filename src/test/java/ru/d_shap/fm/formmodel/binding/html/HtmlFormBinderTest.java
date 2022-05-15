@@ -46,6 +46,9 @@ public final class HtmlFormBinderTest {
         super();
     }
 
+    /**
+     * Set mock for URL Connection.
+     */
     @BeforeClass
     public static void setURLStreamHandlerFactory() {
         UrlHandler.setURLStreamHandlerFactory();
