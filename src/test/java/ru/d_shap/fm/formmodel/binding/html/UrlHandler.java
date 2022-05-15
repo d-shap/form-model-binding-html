@@ -61,7 +61,7 @@ final class UrlHandler {
         HTML = Collections.unmodifiableMap(map);
     }
 
-    private static boolean factorySet = false;
+    private static boolean factorySet;
 
     private UrlHandler() {
         super();
