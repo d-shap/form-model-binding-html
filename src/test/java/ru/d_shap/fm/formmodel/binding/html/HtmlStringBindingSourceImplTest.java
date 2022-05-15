@@ -43,7 +43,7 @@ public final class HtmlStringBindingSourceImplTest {
      */
     @Test
     public void getDocumentTest() {
-        String html = createHtml();
+        String html = UrlHandler.getHtml2();
 
         HtmlBindingSource htmlBindingSource1 = new HtmlStringBindingSourceImpl(html);
         Document resultDocument1 = htmlBindingSource1.getDocument();
@@ -54,17 +54,6 @@ public final class HtmlStringBindingSourceImplTest {
         Document resultDocument2 = htmlBindingSource2.getDocument();
         Assertions.assertThat(resultDocument2).isNotNull();
         Assertions.assertThat(resultDocument2.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
-    }
-
-    private String createHtml() {
-        String html = "";
-        html += "<html>";
-        html += "<head>";
-        html += "<title>Test page title</title>";
-        html += "</head>";
-        html += "<body>Test page body</body>";
-        html += "</html>";
-        return html;
     }
 
 }
