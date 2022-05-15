@@ -128,6 +128,14 @@ final class UrlHandler {
         return HTML.get(URL_HTML_1);
     }
 
+    static String getHtml2() {
+        return HTML.get(URL_HTML_2);
+    }
+
+    static String getHtml3() {
+        return HTML.get(URL_HTML_3);
+    }
+
     private static class URLStreamHandlerFactoryImpl implements URLStreamHandlerFactory {
 
         URLStreamHandlerFactoryImpl() {
