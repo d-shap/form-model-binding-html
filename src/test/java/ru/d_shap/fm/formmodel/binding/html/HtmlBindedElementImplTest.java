@@ -60,7 +60,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
         Document document = htmlFormBinder.bindHtml(html, "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "pclass");
@@ -101,7 +101,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
         Document document = htmlFormBinder.bindHtml(html, "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "pclass");
@@ -137,7 +137,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
         Document document = htmlFormBinder.bindHtml(html, "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "pclass");
@@ -173,7 +173,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
         Document document = htmlFormBinder.bindHtml(html, "id");
 
         List<Element> elements1 = htmlFormBinder.getElementsWithId(document, "pclass");
@@ -207,7 +207,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
 
         Document document = htmlFormBinder.bindHtml(html, "id");
 
@@ -256,7 +256,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
 
         Document document1 = htmlFormBinder.bindHtml(html, "id");
 
@@ -338,7 +338,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
 
         Document document1 = htmlFormBinder.bindHtml(html, "id");
 
@@ -420,7 +420,7 @@ public final class HtmlBindedElementImplTest {
         xml += "</ns1:element>";
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
-        String html = createHtml();
+        String html = UrlHandler.getHtml3();
         Document document = htmlFormBinder.bindHtml(html, "id");
         List<Element> elements = htmlFormBinder.getElementsWithId(document, "pclass");
         List<HtmlBindedElement> bindedElements = htmlFormBinder.getBindedElements(elements);
@@ -432,31 +432,6 @@ public final class HtmlBindedElementImplTest {
             Assertions.assertThat(ex).hasCause(IOException.class);
             Assertions.assertThat(ex).hasCauseMessage("IOException!!!");
         }
-    }
-
-    private String createHtml() {
-        String html = "";
-        html += "<html>";
-        html += "<head>";
-        html += "<title>Test page</title>";
-        html += "</head>";
-        html += "<body>";
-        html += "<p class='pclass xx' style='padding: 0px; display: none;'>";
-        html += "This is a ";
-        html += "<a href='linkref/id' style='color: blue;'>link</a>";
-        html += " to somewhere.";
-        html += "</p>";
-        html += "<p class='pclass xx'>";
-        html += "<div class='blockclass xx'>";
-        html += "<span id='someid'>Span in Div 1.</span>";
-        html += "</div>";
-        html += "<div>";
-        html += "<span class='blockclass xx'>Span in Div 2.</span>";
-        html += "</div>";
-        html += "</p>";
-        html += "</body>";
-        html += "</html>";
-        return html;
     }
 
     /**
