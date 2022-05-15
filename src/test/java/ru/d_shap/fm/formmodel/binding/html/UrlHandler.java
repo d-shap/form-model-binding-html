@@ -47,6 +47,8 @@ final class UrlHandler {
 
     public static final String URL_HTML_3 = URL_PREFIX + "3/";
 
+    public static final String URL_HTML_4 = URL_PREFIX + "4/";
+
     private static final Map<String, String> HTML;
 
     static {
@@ -54,6 +56,7 @@ final class UrlHandler {
         map.put(URL_HTML_1, createHtml1());
         map.put(URL_HTML_2, createHtml2());
         map.put(URL_HTML_3, createHtml3());
+        map.put(URL_HTML_4, createHtml4());
 
         HTML = Collections.unmodifiableMap(map);
     }
@@ -115,6 +118,17 @@ final class UrlHandler {
         return html;
     }
 
+    private static String createHtml4() {
+        String html = "";
+        html += "<html>";
+        html += "<head>";
+        html += "<title>Test page</title>";
+        html += "</head>";
+        html += "<body>Test page</body>";
+        html += "</html>";
+        return html;
+    }
+
     static void setURLStreamHandlerFactory() {
         synchronized (URL.class) {
             if (!factorySet) {
@@ -134,6 +148,10 @@ final class UrlHandler {
 
     static String getHtml3() {
         return HTML.get(URL_HTML_3);
+    }
+
+    static String getHtml4() {
+        return HTML.get(URL_HTML_4);
     }
 
     private static class URLStreamHandlerFactoryImpl implements URLStreamHandlerFactory {

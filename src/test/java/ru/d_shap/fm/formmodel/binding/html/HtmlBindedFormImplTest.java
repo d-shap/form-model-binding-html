@@ -53,7 +53,7 @@ public final class HtmlBindedFormImplTest {
         xml += "</ns1:form>";
         HtmlFormBinder htmlFormBinder = TestHelper.createHtmlFormBinder(xml);
 
-        String html = createHtml();
+        String html = UrlHandler.getHtml4();
         Document sourceDocument = Jsoup.parse(html);
         org.w3c.dom.Document resultDocument = htmlFormBinder.bindDocument(sourceDocument, "id");
         Element element = resultDocument.getDocumentElement();
@@ -62,17 +62,6 @@ public final class HtmlBindedFormImplTest {
         Document bindedFormDocument = bindedForm.getDocument();
         Assertions.assertThat(bindedFormDocument).isNotNull();
         Assertions.assertThat(bindedFormDocument).isSameAs(sourceDocument);
-    }
-
-    private String createHtml() {
-        String html = "";
-        html += "<html>";
-        html += "<head>";
-        html += "<title>Test page</title>";
-        html += "</head>";
-        html += "<body>Test page</body>";
-        html += "</html>";
-        return html;
     }
 
 }
