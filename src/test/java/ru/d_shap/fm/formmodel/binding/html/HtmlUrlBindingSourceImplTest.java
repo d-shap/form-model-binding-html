@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.jsoup.nodes.Document;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ru.d_shap.assertions.Assertions;
@@ -42,6 +43,11 @@ public final class HtmlUrlBindingSourceImplTest {
         super();
     }
 
+    @BeforeClass
+    public static void setURLStreamHandlerFactory() {
+        UrlHandler.setURLStreamHandlerFactory();
+    }
+
     /**
      * {@link HtmlUrlBindingSourceImpl} class test.
      *
@@ -49,18 +55,10 @@ public final class HtmlUrlBindingSourceImplTest {
      */
     @Test
     public void getDocumentTest() throws Exception {
-        String html = createHtml();
-        NanoHttpdImpl server = new NanoHttpdImpl(html);
-        try {
-            server.start();
-            String url = server.getUrl();
-            HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(url);
-            Document document = htmlBindingSource.getDocument();
-            Assertions.assertThat(document).isNotNull();
-            Assertions.assertThat(document.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
-        } finally {
-            server.stop();
-        }
+        HtmlBindingSource htmlBindingSource = new HtmlUrlBindingSourceImpl(UrlHandler.URL_HTML_2);
+        Document document = htmlBindingSource.getDocument();
+        Assertions.assertThat(document).isNotNull();
+        Assertions.assertThat(document.getElementsByTag("body").first().ownText()).isEqualTo("Test page body");
     }
 
     /**
@@ -87,17 +85,6 @@ public final class HtmlUrlBindingSourceImplTest {
         } catch (InputSourceException ex) {
             Assertions.assertThat(ex).hasCause(MalformedURLException.class);
         }
-    }
-
-    private String createHtml() {
-        String html = "";
-        html += "<html>";
-        html += "<head>";
-        html += "<title>Test page title</title>";
-        html += "</head>";
-        html += "<body>Test page body</body>";
-        html += "</html>";
-        return html;
     }
 
 }
